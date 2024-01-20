@@ -1,6 +1,10 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ["./App.{js,jsx,ts,tsx}", "./screens/**/*.{js,jsx,ts,tsx}"],
+  content: [
+    "./App.{js,jsx,ts,tsx}",
+    "./screens/**/*.{js,jsx,ts,tsx}",
+    "./components/**/*.{js,jsx,ts,tsx}",
+  ],
   theme: {
     extend: {
       fontFamily: {
@@ -10,6 +14,9 @@ module.exports = {
       },
       colors: {
         primary: "#544981",
+        secondary: "#2D264B",
+        lotion: "#F5F4F4",
+        lightGray: "#FBFBFB",
       },
     },
   },
