@@ -1,28 +1,35 @@
-import { FlatList } from "react-native";
-import { SurahCard } from "./SurahCard";
-import suar from "@/constants/Suar";
+import { FlatList, Text } from "react-native";
+import SurahCard from "./SurahCard";
 import { router } from "expo-router";
+import useSuar from "@/db/hooks/useSuar";
 
 const SurahTab = () => {
+  const { loading, data } = useSuar();
+
   return (
-    <FlatList
-      data={suar}
-      scrollEnabled
-      className="h-[53%]  flex-2 flex-col "
-      numColumns={2}
-      contentContainerStyle={{ gap: 2 }}
-      columnWrapperStyle={{ gap: 10 }}
-      showsVerticalScrollIndicator={false}
-      renderItem={({ item, index }) => (
-        <SurahCard
-          onPress={() => {
-            router.navigate(`/surah/${item.number}`);
-          }}
-          key={item.number}
-          sura={item}
-        />
-      )}
-    />
+    !loading && (
+      <FlatList
+        data={data}
+        scrollEnabled
+        className="h-[53%]  flex-2 flex-col "
+        numColumns={2}
+        contentContainerStyle={{ gap: 2 }}
+        columnWrapperStyle={{ gap: 10 }}
+        initialNumToRender={10}
+        showsVerticalScrollIndicator={false}
+        onEndReachedThreshold={0.5}
+        refreshing={loading}
+        renderItem={({ item, index }) => (
+          <SurahCard
+            onPress={() => {
+              router.navigate(`/surah/${item.number}`);
+            }}
+            key={item.number}
+            sura={item}
+          />
+        )}
+      />
+    )
   );
 };
 

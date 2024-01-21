@@ -1,8 +1,9 @@
-import { useCallback, type ReactNode } from "react";
+import { useCallback, type ReactNode, useLayoutEffect } from "react";
 import { Slot, SplashScreen } from "expo-router";
 import { SafeAreaView, StatusBar, StyleSheet, I18nManager } from "react-native";
 import { useFonts } from "expo-font";
-
+import { openDatabase } from "@/db/utils";
+import mydb from "@/assets/quran.db";
 SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout(): ReactNode {
@@ -23,6 +24,8 @@ export default function RootLayout(): ReactNode {
   if (!fontsLoaded && !fontError) {
     return null;
   }
+
+  openDatabase(mydb);
 
   return (
     <SafeAreaView onLayout={onLayoutRootView} style={styles.container}>

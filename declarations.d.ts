@@ -4,3 +4,8 @@ declare module "*.svg" {
   const content: React.FC<SvgProps>;
   export default content;
 }
+
+declare module "*.db" {
+  const content: any;
+  export default content;
+}

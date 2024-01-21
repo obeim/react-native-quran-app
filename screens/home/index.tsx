@@ -1,4 +1,4 @@
-import { ScrollView, Text, View } from "react-native";
+import { Text, View } from "react-native";
 import Setting from "@/assets/icons/Setting.svg";
 import Menu from "@/assets/icons/Menu.svg";
 
