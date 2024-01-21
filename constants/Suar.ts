@@ -29,4 +29,35 @@ export default [
     name_ar: "الأنعام",
     type: "Medinan",
   },
+
+  {
+    number: 7,
+    name_ar: "الفاتحة",
+    type: "Meccan",
+  },
+  {
+    number: 8,
+    name_ar: "البقرة",
+    type: "Medinan",
+  },
+  {
+    number: 9,
+    name_ar: "أل عمران",
+    type: "Meccan",
+  },
+  {
+    number: 10,
+    name_ar: "النساء",
+    type: "Medinan",
+  },
+  {
+    number: 11,
+    name_ar: "المائدة",
+    type: "Meccan",
+  },
+  {
+    number: 12,
+    name_ar: "الأنعام",
+    type: "Medinan",
+  },
 ];

@@ -1,4 +1,4 @@
-import { FlatList, ScrollView, View } from "react-native";
+import { FlatList } from "react-native";
 import { SurahCard } from "./SurahCard";
 import suar from "@/constants/Suar";
 import { router } from "expo-router";
@@ -8,7 +8,10 @@ const SurahTab = () => {
     <FlatList
       data={suar}
       scrollEnabled
-      className="h-[53%]"
+      className="h-[53%]  flex-2 flex-col "
+      numColumns={2}
+      contentContainerStyle={{ gap: 2 }}
+      columnWrapperStyle={{ gap: 10 }}
       showsVerticalScrollIndicator={false}
       renderItem={({ item, index }) => (
         <SurahCard

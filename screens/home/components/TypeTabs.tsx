@@ -22,5 +22,4 @@ export const tabs = [
   { name: "surah", title: "سورة", component: <SurahTab /> },
   { name: "chapter", title: "جزء" },
   { name: "hizb", title: "حزب" },
-  { name: "page", title: "صفحة" },
 ];
