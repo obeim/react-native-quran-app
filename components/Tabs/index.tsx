@@ -11,12 +11,12 @@ const Tabs = ({ tabs, activeTab, setTab, vertical = false }: Props) => {
   return (
     <View className={`w-full h-10 `}>
       <View
-        className={`w-full flex-1 flex-row border-b-2 border-lotion/50 justify-between `}
+        className={`w-full flex-1 flex-row border-b-2 border-lotion/50 gap-10 `}
       >
         {tabs.map((item, index) => (
           <Pressable
             className={`${
-              vertical && "md:w-full w-24 "
+              vertical && `md:w-full w-24 `
             }   cursor-pointer  w-12  `}
             onPress={() => setTab(item.name)}
             key={index}

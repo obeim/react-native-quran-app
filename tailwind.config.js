@@ -17,6 +17,7 @@ module.exports = {
         secondary: "#2D264B",
         lotion: "#F5F4F4",
         lightGray: "#FBFBFB",
+        darkGray: "#505050",
       },
     },
   },

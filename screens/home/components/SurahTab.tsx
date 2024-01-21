@@ -1,10 +1,25 @@
-import { Text, ScrollView } from "react-native";
+import { FlatList, ScrollView, View } from "react-native";
+import { SurahCard } from "./SurahCard";
+import suar from "@/constants/Suar";
+import { router } from "expo-router";
 
 const SurahTab = () => {
   return (
-    <ScrollView scrollEnabled className="mt-3  h-[52%]  px-1">
-      <Text className=" ">السور</Text>
-    </ScrollView>
+    <FlatList
+      data={suar}
+      scrollEnabled
+      className="h-[53%]"
+      showsVerticalScrollIndicator={false}
+      renderItem={({ item, index }) => (
+        <SurahCard
+          onPress={() => {
+            router.navigate(`/surah/${item.number}`);
+          }}
+          key={item.number}
+          sura={item}
+        />
+      )}
+    />
   );
 };
 
