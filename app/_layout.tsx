@@ -1,4 +1,4 @@
-import { useCallback, type ReactNode, useLayoutEffect } from "react";
+import { useCallback, type ReactNode } from "react";
 import { Slot, SplashScreen } from "expo-router";
 import { SafeAreaView, StatusBar, StyleSheet, I18nManager } from "react-native";
 import { useFonts } from "expo-font";
