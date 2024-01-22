@@ -4,7 +4,9 @@ import { router } from "expo-router";
 import useSuar from "@/db/hooks/useSuar";
 
 const SurahTab = () => {
-  const { loading, data } = useSuar();
+  const { loading, data } = useSuar({
+    order: { number: "ASC" },
+  });
 
   return (
     !loading && (
@@ -19,7 +21,7 @@ const SurahTab = () => {
         showsVerticalScrollIndicator={false}
         onEndReachedThreshold={0.5}
         refreshing={loading}
-        renderItem={({ item, index }) => (
+        renderItem={({ item }) => (
           <SurahCard
             onPress={() => {
               router.navigate(`/surah/${item.number}`);

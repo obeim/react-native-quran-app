@@ -11,6 +11,7 @@ export default function RootLayout(): ReactNode {
     "HelveticaNeueLTArabic-Bold": require("../assets/fonts/HelveticaNeueLTArabic-Bold.ttf"),
     "HelveticaNeueLTArabic-Roman": require("../assets/fonts/HelveticaNeueLTArabic-Roman.ttf"),
     "HelveticaNeueLTArabic-Light": require("../assets/fonts/HelveticaNeueLTArabic-Light.ttf"),
+    HafsSmart: require("../assets/fonts/HafsSmart_08.ttf"),
   });
   I18nManager.allowRTL(true);
   I18nManager.forceRTL(true);
