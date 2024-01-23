@@ -1,6 +1,5 @@
-import { View } from "@/components/Themed";
 import { Ayah } from "@/types/Suar";
-import { Text } from "react-native";
+import { Text, View } from "react-native";
 import Bookmark from "@/assets/icons/bookmark.svg";
 import { useState } from "react";
 

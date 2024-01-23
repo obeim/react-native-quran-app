@@ -1,4 +1,4 @@
-import { View } from "@/components/Themed";
+import { View } from "react-native";
 import BigArrow from "@/assets/icons/big_arrow.svg";
 import Menu from "@/assets/icons/Menu.svg";
 import { Text } from "react-native";
