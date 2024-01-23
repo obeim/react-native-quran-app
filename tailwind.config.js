@@ -12,6 +12,7 @@ module.exports = {
         HelveticaBold: ["HelveticaNeueLTArabic-Bold"],
         HelveticaRoman: ["HelveticaNeueLTArabic-Roman"],
         HafsSmart: ["HafsSmart"],
+        AlQalamQuran: ["AlQalamQuran"],
       },
       colors: {
         primary: "#544981",

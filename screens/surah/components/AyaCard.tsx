@@ -15,26 +15,27 @@ export function AyaCard({
 }) {
   const [bookmark, setBookmark] = useState(false);
   return (
-    <View className={`bg-lotion py-5 px-3 ${isFirst && "mt-5"} `}>
+    <View className={`bg-lotion pb-2 pt-7 relative px-3 ${isFirst && "mt-5"} `}>
+      <Bookmark
+        onPress={() => {
+          setBookmark(!bookmark);
+        }}
+        fill={bookmark ? "#544981" : "none"}
+        width={20}
+        className="absolute right-0 z-20"
+        height={23}
+      />
       <View
         className={`bg-lotion flex flex-row justify-between items-start ${
           isLast && "border-b"
         } border-primary/10 pb-6`}
       >
         <Text
-          className=" text-lg text-primary font-HelveticaRoman w-[85%]"
-          key={ayah.id}
+          className=" text-lg text-primary font-HafsSmart w-full"
+          key={ayah.aya_no}
         >
-          {ayah.text} {`(${ayah.number_in_surah})`}
+          {ayah.aya_text_tashkil} {`(${ayah.aya_no})`}
         </Text>
-        <Bookmark
-          onPress={() => {
-            setBookmark(!bookmark);
-          }}
-          fill={bookmark ? "#544981" : "none"}
-          width={20}
-          height={23}
-        />
       </View>
     </View>
   );

@@ -10,7 +10,7 @@ const useSura = (id: number) => {
   const [ayat, setAyat] = useState<Ayah[]>([]);
 
   const AyatRepo = useMemo(() => {
-    return new Repository("quran.db", "ayahs", AyahModal);
+    return new Repository("quran.db", "ayat", AyahModal);
   }, []);
 
   const SurahsRepo = useMemo(() => {
@@ -22,18 +22,10 @@ const useSura = (id: number) => {
       if (value) {
         setSura(value);
         AyatRepo.query({
-          where: { surah_id: { equals: id } },
-          order: { number: "ASC" },
+          where: { sora: { equals: id } },
+          order: { aya_no: "ASC" },
         }).then((value) => {
-          setAyat(
-            value.map((aya, index) => ({
-              ...aya,
-              text:
-                index == 0 && id !== 1
-                  ? aya.text.split("بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ")[1]
-                  : aya.text,
-            }))
-          );
+          setAyat(value);
           setLoading(false);
         });
       }

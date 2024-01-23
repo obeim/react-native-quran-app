@@ -3,16 +3,14 @@ import { ColumnMapping, columnTypes } from "expo-sqlite-orm";
 
 const AyahModal: ColumnMapping<Ayah> = {
   id: { type: columnTypes.INTEGER },
-  number: { type: columnTypes.INTEGER },
-  text: { type: columnTypes.TEXT },
-  number_in_surah: { type: columnTypes.INTEGER },
+  jozz: { type: columnTypes.INTEGER },
+  sora: { type: columnTypes.INTEGER },
+  sora_name_ar: { type: columnTypes.TEXT },
   page: { type: columnTypes.INTEGER },
-  surah_id: { type: columnTypes.INTEGER },
-  hizb_id: { type: columnTypes.INTEGER },
-  juz_id: { type: columnTypes.INTEGER },
-  sajda: { type: columnTypes.INTEGER },
-  created_at: { type: columnTypes.INTEGER, default: () => Date.now() },
-  updated_at: { type: columnTypes.INTEGER, default: () => Date.now() },
+  aya_no: { type: columnTypes.INTEGER },
+  aya_text_emlaey: { type: columnTypes.TEXT },
+  maany_aya: { type: columnTypes.TEXT },
+  aya_text_tashkil: { type: columnTypes.TEXT },
 };
 
 export default AyahModal;

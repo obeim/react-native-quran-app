@@ -12,14 +12,12 @@ export interface Surah {
 
 export interface Ayah {
   id: number;
-  number: number;
-  text: string;
-  number_in_surah: number;
+  jozz: number;
+  sora: number;
+  sora_name_ar: number;
   page: number;
-  surah_id: number;
-  hizb_id: number;
-  juz_id: number;
-  sajda: number;
-  created_at: number;
-  updated_at: number;
+  aya_no: number;
+  aya_text_emlaey: string;
+  maany_aya: string;
+  aya_text_tashkil: string;
 }

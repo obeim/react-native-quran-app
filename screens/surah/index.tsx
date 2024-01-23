@@ -18,8 +18,8 @@ const Surah = () => {
             data={data.ayat}
             renderItem={({ item, index }) => (
               <>
-                {local.id !== "1" && index === 0 && (
-                  <Text className="mt-5 text-primary font-HelveticaRoman text-lg text-center ">
+                {local.id !== "1" && local.id !== "9" && index === 0 && (
+                  <Text className="mt-5 text-primary font-HafsSmart text-lg text-center ">
                     بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ
                   </Text>
                 )}
