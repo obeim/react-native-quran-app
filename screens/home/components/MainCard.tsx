@@ -5,30 +5,24 @@ import { router } from "expo-router";
 
 export function MainCard() {
   return (
-    <View className="mt-5 bg-lotion p-3 w-full  rounded-[17px] px-6 pt-6 pb-7 ">
-      <View className="flex-1 flex flex-row gap-2 items-start  pb-5">
-        <Doc width={20} height={20} />
-        <Text className="font-HelveticaRoman h-20 text-secondary/20 text-base">
-          ماتم قراءته موخرا
+    <View className="mt-5 bg-lotion w-full  rounded-[17px] px-6 relative py-6">
+      <View className="h-8 flex flex-col justify-center">
+        <Text className="font-HelveticaRoman text-xl pt-2 text-primary">
+          الفاتحة
         </Text>
+        <Text className="text-secondary/30 font-HelveticaLight">الأية : 1</Text>
       </View>
-      <Text className="font-HelveticaRoman text-5xl pt-10 text-primary">
-        الفاتحة
-      </Text>
-      <View className="flex-1 flex-row  justify-between items-center pt-4">
-        <Text className="text-secondary/30 h-8 font-HelveticaLight">
-          الأية : 1
+      <Pressable
+        className="flex-[0.2] h-8 flex-row items-center absolute right-3 top-6"
+        onPress={() => {
+          router.navigate("/surah/1");
+        }}
+      >
+        <Text className=" font-HelveticaBold  text-primary">
+          متابعة القراءة
         </Text>
-        <Pressable
-          className="flex-[0.2] h-8 flex-row items-center "
-          onPress={() => {
-            router.navigate("/surah/1");
-          }}
-        >
-          <Text className=" font-HelveticaBold  text-primary">متابعة</Text>
-          <ArrowRight width={22} height={12} className="mt-2" />
-        </Pressable>
-      </View>
+        <ArrowRight width={22} height={12} className="mt-2" />
+      </Pressable>
     </View>
   );
 }

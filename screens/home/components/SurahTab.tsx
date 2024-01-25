@@ -2,10 +2,17 @@ import { FlatList, Text } from "react-native";
 import SurahCard from "./SurahCard";
 import { router } from "expo-router";
 import useSuar from "@/db/hooks/useSuar";
+import { useMemo } from "react";
 
-const SurahTab = () => {
+const SurahTab = ({ search }: { search: string }) => {
+  const searcQuery = useMemo(() => {
+    if (search) return { where: { name_ar: { contains: `%${search}%` } } };
+    else return {};
+  }, [search]);
+
   const { loading, data } = useSuar({
     order: { number: "ASC" },
+    ...searcQuery,
   });
 
   return (
@@ -13,7 +20,7 @@ const SurahTab = () => {
       <FlatList
         data={data}
         scrollEnabled
-        className="h-[53%]  flex-2 flex-col "
+        className="h-[60%]  flex-2 flex-col "
         numColumns={2}
         contentContainerStyle={{ gap: 2 }}
         columnWrapperStyle={{ gap: 10 }}
