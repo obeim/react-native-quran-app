@@ -15,13 +15,13 @@ export default function RootLayout(): ReactNode {
     HafsSmart: require("../assets/fonts/HafsSmart_08.ttf"),
   });
 
-  I18nManager.allowRTL(true);
-  I18nManager.forceRTL(true);
-  if (!I18nManager.isRTL) Updates.reloadAsync();
-  openDatabase();
-
   const onLayoutRootView = useCallback(async () => {
+    await openDatabase();
     await SplashScreen.hideAsync();
+
+    I18nManager.allowRTL(true);
+    I18nManager.forceRTL(true);
+    if (!I18nManager.isRTL) Updates.reloadAsync();
   }, [fontsLoaded, fontError]);
 
   if (!fontsLoaded && !fontError) {
