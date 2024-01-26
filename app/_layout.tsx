@@ -4,6 +4,7 @@ import { SafeAreaView, StatusBar, StyleSheet, I18nManager } from "react-native";
 import { useFonts } from "expo-font";
 import { openDatabase } from "@/db/utils";
 import mydb from "@/assets/quran.db";
+
 SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout(): ReactNode {
@@ -13,15 +14,13 @@ export default function RootLayout(): ReactNode {
     "HelveticaNeueLTArabic-Light": require("../assets/fonts/HelveticaNeueLTArabic-Light.ttf"),
     HafsSmart: require("../assets/fonts/HafsSmart_08.ttf"),
   });
+
   I18nManager.allowRTL(true);
   I18nManager.forceRTL(true);
 
   const onLayoutRootView = useCallback(async () => {
-    openDatabase(mydb).then(async () => {
-      if (fontsLoaded || fontError) {
-        await SplashScreen.hideAsync();
-      }
-    });
+    await SplashScreen.hideAsync();
+    openDatabase(mydb);
   }, [fontsLoaded, fontError]);
 
   if (!fontsLoaded && !fontError) {
