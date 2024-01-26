@@ -5,17 +5,22 @@ import { Text } from "react-native";
 import { Surah as SurahType } from "@/types/Suar";
 import { router } from "expo-router";
 
-export function Header({ data }: { data: SurahType }) {
+export function Header({
+  title,
+  subtitle,
+}: {
+  title?: string;
+  subtitle?: string;
+}) {
   return (
     <View className="flex flex-row justify-between  py-4 px-2 h-[9%]  bg-white items-center">
       <Menu width={24} height={32} />
       <View className="bg-white flex items-center">
         <Text className="font-HelveticaRoman text-lg text-primary">
-          {data.name_ar?.slice(5)}
+          {title}
         </Text>
         <Text className="font-HelveticaRoman text-primary/30 text-xs">
-          {`${data?.ayat?.length} أيات`} -{" "}
-          {{ Meccan: "مكية", Medinan: "مدنية" }[data?.type || "Meccan"]}
+          {subtitle}
         </Text>
       </View>
       <BigArrow

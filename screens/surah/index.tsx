@@ -12,7 +12,12 @@ const Surah = () => {
   return (
     !loading && (
       <View className="bg-white">
-        <Header data={data as SurahType} />
+        <Header
+          title={data.name_ar?.slice(5)}
+          subtitle={` ${data?.ayat?.length} أيات - ${
+            { Meccan: "مكية", Medinan: "مدنية" }[data?.type || "Meccan"]
+          }`}
+        />
         <View className="p-2 bg-white">
           <FlatList
             data={data.ayat}

@@ -1,20 +1,16 @@
-import { FlatList, Text } from "react-native";
+import { FlatList } from "react-native";
 import SurahCard from "./SurahCard";
 import { router } from "expo-router";
-import useSuar from "@/db/hooks/useSuar";
-import { useMemo } from "react";
+import { Surah } from "@/types/Suar";
 
-const SurahTab = ({ search }: { search: string }) => {
-  const searcQuery = useMemo(() => {
-    if (search) return { where: { name_ar: { contains: `%${search}%` } } };
-    else return {};
-  }, [search]);
-
-  const { loading, data } = useSuar({
-    order: { number: "ASC" },
-    ...searcQuery,
-  });
-
+const SurahTab = ({
+  data,
+  loading,
+}: {
+  search: string;
+  data: Surah[];
+  loading: boolean;
+}) => {
   return (
     !loading && (
       <FlatList
