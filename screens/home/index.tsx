@@ -4,22 +4,12 @@ import Moon from "@/assets/icons/Moon.svg";
 
 import { MainCard } from "./components/MainCard";
 import { TypeTabs } from "./components/TypeTabs";
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import { onChangeDelayed } from "@/utils";
-import useSuar from "@/db/hooks/useSuar";
 
 const Home = () => {
   const [search, setSearch] = useState<string>("");
   const [timeout, setTimeOutValue] = useState<string>("");
-  const searcQuery = useMemo(() => {
-    if (search) return { where: { name_ar: { contains: `%${search}%` } } };
-    else return {};
-  }, [search]);
-
-  const { loading, data } = useSuar({
-    order: { number: "ASC" },
-    ...searcQuery,
-  });
 
   return (
     <View className="px-3 w-full h-screen">
@@ -59,7 +49,7 @@ const Home = () => {
           </View>
         </View>
       </View>
-      <TypeTabs data={data} loading={loading} search={search} />
+      <TypeTabs search={search} />
     </View>
   );
 };

@@ -3,7 +3,7 @@ import { Slot, SplashScreen } from "expo-router";
 import { SafeAreaView, StatusBar, StyleSheet, I18nManager } from "react-native";
 import { useFonts } from "expo-font";
 import { openDatabase } from "@/db/utils";
-import mydb from "@/assets/quran.db";
+import * as Updates from "expo-updates";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -17,10 +17,11 @@ export default function RootLayout(): ReactNode {
 
   I18nManager.allowRTL(true);
   I18nManager.forceRTL(true);
+  if (!I18nManager.isRTL) Updates.reloadAsync();
+  openDatabase();
 
   const onLayoutRootView = useCallback(async () => {
     await SplashScreen.hideAsync();
-    openDatabase(mydb);
   }, [fontsLoaded, fontError]);
 
   if (!fontsLoaded && !fontError) {
