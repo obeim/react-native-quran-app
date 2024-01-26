@@ -11,6 +11,13 @@ const useSuar = (props?: IQueryOptions<Surah>) => {
     return new Repository("quran.db", "surahs", SurahModal);
   }, []);
 
+  function refetch() {
+    SurahsRepo.query(props).then((value) => {
+      setSuar(value);
+      setLoading(false);
+    });
+  }
+
   useEffect(() => {
     SurahsRepo.query(props).then((value) => {
       setSuar(value);
@@ -18,7 +25,7 @@ const useSuar = (props?: IQueryOptions<Surah>) => {
     });
   }, [props]);
 
-  return { loading, data: suar };
+  return { loading, data: suar, refetch };
 };
 
 export default useSuar;
