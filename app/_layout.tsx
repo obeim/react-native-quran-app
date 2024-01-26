@@ -17,16 +17,16 @@ export default function RootLayout(): ReactNode {
   I18nManager.forceRTL(true);
 
   const onLayoutRootView = useCallback(async () => {
-    if (fontsLoaded || fontError) {
-      await SplashScreen.hideAsync();
-    }
+    openDatabase(mydb).then(async () => {
+      if (fontsLoaded || fontError) {
+        await SplashScreen.hideAsync();
+      }
+    });
   }, [fontsLoaded, fontError]);
 
   if (!fontsLoaded && !fontError) {
     return null;
   }
-
-  openDatabase(mydb);
 
   return (
     <SafeAreaView onLayout={onLayoutRootView} style={styles.container}>

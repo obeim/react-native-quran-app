@@ -14,18 +14,10 @@ async function openDatabase(
     );
   }
 
-  if (
-    !(
-      await FileSystem.getInfoAsync(
-        FileSystem.documentDirectory + "SQLite/quran.db"
-      )
-    ).exists
-  ) {
-    await FileSystem.downloadAsync(
-      Asset.fromModule(pathToDatabaseFile).uri,
-      FileSystem.documentDirectory + "SQLite/quran.db"
-    );
-  }
+  await FileSystem.downloadAsync(
+    Asset.fromModule(pathToDatabaseFile).uri,
+    FileSystem.documentDirectory + "SQLite/quran.db"
+  );
 
   return SQLite.openDatabase("quran.db");
 }
