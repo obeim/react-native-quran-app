@@ -8,9 +8,16 @@
       "distribution": "internal"
     },
     "preview": {
-      "distribution": "internal"
+      "distribution": "internal",
+      "env": {
+        "EXPO_ROUTER_APP_ROOT": "app"
+      }
     },
-    "production": {}
+    "production": {
+      "env": {
+        "EXPO_ROUTER_APP_ROOT": "app"
+      }
+    }
   },
   "submit": {
     "production": {}

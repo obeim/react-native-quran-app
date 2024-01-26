@@ -16,7 +16,6 @@ export default function RootLayout(): ReactNode {
   });
 
   const onLayoutRootView = useCallback(async () => {
-    await openDatabase();
     await SplashScreen.hideAsync();
 
     I18nManager.allowRTL(true);
@@ -27,6 +26,7 @@ export default function RootLayout(): ReactNode {
   if (!fontsLoaded && !fontError) {
     return null;
   }
+  openDatabase();
 
   return (
     <SafeAreaView onLayout={onLayoutRootView} style={styles.container}>
