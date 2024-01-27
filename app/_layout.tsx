@@ -2,8 +2,8 @@ import { useCallback, type ReactNode } from "react";
 import { Slot, SplashScreen } from "expo-router";
 import { SafeAreaView, StatusBar, StyleSheet, I18nManager } from "react-native";
 import { useFonts } from "expo-font";
-import { openDatabase } from "@/db/utils";
 import * as Updates from "expo-updates";
+import { openDatabase } from "@/db/utils";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -16,7 +16,6 @@ export default function RootLayout(): ReactNode {
   });
 
   const onLayoutRootView = useCallback(async () => {
-    await openDatabase();
     I18nManager.allowRTL(true);
     I18nManager.forceRTL(true);
     if (!I18nManager.isRTL) Updates.reloadAsync();
@@ -30,6 +29,7 @@ export default function RootLayout(): ReactNode {
     return null;
   }
 
+  openDatabase();
   return (
     <SafeAreaView
       onLayout={() => {
