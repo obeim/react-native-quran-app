@@ -19,7 +19,7 @@ const JozzTab = () => {
       renderItem={({ item }) => (
         <JozzCard
           onPress={() => {
-            router.navigate(`/jozz/${item.id}`);
+            router.push(`/jozz/${item.id}`);
           }}
           key={item.id}
           jozz={item}

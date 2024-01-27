@@ -32,7 +32,7 @@ const SurahTab = ({ search }: { search: string }) => {
       renderItem={({ item }) => (
         <SurahCard
           onPress={() => {
-            router.navigate(`/surah/${item.number}`);
+            router.push(`/surah/${item.number}`);
           }}
           key={item.number}
           sura={item}

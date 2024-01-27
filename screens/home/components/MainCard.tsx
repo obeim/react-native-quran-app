@@ -15,7 +15,7 @@ export function MainCard() {
       <Pressable
         className="flex-[0.2] h-8 flex-row items-center absolute right-3 top-6"
         onPress={() => {
-          router.navigate("/surah/1");
+          router.push("/surah/1");
         }}
       >
         <Text className=" font-HelveticaBold  text-primary">
