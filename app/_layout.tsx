@@ -14,6 +14,7 @@ export default function RootLayout(): ReactNode {
     "HelveticaNeueLTArabic-Light": require("../assets/fonts/HelveticaNeueLTArabic-Light.ttf"),
     HafsSmart: require("../assets/fonts/HafsSmart_08.ttf"),
   });
+  openDatabase();
 
   const onLayoutRootView = useCallback(async () => {
     I18nManager.allowRTL(true);
@@ -29,7 +30,6 @@ export default function RootLayout(): ReactNode {
     return null;
   }
 
-  openDatabase();
   return (
     <SafeAreaView
       onLayout={() => {
