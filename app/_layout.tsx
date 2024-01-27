@@ -1,4 +1,4 @@
-import { useCallback, type ReactNode } from "react";
+import { useCallback, type ReactNode, useEffect } from "react";
 import { Slot, SplashScreen } from "expo-router";
 import { SafeAreaView, StatusBar, StyleSheet, I18nManager } from "react-native";
 import { useFonts } from "expo-font";
@@ -20,7 +20,9 @@ export default function RootLayout(): ReactNode {
 
     I18nManager.allowRTL(true);
     I18nManager.forceRTL(true);
+
     if (!I18nManager.isRTL) Updates.reloadAsync();
+
     if (fontsLoaded || fontError) {
       await SplashScreen.hideAsync();
     }
@@ -29,9 +31,12 @@ export default function RootLayout(): ReactNode {
   if (!fontsLoaded && !fontError) {
     return null;
   }
+  useEffect(() => {
+    onLayoutRootView();
+  }, []);
 
   return (
-    <SafeAreaView onLayout={onLayoutRootView} style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <Slot />
     </SafeAreaView>
   );
