@@ -1,9 +1,10 @@
 import { useCallback, type ReactNode } from "react";
-import { Slot, SplashScreen } from "expo-router";
+import { SplashScreen, Stack } from "expo-router";
 import { SafeAreaView, StatusBar, StyleSheet, I18nManager } from "react-native";
 import { useFonts } from "expo-font";
 import * as Updates from "expo-updates";
 import { openDatabase } from "@/db/utils";
+import { QueryClient, QueryClientProvider } from "react-query";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -16,11 +17,11 @@ export default function RootLayout(): ReactNode {
   });
   openDatabase();
 
-  const onLayoutRootView = useCallback(async () => {
-    I18nManager.allowRTL(true);
-    I18nManager.forceRTL(true);
-    if (!I18nManager.isRTL) Updates.reloadAsync();
+  I18nManager.allowRTL(true);
+  I18nManager.forceRTL(true);
+  if (!I18nManager.isRTL) Updates.reloadAsync();
 
+  const onLayoutRootView = useCallback(async () => {
     if (fontsLoaded || fontError) {
       SplashScreen.hideAsync();
     }
@@ -30,15 +31,25 @@ export default function RootLayout(): ReactNode {
     return null;
   }
 
+  const queryClient = new QueryClient();
+
   return (
-    <SafeAreaView
-      onLayout={() => {
-        onLayoutRootView();
-      }}
-      style={styles.container}
-    >
-      <Slot />
-    </SafeAreaView>
+    <QueryClientProvider client={queryClient}>
+      <SafeAreaView
+        onLayout={() => {
+          onLayoutRootView();
+        }}
+        style={styles.container}
+      >
+        <Stack
+          screenOptions={{
+            headerShown: false,
+            contentStyle: { padding: 0, margin: 0, backgroundColor: "white" },
+            animation: "slide_from_left",
+          }}
+        />
+      </SafeAreaView>
+    </QueryClientProvider>
   );
 }
 

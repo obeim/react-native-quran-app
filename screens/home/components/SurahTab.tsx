@@ -1,45 +1,43 @@
 import { FlatList, Text } from "react-native";
 import SurahCard from "./SurahCard";
 import { router } from "expo-router";
-import useSuar from "@/db/hooks/useSuar";
-import { useEffect, useMemo } from "react";
+import { Surah } from "@/types/Suar";
+import { useMemo } from "react";
 
-const SurahTab = ({ search }: { search: string }) => {
-  const searcQuery = useMemo(() => {
-    if (search) return { where: { name_ar: { contains: `%${search}%` } } };
-    else return {};
-  }, [search]);
+const SurahTab = ({ data, search }: { data: Surah[]; search: string }) => {
+  const filterdData = useMemo(
+    () =>
+      data.filter ? data?.filter((item) => item.name_ar.includes(search)) : [],
+    [search, data]
+  );
 
-  const { loading, data } = useSuar({
-    order: { number: "ASC" },
-    ...searcQuery,
-  });
-
-  return loading ? (
-    <Text>Loading...</Text>
-  ) : (
+  return (
     <FlatList
-      data={data}
+      data={filterdData}
       scrollEnabled
-      className="h-[60%]  flex-2 flex-col "
+      className="h-[60%] mt-3 flex-2 flex-col "
       numColumns={2}
       contentContainerStyle={{ gap: 2 }}
+      ListEmptyComponent={
+        <Text className="my-8 text-center text-gray-300 font-HelveticaLight">
+          لا يوجد سور
+        </Text>
+      }
       columnWrapperStyle={{ gap: 10 }}
-      initialNumToRender={10}
       showsVerticalScrollIndicator={false}
-      onEndReachedThreshold={0.5}
-      refreshing={loading}
-      renderItem={({ item }) => (
-        <SurahCard
-          onPress={() => {
-            router.push(`/surah/${item.number}`);
-          }}
-          key={item.number}
-          sura={item}
-        />
-      )}
+      renderItem={renderSurah}
     />
   );
 };
 
 export default SurahTab;
+
+const renderSurah = ({ item }: { item: Surah }) => (
+  <SurahCard
+    onPress={() => {
+      router.push(`/surah/${item.number}`);
+    }}
+    key={item.number}
+    sura={item}
+  />
+);

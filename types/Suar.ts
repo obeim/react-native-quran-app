@@ -7,7 +7,7 @@ export interface Surah {
   created_at: number;
   updated_at: number;
   type: string;
-  ayat: Ayah[];
+  ayat?: Ayah[];
 }
 
 export interface Ayah {

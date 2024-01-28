@@ -1,13 +1,26 @@
 import { FlatList } from "react-native";
 import { router } from "expo-router";
 import JozzCard from "./JozzCard";
-import useJozzs from "@/db/hooks/useJozzs";
+import { useQuery } from "react-query";
 const JozzTab = () => {
-  const { jozzItems } = useJozzs();
+  const { data } = useQuery(
+    "jozzs",
+    async () => {
+      let JozzArray: { id: number; name: string }[] = [];
+      Array.apply(0, Array(30)).forEach((item, index) => {
+        JozzArray.push({
+          id: index + 1,
+          name: `الجزء ${index + 1}`,
+        });
+      });
+      return JozzArray;
+    },
+    { cacheTime: Infinity }
+  );
 
   return (
     <FlatList
-      data={jozzItems}
+      data={data}
       scrollEnabled
       className="h-[60%] flex-2 flex-col "
       numColumns={2}
