@@ -43,7 +43,7 @@ const Surah = () => {
                 />
               </>
             )}
-            className="w-full bg-lotion h-[91%]  px-5 rounded-2xl overflow-hidden"
+            className="w-full bg-lotion h-[93%] px-5 overflow-hidden"
           />
         </View>
       </View>

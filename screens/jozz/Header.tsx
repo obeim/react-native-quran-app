@@ -12,13 +12,12 @@ export function Header({
   subtitle?: string;
 }) {
   return (
-    <View className="flex flex-row justify-between  py-4 px-2 h-[9%]  bg-white items-center">
-      <View></View>
+    <View className="flex flex-row justify-between  pb-4 pt-2 px-2 h-[7%]  bg-white items-center">
       <Pressable
         onPress={() => {
           router.back();
         }}
-        className="bg-white flex-1 items-center"
+        className="bg-white items-center"
       >
         <Text className="font-HelveticaRoman text-lg text-primary">
           {title}
@@ -30,7 +29,7 @@ export function Header({
         }}
         className=" h-10 items-center justify-end !w-10 flex-3 "
       >
-        <BigArrow height={28} width={20} />
+        <BigArrow height={24} width={20} />
       </Pressable>
     </View>
   );

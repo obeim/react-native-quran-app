@@ -1,8 +1,9 @@
-import { FlatList } from "react-native";
+import { FlatList, Text } from "react-native";
 import { router } from "expo-router";
 import JozzCard from "./JozzCard";
 import { useQuery } from "react-query";
-const JozzTab = () => {
+import { useMemo } from "react";
+const JozzTab = ({ search }: { search: string }) => {
   const { data } = useQuery(
     "jozzs",
     async () => {
@@ -18,17 +19,28 @@ const JozzTab = () => {
     { cacheTime: Infinity }
   );
 
+  const filterdData = useMemo(
+    () =>
+      data?.filter ? data?.filter((item) => item.name.includes(search)) : [],
+    [search, data]
+  );
+
   return (
     <FlatList
-      data={data}
+      data={filterdData}
       scrollEnabled
-      className="h-[60%] flex-2 flex-col "
+      className="h-[60%] flex-2 flex-col mt-3"
       numColumns={2}
       contentContainerStyle={{ gap: 2 }}
       columnWrapperStyle={{ gap: 10 }}
       initialNumToRender={10}
       showsVerticalScrollIndicator={false}
       onEndReachedThreshold={0.5}
+      ListEmptyComponent={
+        <Text className="my-8 text-center text-gray-300 font-HelveticaLight">
+          لا يوجد
+        </Text>
+      }
       renderItem={({ item }) => (
         <JozzCard
           onPress={() => {

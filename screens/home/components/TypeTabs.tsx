@@ -23,7 +23,10 @@ export const TypeTabs = (props: { data: Surah[]; search: string }) => {
 };
 export const tabs = (props: { data: Surah[]; search: string }) => [
   { name: "surah", title: "سورة", component: <SurahTab {...props} /> },
-  { name: "chapter", title: "جزء", component: <JozzTab /> },
-  { name: "ayah", title: "أية" },
+  {
+    name: "chapter",
+    title: "جزء",
+    component: <JozzTab search={props.search} />,
+  },
   { name: "azkar", title: "الأذكار" },
 ];

@@ -13,15 +13,14 @@ export function Header({
   subtitle?: string;
 }) {
   return (
-    <View className="flex flex-row justify-between  py-4 px-2 h-[9%]  bg-white items-center">
-      <Menu width={24} height={32} />
+    <View className="flex flex-row justify-between  pb-4 pt-2 px-2 h-[7%]  bg-white items-center">
       <Pressable
         onPress={() => {
           router.back();
         }}
-        className="bg-white flex-1 items-center"
+        className="bg-white flex-3  items-center"
       >
-        <Text className="font-HelveticaRoman text-lg text-primary">
+        <Text className="font-HelveticaRoman text-lg text-primary text-center">
           {title}
         </Text>
         <Text className="font-HelveticaRoman text-primary/30 text-xs">
@@ -34,7 +33,7 @@ export function Header({
         }}
         className=" h-10 items-center justify-end !w-10 flex-3 "
       >
-        <BigArrow height={28} width={20} />
+        <BigArrow height={24} width={20} />
       </Pressable>
     </View>
   );

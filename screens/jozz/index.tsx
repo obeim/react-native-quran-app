@@ -27,7 +27,7 @@ const Jozz = () => {
           renderItem={({ item, index }) => (
             <View key={index}>
               {item.sora_name_ar !== "no" && (
-                <Text className="my-2 rounded-full bg-primary mx-auto text-white font-UthmanicHafs text-lg w-1/2  text-center">
+                <Text className="my-2  bg-primary mx-auto text-white font-UthmanicHafs text-lg w-1/2  text-center">
                   {item.sora_name_ar}
                 </Text>
               )}
@@ -38,7 +38,7 @@ const Jozz = () => {
               />
             </View>
           )}
-          className="w-full bg-lotion h-[91%]  px-5 rounded-2xl overflow-hidden"
+          className="w-full bg-lotion h-[91%]  px-5  overflow-hidden"
         />
       </View>
     )
