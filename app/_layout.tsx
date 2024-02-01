@@ -13,7 +13,7 @@ export default function RootLayout(): ReactNode {
     "HelveticaNeueLTArabic-Bold": require("../assets/fonts/HelveticaNeueLTArabic-Bold.ttf"),
     "HelveticaNeueLTArabic-Roman": require("../assets/fonts/HelveticaNeueLTArabic-Roman.ttf"),
     "HelveticaNeueLTArabic-Light": require("../assets/fonts/HelveticaNeueLTArabic-Light.ttf"),
-    HafsSmart: require("../assets/fonts/HafsSmart_08.ttf"),
+    UthmanicHafs: require("../assets/fonts/UthmanicHafs.ttf"),
   });
   openDatabase();
 
@@ -45,7 +45,7 @@ export default function RootLayout(): ReactNode {
           screenOptions={{
             headerShown: false,
             contentStyle: { padding: 0, margin: 0, backgroundColor: "white" },
-            animation: "slide_from_left",
+            animation: "slide_from_right",
           }}
         />
       </SafeAreaView>

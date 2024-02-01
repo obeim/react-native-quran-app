@@ -7,14 +7,13 @@ export interface Surah {
   created_at: number;
   updated_at: number;
   type: string;
-  ayat?: Ayah[];
 }
 
 export interface Ayah {
   id: number;
   jozz: number;
   sora: number;
-  sora_name_ar: number;
+  sora_name_ar: string;
   page: number;
   aya_no: number;
   aya_text_emlaey: string;

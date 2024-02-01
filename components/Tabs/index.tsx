@@ -13,14 +13,14 @@ const Tabs = ({ tabs, activeTab, setTab, vertical = false }: Props) => {
       <View className={`w-full flex-1 flex-row  justify-between `}>
         {tabs.map((item, index) => (
           <Pressable
-            className={`${vertical && ` w-24 `}   cursor-pointer  w-20  `}
+            className={`${vertical && ` w-24 `} cursor-pointer w-20 `}
             onPress={() => setTab(item.name)}
             key={index}
           >
             <Text
-              className={`text-base text-center w-full  p-2 ${
+              className={`text-base text-center transition-all w-full  p-2 ${
                 item.name === activeTab
-                  ? "font-HelveticaBold rounded-xl bg-lotion text-primary"
+                  ? "font-HelveticaBold rounded-xl transition-all bg-lotion text-primary"
                   : " font-HelveticaRoman text-primary/20"
               } `}
             >

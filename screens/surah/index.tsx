@@ -1,6 +1,5 @@
 import { View } from "@/components/Themed";
 import { useLocalSearchParams } from "expo-router";
-import { Surah as SurahType } from "@/types/Suar";
 import { Header } from "./Header";
 import { FlatList, Text } from "react-native";
 import { AyaCard } from "./components/AyaCard";
@@ -20,20 +19,20 @@ const Surah = () => {
   return (
     !isLoading &&
     isFetched && (
-      <View className="bg-white">
+      <View>
         <Header
           title={data?.name_ar?.slice(5)}
           subtitle={` ${data?.ayat?.length} أيات - ${
             { Meccan: "مكية", Medinan: "مدنية" }[data?.type || "Meccan"]
           }`}
         />
-        <View className="p-2 bg-white">
+        <View className=" bg-white">
           <FlatList
             data={data?.ayat}
             renderItem={({ item, index }) => (
               <>
                 {local.id !== "1" && local.id !== "9" && index === 0 && (
-                  <Text className="mt-5 text-primary font-HafsSmart text-lg text-center ">
+                  <Text className="mt-5 text-primary font-UthmanicHafs text-lg text-center ">
                     بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ
                   </Text>
                 )}

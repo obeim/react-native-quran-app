@@ -11,7 +11,7 @@ module.exports = {
         HelveticaLight: ["HelveticaNeueLTArabic-Light"],
         HelveticaBold: ["HelveticaNeueLTArabic-Bold"],
         HelveticaRoman: ["HelveticaNeueLTArabic-Roman"],
-        HafsSmart: ["HafsSmart"],
+        UthmanicHafs: ["UthmanicHafs"],
       },
       colors: {
         primary: "#544981",

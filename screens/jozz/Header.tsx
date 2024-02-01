@@ -2,7 +2,6 @@ import { Pressable, View } from "react-native";
 import BigArrow from "@/assets/icons/big_arrow.svg";
 import Menu from "@/assets/icons/Menu.svg";
 import { Text } from "react-native";
-import { Surah as SurahType } from "@/types/Suar";
 import { router } from "expo-router";
 
 export function Header({
@@ -14,7 +13,7 @@ export function Header({
 }) {
   return (
     <View className="flex flex-row justify-between  py-4 px-2 h-[9%]  bg-white items-center">
-      <Menu width={24} height={32} />
+      <View></View>
       <Pressable
         onPress={() => {
           router.back();
@@ -23,9 +22,6 @@ export function Header({
       >
         <Text className="font-HelveticaRoman text-lg text-primary">
           {title}
-        </Text>
-        <Text className="font-HelveticaRoman text-primary/30 text-xs">
-          {subtitle}
         </Text>
       </Pressable>
       <Pressable
