@@ -18,10 +18,10 @@ const Tabs = ({ tabs, activeTab, setTab, vertical = false }: Props) => {
             key={index}
           >
             <Text
-              className={`text-base text-center transition-all w-full  p-2 ${
+              className={`text-base text-center transition-all w-full p-2 ${
                 item.name === activeTab
-                  ? "font-HelveticaBold rounded-xl transition-all bg-lotion text-primary"
-                  : " font-HelveticaRoman text-primary/20"
+                  ? "font-HelveticaBold rounded-xl transition-all  bg-lotion dark:bg-blackCoral text-primary dark:text-primaryDark/80"
+                  : " font-HelveticaRoman  text-primary/20 dark:text-primaryDark/40"
               } `}
             >
               {item.title}

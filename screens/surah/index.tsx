@@ -29,16 +29,16 @@ const Surah = () => {
             { Meccan: "مكية", Medinan: "مدنية" }[data?.type || "Meccan"]
           }`}
         />
-        <View className=" bg-white">
+        <View className=" bg-white dark:bg-darkBg">
           <FlatList
             data={data?.ayat}
             viewabilityConfigCallbackPairs={
               viewabilityConfigCallbackPairs.current as any
             }
             renderItem={({ item, index }) => (
-              <View className="bg-lotion" key={index}>
+              <View className="bg-lotion dark:bg-blackCoral" key={index}>
                 {local.id !== "1" && local.id !== "9" && index === 0 && (
-                  <Text className="mt-5 text-primary font-UthmanicHafs text-lg text-center ">
+                  <Text className="mt-5 text-primary dark:text-primaryDark/70 font-UthmanicHafs text-lg text-center ">
                     بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ
                   </Text>
                 )}
@@ -49,7 +49,7 @@ const Surah = () => {
                 />
               </View>
             )}
-            className="w-full bg-lotion h-[93%] px-5 overflow-hidden"
+            className="w-full bg-lotion dark:bg-blackCoral h-[93%] px-5 overflow-hidden"
           />
         </View>
       </View>

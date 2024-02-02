@@ -26,6 +26,7 @@ const SurahTab = ({ data, search }: { data: Surah[]; search: string }) => {
       columnWrapperStyle={{ gap: 10 }}
       showsVerticalScrollIndicator={false}
       renderItem={renderSurah}
+      keyExtractor={(item, index) => item.name_ar}
     />
   );
 };

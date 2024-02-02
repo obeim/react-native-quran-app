@@ -5,10 +5,12 @@ import { useFonts } from "expo-font";
 import * as Updates from "expo-updates";
 import { openDatabase } from "@/db/utils";
 import { QueryClient, QueryClientProvider } from "react-query";
+import { useColorScheme } from "nativewind";
 
 SplashScreen.preventAutoHideAsync();
 export default function RootLayout(): ReactNode {
   const queryClient = new QueryClient();
+  const { colorScheme, toggleColorScheme } = useColorScheme();
 
   const [fontsLoaded, fontError] = useFonts({
     "HelveticaNeueLTArabic-Bold": require("../assets/fonts/HelveticaNeueLTArabic-Bold.ttf"),
@@ -38,12 +40,21 @@ export default function RootLayout(): ReactNode {
         onLayout={() => {
           onLayoutRootView();
         }}
-        style={styles.container}
+        style={{
+          ...styles.container,
+          backgroundColor: colorScheme === "dark" ? "#352F44" : "white",
+        }}
+        className=" bg-white dark:bg-darkBg "
       >
         <Stack
           screenOptions={{
             headerShown: false,
-            contentStyle: { padding: 0, margin: 0, backgroundColor: "white" },
+            statusBarColor: "#352F44",
+            contentStyle: {
+              padding: 0,
+              margin: 0,
+              backgroundColor: colorScheme === "dark" ? "#352F44" : "white",
+            },
             animation: "slide_from_bottom",
           }}
         />
@@ -55,8 +66,7 @@ export default function RootLayout(): ReactNode {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: StatusBar.currentHeight,
+    paddingTop: StatusBar.currentHeight,
     paddingHorizontal: 10,
-    backgroundColor: "white",
   },
 });
