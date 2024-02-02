@@ -5,9 +5,11 @@ import { FlatList, Text } from "react-native";
 import { AyaCard } from "./components/AyaCard";
 import { useQuery } from "react-query";
 import { getSuraWithAyat } from "@/db/repos/SurahsRepo";
+import useOnAyaScrolling from "@/utils/useOnAyaScrolling";
 
 const Surah = () => {
   const local = useLocalSearchParams();
+
   const { isLoading, data, isFetched } = useQuery(
     "sura",
     () => {
@@ -15,6 +17,7 @@ const Surah = () => {
     },
     { cacheTime: Infinity }
   );
+  const { viewabilityConfigCallbackPairs } = useOnAyaScrolling({});
 
   return (
     !isLoading &&
@@ -29,8 +32,11 @@ const Surah = () => {
         <View className=" bg-white">
           <FlatList
             data={data?.ayat}
+            viewabilityConfigCallbackPairs={
+              viewabilityConfigCallbackPairs.current as any
+            }
             renderItem={({ item, index }) => (
-              <>
+              <View className="bg-lotion" key={index}>
                 {local.id !== "1" && local.id !== "9" && index === 0 && (
                   <Text className="mt-5 text-primary font-UthmanicHafs text-lg text-center ">
                     بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ
@@ -41,7 +47,7 @@ const Surah = () => {
                   isFirst={index === 0}
                   isLast={index + 1 !== data?.ayat.length}
                 />
-              </>
+              </View>
             )}
             className="w-full bg-lotion h-[93%] px-5 overflow-hidden"
           />

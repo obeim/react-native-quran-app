@@ -1,7 +1,7 @@
 import { FlatList, Text } from "react-native";
 import SurahCard from "./SurahCard";
 import { router } from "expo-router";
-import { Surah } from "@/types/Suar";
+import { Surah } from "@/types";
 import { useMemo } from "react";
 
 const SurahTab = ({ data, search }: { data: Surah[]; search: string }) => {

@@ -1,4 +1,4 @@
-import { Ayah } from "@/types/Suar";
+import { Ayah } from "@/types";
 import { Text, View } from "react-native";
 import Bookmark from "@/assets/icons/bookmark.svg";
 import { useState } from "react";

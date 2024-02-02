@@ -3,7 +3,7 @@ import { useState } from "react";
 import Tabs from "@/components/Tabs";
 import SurahTab from "./SurahTab";
 import JozzTab from "./JozzTab";
-import { Surah } from "@/types/Suar";
+import { Surah } from "@/types";
 
 export const TypeTabs = (props: { data: Surah[]; search: string }) => {
   const [tab, setTab] = useState<string>("surah");

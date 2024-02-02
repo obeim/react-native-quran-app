@@ -1,8 +1,6 @@
 import { Pressable, View } from "react-native";
 import BigArrow from "@/assets/icons/big_arrow.svg";
-import Menu from "@/assets/icons/Menu.svg";
 import { Text } from "react-native";
-import { Surah as SurahType } from "@/types/Suar";
 import { router } from "expo-router";
 
 export function Header({

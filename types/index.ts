@@ -20,3 +20,11 @@ export interface Ayah {
   maany_aya: string;
   aya_text_tashkil: string;
 }
+
+export interface Recent {
+  type: "surah" | "jozz";
+  name: string;
+  aya: number;
+  index: number;
+  id: number;
+}

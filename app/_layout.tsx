@@ -7,8 +7,9 @@ import { openDatabase } from "@/db/utils";
 import { QueryClient, QueryClientProvider } from "react-query";
 
 SplashScreen.preventAutoHideAsync();
-
 export default function RootLayout(): ReactNode {
+  const queryClient = new QueryClient();
+
   const [fontsLoaded, fontError] = useFonts({
     "HelveticaNeueLTArabic-Bold": require("../assets/fonts/HelveticaNeueLTArabic-Bold.ttf"),
     "HelveticaNeueLTArabic-Roman": require("../assets/fonts/HelveticaNeueLTArabic-Roman.ttf"),
@@ -31,8 +32,6 @@ export default function RootLayout(): ReactNode {
     return null;
   }
 
-  const queryClient = new QueryClient();
-
   return (
     <QueryClientProvider client={queryClient}>
       <SafeAreaView
@@ -45,7 +44,7 @@ export default function RootLayout(): ReactNode {
           screenOptions={{
             headerShown: false,
             contentStyle: { padding: 0, margin: 0, backgroundColor: "white" },
-            animation: "slide_from_right",
+            animation: "slide_from_bottom",
           }}
         />
       </SafeAreaView>

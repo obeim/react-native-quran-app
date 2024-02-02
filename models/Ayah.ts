@@ -1,4 +1,4 @@
-import { Ayah, Surah } from "@/types/Suar";
+import { Ayah, Surah } from "@/types";
 import { ColumnMapping, columnTypes } from "expo-sqlite-orm";
 
 const AyahModal: ColumnMapping<Ayah> = {

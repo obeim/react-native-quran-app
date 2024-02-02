@@ -7,7 +7,6 @@ import { TypeTabs } from "./components/TypeTabs";
 import { useEffect, useState } from "react";
 import { useQuery } from "react-query";
 import SurahsRepo from "@/db/repos/SurahsRepo";
-import { Surah } from "@/types/Suar";
 
 const Home = () => {
   const [search, setSearch] = useState<string>("");

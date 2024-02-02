@@ -4,7 +4,7 @@ import { useLocalSearchParams } from "expo-router";
 import { Header } from "./Header";
 import { AyaCard } from "../surah/components/AyaCard";
 import { getAyatAsJozz } from "@/db/repos/AyatRepo";
-import { useState } from "react";
+import useOnAyaScrolling from "@/utils/useOnAyaScrolling";
 
 const Jozz = () => {
   const local = useLocalSearchParams();
@@ -15,7 +15,10 @@ const Jozz = () => {
     },
     { cacheTime: Infinity }
   );
-  const [currentSora, setCurrentSora] = useState();
+
+  const { viewabilityConfigCallbackPairs } = useOnAyaScrolling({
+    type: "jozz",
+  });
 
   return (
     !isLoading &&
@@ -24,9 +27,12 @@ const Jozz = () => {
         <Header title={`الجزء ${local.id}`} />
         <FlatList
           data={data}
+          viewabilityConfigCallbackPairs={
+            viewabilityConfigCallbackPairs.current as any
+          }
           renderItem={({ item, index }) => (
             <View key={index}>
-              {item.sora_name_ar !== "no" && (
+              {!item.sora_name_ar.includes("no") && (
                 <Text className="my-2  bg-primary mx-auto text-white font-UthmanicHafs text-lg w-1/2  text-center">
                   {item.sora_name_ar}
                 </Text>

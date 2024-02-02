@@ -10,7 +10,7 @@ export const getAyatAsJozz = async (id: number) => {
   });
   ayat = ayat.map((aya, index) => {
     if (index > 0 && aya.sora === ayat[index - 1].sora)
-      return { ...aya, sora_name_ar: "no" };
+      return { ...aya, sora_name_ar: `${aya.sora_name_ar},no` };
     else return aya;
   });
   return ayat;
