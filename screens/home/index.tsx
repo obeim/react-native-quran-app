@@ -29,11 +29,11 @@ const Home = () => {
         <View className="h-[30%]">
           <View className="flex-1 flex-row justify-between mt-5">
             <View></View>
-            <Pressable onPress={toggleColorScheme}>
+            <Pressable onPress={toggleColorScheme} className=" h-10 w-10">
               {colorScheme === "dark" ? (
-                <Sun className="transition-all" width={25} height={23} />
+                <Sun className="my-auto mx-auto" width={25} height={23} />
               ) : (
-                <Moon className="transition-all" width={25} height={23} />
+                <Moon className="my-auto mx-auto" width={25} height={23} />
               )}
             </Pressable>
           </View>

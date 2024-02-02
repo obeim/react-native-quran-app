@@ -34,7 +34,9 @@ export function MainCard() {
             className="flex-[0.2] h-6 flex-row items-center absolute right-3 top-6 text-primar dark:text-primaryDark/80 "
             onPress={() => {
               router.push(
-                `/${recent.type === "surah" ? "surah" : "jozz"}/${recent.id}`
+                `/${recent.type === "surah" ? "surah" : "jozz"}/${recent.id}s${
+                  recent.index
+                }`
               );
             }}
           >

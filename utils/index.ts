@@ -31,20 +31,19 @@ export const onAyaChanged = ({
 }: any) => {
   if (viewableItems)
     onChange(() => {
-      storage.set(
-        "recent",
-        JSON.stringify({
-          type: type,
-          name: viewableItems[viewableItems.length - 1].item.sora_name_ar.split(
-            ","
-          )[0],
-          aya: viewableItems[viewableItems.length - 1].item.aya_no,
-          index: viewableItems[viewableItems.length - 1].index,
-          id:
-            type === "jozz"
-              ? viewableItems[0].item.jozz
-              : viewableItems[viewableItems.length - 1].item.sora,
-        })
-      );
+      if (viewableItems[0])
+        storage.set(
+          "recent",
+          JSON.stringify({
+            type: type,
+            name: viewableItems[0].item.sora_name_ar.split(",")[0],
+            aya: viewableItems[0].item.aya_no,
+            index: viewableItems[0].index,
+            id:
+              type === "jozz"
+                ? viewableItems[0].item.jozz
+                : viewableItems[0].item.sora,
+          })
+        );
     });
 };

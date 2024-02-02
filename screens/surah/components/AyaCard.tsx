@@ -42,7 +42,7 @@ export function AyaCard({
         } border-primary/5 dark:border-primaryDark/10 pb-3`}
       >
         <Text
-          className=" text-xl py-3 text-primary dark:text-primaryDark !font-UthmanicHafs w-full"
+          className=" text-xl py-3 text-primary dark:text-primaryDark/80 !font-UthmanicHafs w-full"
           key={ayah.aya_no}
         >
           {ayah.aya_text_tashkil} {`(${ayah.aya_no})`}

@@ -1,19 +1,20 @@
 import { View } from "@/components/Themed";
 import { useLocalSearchParams } from "expo-router";
 import { Header } from "./Header";
-import { FlatList, Text } from "react-native";
-import { AyaCard } from "./components/AyaCard";
+import { FlatList } from "react-native";
 import { useQuery } from "react-query";
 import { getSuraWithAyat } from "@/db/repos/SurahsRepo";
 import useOnAyaScrolling from "@/utils/useOnAyaScrolling";
+import useScrollToAya from "@/utils/useScrollToAya";
+import { AyahItem } from "./components/AyahItem";
 
 const Surah = () => {
   const local = useLocalSearchParams();
-
+  const { flatListRef, onScrollToIndexFailed } = useScrollToAya();
   const { isLoading, data, isFetched } = useQuery(
     "sura",
     () => {
-      return getSuraWithAyat(parseInt(local.id as string));
+      return getSuraWithAyat(parseInt((local.id as string).split("s")[0]));
     },
     { cacheTime: Infinity }
   );
@@ -31,23 +32,19 @@ const Surah = () => {
         />
         <View className=" bg-white dark:bg-darkBg">
           <FlatList
+            ref={flatListRef as any}
             data={data?.ayat}
             viewabilityConfigCallbackPairs={
               viewabilityConfigCallbackPairs.current as any
             }
+            initialNumToRender={
+              parseInt((local.id as string).split("s")[1]) + 2 || undefined
+            }
+            onScrollToIndexFailed={onScrollToIndexFailed}
             renderItem={({ item, index }) => (
-              <View className="bg-lotion dark:bg-blackCoral" key={index}>
-                {local.id !== "1" && local.id !== "9" && index === 0 && (
-                  <Text className="mt-5 text-primary dark:text-primaryDark/70 font-UthmanicHafs text-lg text-center ">
-                    بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ
-                  </Text>
-                )}
-                <AyaCard
-                  ayah={item}
-                  isFirst={index === 0}
-                  isLast={index + 1 !== data?.ayat.length}
-                />
-              </View>
+              <AyahItem
+                {...{ item, id: local.id as string, index, data: data }}
+              />
             )}
             className="w-full bg-lotion dark:bg-blackCoral h-[93%] px-5 overflow-hidden"
           />
