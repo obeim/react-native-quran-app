@@ -20,8 +20,8 @@ module.exports = {
         lightGray: "#FBFBFB",
         darkGray: "#505050",
         primaryDark: "#FAF0E6", // dark mode text color
-        blackCoral: "#5C5470", //dark mode card bg
-        darkBg: "#352F44",
+        blackCoral: "#292630", //dark mode card bg
+        darkBg: "#34303D",
       },
     },
   },

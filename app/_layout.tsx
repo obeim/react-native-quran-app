@@ -66,7 +66,5 @@ export default function RootLayout(): ReactNode {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: StatusBar.currentHeight,
-    paddingHorizontal: 10,
   },
 });

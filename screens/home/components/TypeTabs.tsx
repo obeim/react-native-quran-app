@@ -9,7 +9,7 @@ export const TypeTabs = (props: { data: Surah[]; search: string }) => {
   const [tab, setTab] = useState<string>("surah");
 
   return (
-    <View className="px-1 mt-5">
+    <View className="px-4 mt-5">
       <Tabs
         setTab={(name) => {
           setTab(name);

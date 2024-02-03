@@ -7,9 +7,12 @@ import { getSuraWithAyat } from "@/db/repos/SurahsRepo";
 import useOnAyaScrolling from "@/utils/useOnAyaScrolling";
 import useScrollToAya from "@/utils/useScrollToAya";
 import { AyahItem } from "./components/AyahItem";
+import { useState } from "react";
 
 const Surah = () => {
   const local = useLocalSearchParams();
+  const [layout, setLayout] = useState<"page" | "ayat">("ayat");
+
   const { flatListRef, onScrollToIndexFailed } = useScrollToAya();
   const { isLoading, data, isFetched } = useQuery(
     "sura",
@@ -25,6 +28,8 @@ const Surah = () => {
     isFetched && (
       <View>
         <Header
+          layout={layout}
+          setLayout={setLayout}
           title={data?.name_ar?.slice(5)}
           subtitle={` ${data?.ayat?.length} أيات - ${
             { Meccan: "مكية", Medinan: "مدنية" }[data?.type || "Meccan"]

@@ -6,9 +6,11 @@ import { getAyatAsJozz } from "@/db/repos/AyatRepo";
 import useOnAyaScrolling from "@/utils/useOnAyaScrolling";
 import useScrollToAya from "@/utils/useScrollToAya";
 import { AyahItem } from "./components/AyahItem";
+import { useState } from "react";
 
 const Jozz = () => {
   const local = useLocalSearchParams();
+
   const { flatListRef, onScrollToIndexFailed } = useScrollToAya();
 
   const { isLoading, data, isFetched } = useQuery(

@@ -18,7 +18,7 @@ export const AyahItem = memo(
   }) => (
     <View className="bg-lotion dark:bg-blackCoral h-30" key={index}>
       {id !== "1" && id !== "9" && index === 0 && (
-        <Text className="mt-5 text-primary dark:text-primaryDark/70 font-UthmanicHafs text-lg text-center ">
+        <Text className="mt-5 text-primary dark:text-primaryDark font-UthmanicHafs text-lg text-center ">
           بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ
         </Text>
       )}

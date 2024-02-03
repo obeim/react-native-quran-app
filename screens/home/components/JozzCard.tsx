@@ -14,7 +14,7 @@ const JozzCard = ({
       onPress={onPress}
       className=" bg-lotion dark:bg-blackCoral basis-2  my-2 p-3 w-full rounded-[17px] px-6 flex-1 flex-row  items-center"
     >
-      <Text className="text-primary dark:text-primaryDark/70 font-HelveticaRoman text-xl text-center w-full">
+      <Text className="text-primary dark:text-primaryDark font-HelveticaRoman text-xl text-center w-full">
         {jozz.name}
       </Text>
     </Pressable>
