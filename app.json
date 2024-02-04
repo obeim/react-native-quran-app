@@ -32,16 +32,7 @@
       "output": "static",
       "favicon": "./assets/images/favicon.png"
     },
-    "plugins": [
-      "expo-router",
-      "expo-localization",
-      [
-        "expo-updates",
-        {
-          "username": "obei"
-        }
-      ]
-    ],
+    "plugins": ["expo-router", "expo-localization"],
     "experiments": {
       "typedRoutes": true,
       "tsconfigPaths": true
@@ -58,11 +49,6 @@
     },
     "runtimeVersion": {
       "policy": "appVersion"
-    },
-    "updates": {
-      "url": "https://u.expo.dev/6cf4cd2b-c02b-4f3d-bfe3-ff03fa5b2f4a",
-      "enabled": true,
-      "useClassicUpdates": true
     }
   }
 }
