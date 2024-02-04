@@ -1,4 +1,3 @@
-import { Surah } from "@/types";
 import { memo } from "react";
 import { Text, Pressable } from "react-native";
 

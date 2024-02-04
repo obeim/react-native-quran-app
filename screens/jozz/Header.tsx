@@ -2,7 +2,7 @@ import { Pressable, View } from "react-native";
 import { Text } from "react-native";
 import { router } from "expo-router";
 import { useColorScheme } from "nativewind";
-import { AntDesign, Feather, Entypo } from "@expo/vector-icons";
+import { AntDesign, Entypo } from "@expo/vector-icons";
 
 export function Header({ title }: { title?: string }) {
   const { colorScheme } = useColorScheme();

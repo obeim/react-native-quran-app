@@ -1,7 +1,6 @@
-import { View } from "@/components/Themed";
 import { useLocalSearchParams } from "expo-router";
 import { Header } from "./Header";
-import { FlatList, ScrollView, Text } from "react-native";
+import { FlatList, ScrollView, Text, View } from "react-native";
 import { useQuery } from "react-query";
 import { getSuraWithAyat } from "@/db/repos/SurahsRepo";
 import useOnAyaScrolling from "@/utils/useOnAyaScrolling";

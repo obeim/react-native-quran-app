@@ -45,7 +45,7 @@ export function AyaCard({
           className=" text-xl py-3 text-primary dark:text-primaryDark !font-UthmanicHafs w-full"
           key={ayah.aya_no}
         >
-          {ayah.aya_text_tashkil} {`(${ayah.aya_no})`}
+          {ayah.aya_text_tashkil} {`﴾${ayah.aya_no}﴿`}
         </Text>
       </View>
     </View>

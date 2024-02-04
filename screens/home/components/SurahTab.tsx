@@ -25,7 +25,7 @@ const SurahTab = ({ data, search }: { data: Surah[]; search: string }) => {
       }
       columnWrapperStyle={{ gap: 10 }}
       showsVerticalScrollIndicator={false}
-      renderItem={renderSurah}
+      renderItem={RenderSurah}
       keyExtractor={(item, index) => item.name_ar}
     />
   );
@@ -33,7 +33,7 @@ const SurahTab = ({ data, search }: { data: Surah[]; search: string }) => {
 
 export default SurahTab;
 
-const renderSurah = ({ item }: { item: Surah }) => (
+const RenderSurah = ({ item }: { item: Surah }) => (
   <SurahCard
     onPress={() => {
       router.push(`/surah/${item.number}`);

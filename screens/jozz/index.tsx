@@ -1,4 +1,4 @@
-import { FlatList, Text, View } from "react-native";
+import { FlatList, View } from "react-native";
 import { useQuery } from "react-query";
 import { useLocalSearchParams } from "expo-router";
 import { Header } from "./Header";
@@ -6,7 +6,6 @@ import { getAyatAsJozz } from "@/db/repos/AyatRepo";
 import useOnAyaScrolling from "@/utils/useOnAyaScrolling";
 import useScrollToAya from "@/utils/useScrollToAya";
 import { AyahItem } from "./components/AyahItem";
-import { useState } from "react";
 
 const Jozz = () => {
   const local = useLocalSearchParams();
