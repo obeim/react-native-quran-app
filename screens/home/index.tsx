@@ -10,6 +10,7 @@ import { useQuery } from "react-query";
 import SurahsRepo from "@/db/repos/SurahsRepo";
 import { useColorScheme } from "nativewind";
 import { SearchInput } from "./components/SearchInput";
+import InnerSplash from "@/components/InnerSplash";
 
 const Home = () => {
   const [search, setSearch] = useState<string>("");
@@ -23,48 +24,44 @@ const Home = () => {
     { cacheTime: Infinity }
   );
 
-  return (
-    data &&
-    isFetched && (
-      <View className=" w-full h-screen bg-white dark:bg-darkBg ">
-        <View className="h-[34%]">
-          <View className="flex-1 flex-row justify-between ">
-            <Pressable
-              onPress={toggleColorScheme}
-              className=" h-18 w-32 pl-4  items-start justify-start "
-            >
-              <Menu
-                className="my-auto"
-                color={colorScheme === "dark" ? "#FAF0E6" : "#544981"}
-                width={25}
-                height={23}
-              />
-            </Pressable>
-            <Pressable
-              onPress={toggleColorScheme}
-              className=" h-18 w-32 pr-4  items-end justify-start "
-            >
-              {colorScheme === "dark" ? (
-                <Sun className="my-auto" width={25} height={23} />
-              ) : (
-                <Moon className="my-auto" width={25} height={23} />
-              )}
-            </Pressable>
-          </View>
-          <View className="mt-3 w-full px-4">
-            <Text className="text-lg font-HelveticaBold mb-2 text-primary/40 dark:text-primaryDark">
-              بسم الله الرحمن الرحيم
-            </Text>
-            <MainCard />
-            <SearchInput
-              value={search}
-              onChange={(value) => setSearch(value)}
+  return data && isFetched ? (
+    <View className=" w-full h-screen bg-white dark:bg-darkBg ">
+      <View className="h-[34%]">
+        <View className="flex-1 flex-row justify-between ">
+          <Pressable
+            onPress={toggleColorScheme}
+            className=" h-18 w-32 pl-4  items-start justify-start "
+          >
+            <Menu
+              className="my-auto"
+              color={colorScheme === "dark" ? "#FAF0E6" : "#544981"}
+              width={25}
+              height={23}
             />
-          </View>
+          </Pressable>
+          <Pressable
+            onPress={toggleColorScheme}
+            className=" h-18 w-32 pr-4  items-end justify-start "
+          >
+            {colorScheme === "dark" ? (
+              <Sun className="my-auto" width={25} height={23} />
+            ) : (
+              <Moon className="my-auto" width={25} height={23} />
+            )}
+          </Pressable>
         </View>
-        {data && <TypeTabs search={search} data={data} />}
+        <View className="mt-3 w-full px-4">
+          <Text className="text-lg font-HelveticaBold mb-2 text-primary/40 dark:text-primaryDark">
+            بسم الله الرحمن الرحيم
+          </Text>
+          <MainCard />
+          <SearchInput value={search} onChange={(value) => setSearch(value)} />
+        </View>
       </View>
-    )
+      {data && <TypeTabs search={search} data={data} />}
+    </View>
+  ) : (
+    <InnerSplash />
   );
 };
 
