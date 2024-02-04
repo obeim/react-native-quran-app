@@ -1,16 +1,16 @@
 import { useCallback, type ReactNode } from "react";
 import { SplashScreen, Stack } from "expo-router";
-import { SafeAreaView, StatusBar, StyleSheet, I18nManager } from "react-native";
+import { SafeAreaView, StyleSheet, I18nManager } from "react-native";
 import { useFonts } from "expo-font";
-import * as Updates from "expo-updates";
 import { openDatabase } from "@/db/utils";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { useColorScheme } from "nativewind";
+import RNAppRestart from "@brandingbrand/react-native-app-restart";
 
 SplashScreen.preventAutoHideAsync();
 export default function RootLayout(): ReactNode {
   const queryClient = new QueryClient();
-  const { colorScheme, toggleColorScheme } = useColorScheme();
+  const { colorScheme } = useColorScheme();
 
   const [fontsLoaded, fontError] = useFonts({
     "HelveticaNeueLTArabic-Bold": require("../assets/fonts/HelveticaNeueLTArabic-Bold.ttf"),
@@ -22,7 +22,7 @@ export default function RootLayout(): ReactNode {
 
   I18nManager.allowRTL(true);
   I18nManager.forceRTL(true);
-  if (!I18nManager.isRTL) Updates.reloadAsync();
+  if (!I18nManager.isRTL) RNAppRestart.restartApplication();
 
   const onLayoutRootView = useCallback(async () => {
     if (fontsLoaded || fontError) {
