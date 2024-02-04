@@ -12,9 +12,7 @@
       "resizeMode": "contain",
       "backgroundColor": "#F5F4F4"
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true,
       "infoPlist": {
@@ -62,7 +60,9 @@
       "policy": "appVersion"
     },
     "updates": {
-      "url": "https://u.expo.dev/6cf4cd2b-c02b-4f3d-bfe3-ff03fa5b2f4a"
+      "url": "https://u.expo.dev/6cf4cd2b-c02b-4f3d-bfe3-ff03fa5b2f4a",
+      "enabled": true,
+      "useClassicUpdates": true
     }
   }
 }
