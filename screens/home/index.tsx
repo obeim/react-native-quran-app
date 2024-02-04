@@ -11,6 +11,7 @@ import SurahsRepo from "@/db/repos/SurahsRepo";
 import { useColorScheme } from "nativewind";
 import { SearchInput } from "./components/SearchInput";
 import InnerSplash from "@/components/InnerSplash";
+import { storage } from "@/utils";
 
 const Home = () => {
   const [search, setSearch] = useState<string>("");
@@ -40,7 +41,10 @@ const Home = () => {
             />
           </Pressable>
           <Pressable
-            onPress={toggleColorScheme}
+            onPress={() => {
+              storage.set("theme", colorScheme === "dark" ? "light" : "dark");
+              toggleColorScheme();
+            }}
             className=" h-18 w-32 pr-4  items-end justify-start "
           >
             {colorScheme === "dark" ? (

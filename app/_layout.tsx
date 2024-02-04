@@ -6,11 +6,12 @@ import { openDatabase } from "@/db/utils";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { useColorScheme } from "nativewind";
 import RNAppRestart from "@brandingbrand/react-native-app-restart";
+import { storage } from "@/utils";
 
 SplashScreen.preventAutoHideAsync();
 export default function RootLayout(): ReactNode {
   const queryClient = new QueryClient();
-  const { colorScheme } = useColorScheme();
+  const { colorScheme, setColorScheme } = useColorScheme();
 
   const [fontsLoaded, fontError] = useFonts({
     "HelveticaNeueLTArabic-Bold": require("../assets/fonts/HelveticaNeueLTArabic-Bold.ttf"),
@@ -25,6 +26,10 @@ export default function RootLayout(): ReactNode {
   if (!I18nManager.isRTL) RNAppRestart.restartApplication();
 
   const onLayoutRootView = useCallback(async () => {
+    let localTheme = storage.getString("theme") as "dark" | "light";
+    if (localTheme && localTheme !== colorScheme) {
+      setColorScheme(localTheme);
+    }
     if (fontsLoaded || fontError) {
       SplashScreen.hideAsync();
     }
