@@ -47,3 +47,12 @@ export const onAyaChanged = ({
         );
     });
 };
+
+export function groupBy(xs: any, f: any) {
+  return xs.reduce(
+    (r: any, v: any, i: any, a: any, k = f(v)) => (
+      (r[k] || (r[k] = [])).push(v), r
+    ),
+    {}
+  );
+}
