@@ -5,10 +5,16 @@ import { Header } from "./Header";
 import { getAyatAsJozz } from "@/db/repos/AyatRepo";
 import useOnAyaScrolling from "@/utils/useOnAyaScrolling";
 import useScrollToAya from "@/utils/useScrollToAya";
-import { AyahItem } from "./components/AyahItem";
+import { useState } from "react";
+import { storage } from "@/utils";
+import { AyatView } from "./components/AyaView";
+import { PageView } from "./components/PageView";
 
 const Jozz = () => {
   const local = useLocalSearchParams();
+  const [layout, setLayout] = useState<"page" | "ayat">(
+    (storage.getString("view_pref") as "page") || "ayat" || "ayat"
+  );
 
   const { flatListRef, onScrollToIndexFailed } = useScrollToAya();
 
@@ -30,22 +36,18 @@ const Jozz = () => {
     !isLoading &&
     isFetched && (
       <View className="h-full">
-        <Header title={`الجزء ${(local.id as string).split("s")[0]}`} />
-        <FlatList
-          ref={flatListRef as any}
-          data={data}
-          viewabilityConfigCallbackPairs={
-            viewabilityConfigCallbackPairs.current as any
-          }
-          initialNumToRender={
-            parseInt((local.id as string).split("s")[1]) + 2 || undefined
-          }
-          onScrollToIndexFailed={onScrollToIndexFailed}
-          renderItem={({ item, index }) => (
-            <AyahItem {...{ item, index, data: data }} />
-          )}
-          className="w-full bg-lotion dark:bg-blackCoral h-[91%] px-5 overflow-hidden"
+        <Header
+          setLayout={setLayout}
+          layout={layout}
+          title={`الجزء ${(local.id as string).split("s")[0]}`}
         />
+        <View className=" bg-white dark:bg-darkBg">
+          {
+            { ayat: <AyatView data={data} />, page: <PageView data={data} /> }[
+              layout
+            ]
+          }
+        </View>
       </View>
     )
   );

@@ -1,13 +1,13 @@
-import { ScrollView, Text, View } from "react-native";
+import { Pressable, ScrollView, Text, View } from "react-native";
 import { Ayah } from "@/types";
 import usePagedAyat from "@/utils/usePagedAyat";
-import { PageProps } from "./AyatView";
-import { PageBottomBar } from "./PageBottomBar";
+import { PageProps } from "./AyaView";
+import { PageBottomBar } from "@/screens/surah/components/PageBottomBar";
 
 export const PageView = ({ data }: PageProps) => {
   const { ayat, nextPage, PrevPage, totalPages, currentPage, isLast } =
     usePagedAyat({
-      data: data?.ayat,
+      data: data,
     });
 
   return (
@@ -38,11 +38,11 @@ export const PageView = ({ data }: PageProps) => {
         )}
       </ScrollView>
       <PageBottomBar
+        type="jozz"
         nextPage={nextPage}
         PrevPage={PrevPage}
         currentPage={currentPage}
         totalPages={totalPages}
-        type="surah"
       />
     </View>
   );

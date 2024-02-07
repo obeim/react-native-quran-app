@@ -3,6 +3,7 @@ import { Text } from "react-native";
 import { router } from "expo-router";
 import { useColorScheme } from "nativewind";
 import { AntDesign, Feather, Entypo } from "@expo/vector-icons";
+import { storage } from "@/utils";
 
 export function Header({
   title,
@@ -48,8 +49,13 @@ export function Header({
       <Pressable
         className=" w-24 pr-4  h-32  inline-flex justify-center"
         onPress={() => {
-          if (layout === "ayat") setLayout("page");
-          else setLayout("ayat");
+          if (layout === "ayat") {
+            storage.set("view_pref", "page");
+            setLayout("page");
+          } else {
+            setLayout("ayat");
+            storage.set("view_pref", "ayat");
+          }
         }}
       >
         {layout === "ayat" && (

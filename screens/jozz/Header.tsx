@@ -2,9 +2,18 @@ import { Pressable, View } from "react-native";
 import { Text } from "react-native";
 import { router } from "expo-router";
 import { useColorScheme } from "nativewind";
-import { AntDesign, Entypo } from "@expo/vector-icons";
+import { AntDesign, Entypo, Feather } from "@expo/vector-icons";
+import { storage } from "@/utils";
 
-export function Header({ title }: { title?: string }) {
+export function Header({
+  title,
+  layout,
+  setLayout,
+}: {
+  title?: string;
+  setLayout: React.Dispatch<React.SetStateAction<"ayat" | "page">>;
+  layout: "ayat" | "page";
+}) {
   const { colorScheme } = useColorScheme();
 
   return (
@@ -33,12 +42,33 @@ export function Header({ title }: { title?: string }) {
           </Text>
         </Pressable>
       </View>
-      <Pressable>
-        <Entypo
-          name="text"
-          size={24}
-          color={colorScheme === "dark" ? "#FAF0E6" : "#544981"}
-        />
+      <Pressable
+        className=" w-24 pr-4  h-32  inline-flex justify-center"
+        onPress={() => {
+          if (layout === "ayat") {
+            storage.set("view_pref", "page");
+            setLayout("page");
+          } else {
+            setLayout("ayat");
+            storage.set("view_pref", "ayat");
+          }
+        }}
+      >
+        {layout === "ayat" && (
+          <Entypo
+            size={24}
+            name="text"
+            color={colorScheme === "dark" ? "#FAF0E6" : "#544981"}
+          />
+        )}
+
+        {layout === "page" && (
+          <Feather
+            name="list"
+            size={24}
+            color={colorScheme === "dark" ? "#FAF0E6" : "#544981"}
+          />
+        )}
       </Pressable>
     </View>
   );
