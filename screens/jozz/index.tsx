@@ -1,10 +1,8 @@
-import { FlatList, View } from "react-native";
+import { View } from "react-native";
 import { useQuery } from "react-query";
 import { useLocalSearchParams } from "expo-router";
 import { Header } from "./Header";
 import { getAyatAsJozz } from "@/db/repos/AyatRepo";
-import useOnAyaScrolling from "@/utils/useOnAyaScrolling";
-import useScrollToAya from "@/utils/useScrollToAya";
 import { useState } from "react";
 import { storage } from "@/utils";
 import { AyatView } from "./components/AyaView";
@@ -16,8 +14,6 @@ const Jozz = () => {
     (storage.getString("view_pref") as "page") || "ayat" || "ayat"
   );
 
-  const { flatListRef, onScrollToIndexFailed } = useScrollToAya();
-
   const { isLoading, data, isFetched } = useQuery(
     "jozz",
     () => {
@@ -27,10 +23,6 @@ const Jozz = () => {
     },
     { cacheTime: Infinity }
   );
-
-  const { viewabilityConfigCallbackPairs } = useOnAyaScrolling({
-    type: "jozz",
-  });
 
   return (
     !isLoading &&

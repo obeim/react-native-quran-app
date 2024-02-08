@@ -18,7 +18,7 @@ const usePagedAyat = ({ data }: PageProps) => {
 
   const currentPageAyat = useMemo(() => {
     return (formatedData as any)[Object.keys(formatedData as any)[activePage]];
-  }, [activePage]);
+  }, [activePage, formatedData]);
 
   const nextPage = () => {
     if (activePage < Object.keys(formatedData).length - 1) {
