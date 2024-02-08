@@ -18,7 +18,7 @@ export const PageView = ({ data }: PageProps) => {
         className=" px-2 h-[94%] py-3 mb-9 "
       >
         <Text className="text-primary/30 dark:text-primaryDark/40 px-3">
-          الجزء {ayat[ayat.length - 1].jozz}
+          سورة {ayat[ayat.length - 1].sora_name_ar.split(",")[0]}
         </Text>
         {currentPage === 1 &&
           (ayat[0] as Ayah).sora !== 1 &&
