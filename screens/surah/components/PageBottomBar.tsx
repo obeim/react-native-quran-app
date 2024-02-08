@@ -2,6 +2,7 @@ import { Pressable, Text, View } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 import { useColorScheme } from "nativewind";
 import { router, useLocalSearchParams } from "expo-router";
+import { useMemo } from "react";
 
 export function PageBottomBar({
   PrevPage,
@@ -18,6 +19,10 @@ export function PageBottomBar({
 }) {
   const local = useLocalSearchParams();
   const id = parseInt((local.id as string) || "");
+  const isLastSuraOrJozz = useMemo(
+    () => (type === "jozz" && id === 30) || (type === "surah" && id === 114),
+    [type, id]
+  );
 
   const { colorScheme } = useColorScheme();
   return (
@@ -52,14 +57,14 @@ export function PageBottomBar({
       <Pressable
         className="h-full flex-3 flex-row justify-end w-1/3 items-center pr-5 pt-4"
         onPress={() => {
-          if (currentPage === totalPages)
+          if (currentPage === totalPages && !isLastSuraOrJozz)
             router.replace(
               `/${type}/${parseInt((local.id as string) || "") + 1}`
             );
           else nextPage();
         }}
       >
-        {currentPage === totalPages && (
+        {currentPage === totalPages && !isLastSuraOrJozz && (
           <Text className="font-HelveticaRoman text-primary dark:text-primaryDark">
             التالي
           </Text>
