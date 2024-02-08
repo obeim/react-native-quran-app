@@ -18,7 +18,7 @@ export interface Ayah {
   aya_no: number;
   aya_text_emlaey: string;
   maany_aya: string;
-  aya_text_tashkil: string;
+  aya_text: string;
 }
 
 export interface Recent {
