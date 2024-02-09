@@ -13,7 +13,7 @@ const useGoToRecent = () => {
     }, [])
   );
   const goToRecent = () => {
-    if (recent?.aya && storage.getString("view_pref") === "ayat")
+    if (recent?.aya && storage.getString("view_pref") !== "page")
       router.push(
         `/${recent.type === "surah" ? "surah" : "jozz"}/${recent.id}s${
           recent.index

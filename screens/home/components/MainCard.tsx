@@ -33,7 +33,7 @@ export function MainCard() {
 
   return (
     <View className="mt-3 bg-lotion dark:bg-blackCoral w-full  rounded-[17px] px-6 relative py-6">
-      {recent?.aya && storage.getString("view_pref") === "ayat" && (
+      {recent?.aya && storage.getString("view_pref") !== "page" && (
         <CardContent
           primary_text={
             recent.type === "surah" ? recent?.name : `الجزء ${recent.id}`
