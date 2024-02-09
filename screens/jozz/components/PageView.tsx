@@ -13,7 +13,7 @@ export const PageView = ({ data }: PageProps) => {
   });
 
   useEffect(() => {
-    if (data)
+    if (ayat)
       storage.set(
         "recent",
         JSON.stringify({
@@ -23,7 +23,7 @@ export const PageView = ({ data }: PageProps) => {
           id: ayat[0]?.jozz,
         })
       );
-  }, [currentPage]);
+  }, [currentPage,ayat]);
 
   return (
     <View className="h-[95%] bg-lotion dark:bg-blackCoral">
