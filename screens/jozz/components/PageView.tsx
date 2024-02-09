@@ -5,7 +5,6 @@ import { PageProps } from "./AyaView";
 import { PageBottomBar } from "@/screens/surah/components/PageBottomBar";
 import { LegacyRef, useEffect, useRef } from "react";
 import { storage } from "@/utils";
-import { useLocalSearchParams } from "expo-router";
 
 export const PageView = ({ data }: PageProps) => {
   const listRef = useRef<ScrollView>();

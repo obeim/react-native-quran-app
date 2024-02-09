@@ -1,7 +1,8 @@
 import { Text, View } from "react-native";
 import { ContinueReadingButton } from "./ContinueReadingButton";
+import { memo } from "react";
 
-export const CardContent = ({
+const CardContent = ({
   primary_text,
   secondary_text,
   onClick,
@@ -24,3 +25,4 @@ export const CardContent = ({
     </>
   );
 };
+export default memo(CardContent);

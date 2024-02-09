@@ -24,7 +24,7 @@ export const PageView = ({ data }: PageProps) => {
         id: data?.id,
       })
     );
-  }, [currentPage]);
+  }, [currentPage, data]);
 
   return (
     <View className="h-[95%] bg-lotion dark:bg-blackCoral">
