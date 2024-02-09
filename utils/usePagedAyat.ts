@@ -1,12 +1,16 @@
 import { Ayah, Surah } from "@/types";
 import { useMemo, useState } from "react";
 import { groupBy } from ".";
+import { useLocalSearchParams } from "expo-router";
 
 interface PageProps {
   data?: Ayah[];
 }
 const usePagedAyat = ({ data }: PageProps) => {
-  const [activePage, setActive] = useState(0);
+  const local = useLocalSearchParams();
+  const [activePage, setActive] = useState(
+    parseInt((local.id as string).split("s")[1]) - 1 || 0
+  );
   const [isLast, setIsLast] = useState(false);
 
   const formatedData = useMemo(() => {

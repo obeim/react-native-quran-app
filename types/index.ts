@@ -25,6 +25,7 @@ export interface Recent {
   type: "surah" | "jozz";
   name: string;
   aya: number;
+  page: number;
   index: number;
   id: number;
 }

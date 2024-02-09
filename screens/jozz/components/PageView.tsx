@@ -3,14 +3,29 @@ import { Ayah } from "@/types";
 import usePagedAyat from "@/utils/usePagedAyat";
 import { PageProps } from "./AyaView";
 import { PageBottomBar } from "@/screens/surah/components/PageBottomBar";
-import { LegacyRef, useRef } from "react";
+import { LegacyRef, useEffect, useRef } from "react";
+import { storage } from "@/utils";
+import { useLocalSearchParams } from "expo-router";
 
 export const PageView = ({ data }: PageProps) => {
   const listRef = useRef<ScrollView>();
-  const { ayat, nextPage, PrevPage, totalPages, currentPage, isLast } =
-    usePagedAyat({
-      data: data,
-    });
+  const { ayat, nextPage, PrevPage, totalPages, currentPage } = usePagedAyat({
+    data: data,
+  });
+
+  useEffect(() => {
+    if (data)
+      storage.set(
+        "recent",
+        JSON.stringify({
+          type: "jozz",
+          name: ayat[0]?.sora_name_ar.split(",")[0],
+          page: currentPage,
+          id: ayat[0]?.jozz,
+        })
+      );
+  }, [currentPage]);
+
   return (
     <View className="h-[95%] bg-lotion dark:bg-blackCoral">
       <ScrollView

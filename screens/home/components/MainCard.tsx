@@ -1,14 +1,29 @@
-import { Pressable, Text, View } from "react-native";
-import ArrowRight from "@/assets/icons/arrow_right.svg";
+import { View } from "react-native";
 import { router, useFocusEffect } from "expo-router";
 import { storage } from "@/utils";
-import { useCallback, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { Recent } from "@/types";
-import { useColorScheme } from "nativewind";
+import { CardContent } from "./CardContent";
+import { NoRecentView } from "./NoRecentView";
 
 export function MainCard() {
   const [recent, setRecent] = useState<Recent>();
-  const { colorScheme } = useColorScheme();
+
+  const noPageAyaText = useMemo(
+    () =>
+      recent?.type === "surah"
+        ? `الأية : ${recent?.aya}`
+        : `${recent?.name} الأية : ${recent?.aya}`,
+    [recent]
+  );
+
+  const pageTextAya = useMemo(
+    () =>
+      recent?.type === "surah"
+        ? `الصفحة  ${recent.page} `
+        : ` سورة ${recent?.name} `,
+    [recent]
+  );
   useFocusEffect(
     useCallback(() => {
       let recentJSON = storage.getString("recent");
@@ -18,47 +33,39 @@ export function MainCard() {
 
   return (
     <View className="mt-3 bg-lotion dark:bg-blackCoral w-full  rounded-[17px] px-6 relative py-6">
-      {recent ? (
-        <>
-          <View className="h-8 flex flex-col justify-center ">
-            <Text className="font-HelveticaRoman text-xl text-primary dark:text-primaryDark  ">
-              {recent.type === "surah" ? recent?.name : `الجزء ${recent.id}`}
-            </Text>
-            <Text className=" text-secondary/30 dark:text-primaryDark text-xs font-HelveticaLight">
-              {recent.type === "surah"
-                ? `الأية : ${recent?.aya}`
-                : `${recent.name} الأية : ${recent?.aya}`}
-            </Text>
-          </View>
-          <Pressable
-            className="flex-[0.2] h-20 flex-row items-center absolute right-3 top- text-primar dark:text-primaryDark "
-            onPress={() => {
-              router.push(
-                `/${recent.type === "surah" ? "surah" : "jozz"}/${recent.id}s${
-                  recent.index
-                }`
-              );
-            }}
-          >
-            <Text className="font-HelveticaBold text-primary dark:text-primaryDark ">
-              متابعة القراءة
-            </Text>
-            <ArrowRight
-              style={{
-                // @ts-ignore
-                color: colorScheme === "dark" ? "#FAF0E6" : "#544981",
-              }}
-              width={22}
-              height={12}
-              className="mt-2"
-            />
-          </Pressable>
-        </>
-      ) : (
-        <Text className="text-center font-HelveticaRoman text-primary/20 dark:text-primaryDark/70">
-          لم يتم قراءة شئ موخرا
-        </Text>
+      {recent?.aya && storage.getString("view_pref") === "ayat" && (
+        <CardContent
+          primary_text={
+            recent.type === "surah" ? recent?.name : `الجزء ${recent.id}`
+          }
+          secondary_text={noPageAyaText}
+          onClick={() => {
+            router.push(
+              `/${recent.type === "surah" ? "surah" : "jozz"}/${recent.id}s${
+                recent.index
+              }`
+            );
+          }}
+        />
       )}
+
+      {recent?.page && storage.getString("view_pref") === "page" && (
+        <CardContent
+          primary_text={
+            recent.type === "surah" ? recent?.name : `الجزء ${recent.id}`
+          }
+          secondary_text={pageTextAya}
+          onClick={() => {
+            router.push(
+              `/${recent.type === "surah" ? "surah" : "jozz"}/${recent.id}s${
+                recent.page
+              }`
+            );
+          }}
+        />
+      )}
+
+      {!recent && <NoRecentView />}
     </View>
   );
 }

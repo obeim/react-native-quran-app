@@ -1,16 +1,19 @@
 import { Text, View } from "react-native";
-
 import { MainCard } from "./components/MainCard";
 import { TypeTabs } from "./components/TypeTabs";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { useQuery } from "react-query";
 import SurahsRepo from "@/db/repos/SurahsRepo";
 import { SearchInput } from "./components/SearchInput";
 import InnerSplash from "@/components/InnerSplash";
 import { Header } from "./components/Header";
+import { useFocusEffect } from "expo-router";
+
+import { ContinePopup } from "./ContinePopup";
 
 const Home = () => {
   const [search, setSearch] = useState<string>("");
+  const [openCont, setOpenCont] = useState(false);
 
   const { data, isFetched } = useQuery(
     "suar",
@@ -19,9 +22,19 @@ const Home = () => {
     },
     { cacheTime: Infinity }
   );
+  useFocusEffect(
+    useCallback(() => {
+      setOpenCont(true);
+    }, [])
+  );
 
   return data && isFetched ? (
-    <View className=" w-full h-screen bg-white dark:bg-darkBg ">
+    <View
+      className=" w-full h-screen bg-white dark:bg-darkBg "
+      onTouchStart={() => {
+        if (openCont) setOpenCont(false);
+      }}
+    >
       <View className="h-[34%]">
         <Header />
         <View className="mt-3 w-full px-4">
@@ -33,6 +46,7 @@ const Home = () => {
         </View>
       </View>
       {data && <TypeTabs search={search} data={data} />}
+      <ContinePopup isOpen={openCont} />
     </View>
   ) : (
     <InnerSplash />

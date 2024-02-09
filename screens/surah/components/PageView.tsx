@@ -3,7 +3,8 @@ import { Ayah } from "@/types";
 import usePagedAyat from "@/utils/usePagedAyat";
 import { PageProps } from "./AyatView";
 import { PageBottomBar } from "./PageBottomBar";
-import { LegacyRef, useRef } from "react";
+import { LegacyRef, useEffect, useRef } from "react";
+import { storage } from "@/utils";
 
 export const PageView = ({ data }: PageProps) => {
   const listRef = useRef<ScrollView>();
@@ -12,6 +13,18 @@ export const PageView = ({ data }: PageProps) => {
     usePagedAyat({
       data: data?.ayat,
     });
+
+  useEffect(() => {
+    storage.set(
+      "recent",
+      JSON.stringify({
+        type: "surah",
+        name: data?.name_ar.replace("سورة", ""),
+        page: currentPage,
+        id: data?.id,
+      })
+    );
+  }, [currentPage]);
 
   return (
     <View className="h-[95%] bg-lotion dark:bg-blackCoral">
