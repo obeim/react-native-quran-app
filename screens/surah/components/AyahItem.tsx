@@ -2,6 +2,7 @@ import { Text, View } from "react-native";
 import { AyaCard } from "./AyaCard";
 import { memo } from "react";
 import { Ayah } from "@/types";
+import { AyatBottomNav } from "@/screens/jozz/components/AyatBottomNav";
 
 export const AyahItem = memo(
   ({
@@ -26,6 +27,7 @@ export const AyahItem = memo(
         isFirst={index === 0}
         isLast={index + 1 !== data?.ayat.length}
       />
+      {data?.ayat?.length - 1 === index && <AyatBottomNav type="surah" />}
     </View>
   ),
 

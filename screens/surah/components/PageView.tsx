@@ -3,8 +3,11 @@ import { Ayah } from "@/types";
 import usePagedAyat from "@/utils/usePagedAyat";
 import { PageProps } from "./AyatView";
 import { PageBottomBar } from "./PageBottomBar";
+import { LegacyRef, useRef } from "react";
 
 export const PageView = ({ data }: PageProps) => {
+  const listRef = useRef<ScrollView>();
+
   const { ayat, nextPage, PrevPage, totalPages, currentPage, isLast } =
     usePagedAyat({
       data: data?.ayat,
@@ -13,6 +16,7 @@ export const PageView = ({ data }: PageProps) => {
   return (
     <View className="h-[95%] bg-lotion dark:bg-blackCoral">
       <ScrollView
+        ref={listRef as LegacyRef<ScrollView>}
         bounces={false}
         decelerationRate={0}
         className=" px-2 h-[94%] py-3 mb-9 "
@@ -36,8 +40,14 @@ export const PageView = ({ data }: PageProps) => {
         )}
       </ScrollView>
       <PageBottomBar
-        nextPage={nextPage}
-        PrevPage={PrevPage}
+        nextPage={() => {
+          nextPage();
+          listRef.current?.scrollTo({ y: 0 });
+        }}
+        PrevPage={() => {
+          PrevPage();
+          listRef.current?.scrollTo({ y: 0 });
+        }}
         currentPage={currentPage}
         totalPages={totalPages}
         type="surah"

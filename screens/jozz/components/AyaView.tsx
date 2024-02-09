@@ -3,7 +3,7 @@ import { FlatList } from "react-native";
 import useOnAyaScrolling from "@/utils/useOnAyaScrolling";
 import useScrollToAya from "@/utils/useScrollToAya";
 import { AyahItem } from "./AyahItem";
-import { Ayah, Surah as SurahType } from "@/types";
+import { Ayah } from "@/types";
 
 export interface PageProps {
   data?: Ayah[];
@@ -12,7 +12,9 @@ export function AyatView({ data }: PageProps) {
   const local = useLocalSearchParams();
 
   const { flatListRef, onScrollToIndexFailed } = useScrollToAya();
-  const { viewabilityConfigCallbackPairs } = useOnAyaScrolling({});
+  const { viewabilityConfigCallbackPairs } = useOnAyaScrolling({
+    type: "jozz",
+  });
 
   return (
     <FlatList
@@ -26,7 +28,10 @@ export function AyatView({ data }: PageProps) {
       }
       onScrollToIndexFailed={onScrollToIndexFailed}
       renderItem={({ item, index }) => (
-        <AyahItem {...{ item, id: local.id as string, index, data: data }} />
+        <AyahItem
+          key={index}
+          {...{ item, id: local.id as string, index, data: data }}
+        />
       )}
       className="w-full bg-lotion dark:bg-blackCoral h-[93%] px-5 overflow-hidden"
     />

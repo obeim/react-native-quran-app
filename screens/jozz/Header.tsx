@@ -17,7 +17,7 @@ export function Header({
   const { colorScheme } = useColorScheme();
 
   return (
-    <View className="flex flex-row justify-between   px-4  py-4 h-[8%] bg-white dark:bg-darkBg items-center">
+    <View className="flex flex-row justify-between pl-4 py-4 h-[8%] bg-white dark:bg-darkBg items-center">
       <View className="inline-flex flex-row items-center justify-center h-full">
         <Pressable
           onPress={() => {
