@@ -1,4 +1,4 @@
-import { Pressable, ScrollView, Text, View } from "react-native";
+import { Alert, Pressable, ScrollView, Text, View } from "react-native";
 import { Ayah } from "@/types";
 import usePagedAyat from "@/utils/usePagedAyat";
 import { PageProps } from "./AyaView";
@@ -23,7 +23,7 @@ export const PageView = ({ data }: PageProps) => {
           id: ayat[0]?.jozz,
         })
       );
-  }, [currentPage,ayat]);
+  }, [currentPage, ayat]);
 
   return (
     <View className="h-[95%] bg-lotion dark:bg-blackCoral">
@@ -31,22 +31,32 @@ export const PageView = ({ data }: PageProps) => {
         ref={listRef as LegacyRef<ScrollView>}
         bounces={false}
         decelerationRate={0}
-        className=" px-2 h-[94%] py-3 mb-9 "
+        className=" px-2 h-[94%] mb-9 "
       >
-        <Text className="text-primary/30 dark:text-primaryDark/40 px-3">
-          سورة {ayat[ayat.length - 1].sora_name_ar.split(",")[0]}
-        </Text>
-        {currentPage === 1 &&
-          (ayat[0] as Ayah).sora !== 1 &&
-          (ayat[0] as Ayah).sora !== 9 && (
-            <Text className="mb-3 text-primary dark:text-primaryDark font-UthmanicHafs text-xl text-center ">
-              بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ
-            </Text>
-          )}
+        {ayat[0].sora_name_ar.includes("no") && (
+          <Text className="text-primary/30 dark:text-primaryDark/40 px-3 my-3 ">
+            سورة {ayat[0].sora_name_ar.split(",")[0]}
+          </Text>
+        )}
         {ayat && (
-          <View className="bg-lotion dark:bg-blackCoral mb-9">
-            <Text className="text-justify text-[19px] py-1 px-2  leading-[49px] text-primary dark:text-primaryDark !font-UthmanicHafs w-full">
-              {ayat.map((aya: Ayah) => aya.aya_text + `﴿${aya.aya_no}﴾`)}
+          <View className="bg-lotion dark:bg-blackCoral mb-9 flex flex-col items-start">
+            <Text className="text-[20px] leading-[49px] text-primary dark:text-primaryDark !font-UthmanicHafs w-full text-justify px-2 ">
+              {ayat.map((aya: Ayah, i: number) => (
+                <Text
+                  key={i}
+                  onPress={() => {
+                    // clicking on aya view
+                  }}
+                >
+                  {!aya.sora_name_ar.includes("no") && (
+                    <Text className="text-primary/30 dark:text-primaryDark/40">
+                      {`${i !== 0 ? "\n" : ""}  سورة ${aya.sora_name_ar}\n`}
+                    </Text>
+                  )}
+
+                  <Text>{aya.aya_text + `﴿${aya.aya_no}﴾ `}</Text>
+                </Text>
+              ))}
             </Text>
           </View>
         )}

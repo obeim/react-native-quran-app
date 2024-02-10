@@ -33,7 +33,7 @@ export function Header() {
               colorScheme === "light" ? "" : "-translate-x-6"
             }`}
           >
-            {colorScheme === "dark" ? "فاتح" : "غامق"}
+            {colorScheme === "dark" ? "فاتح" : "مظلم"}
           </Motion.Text>
           <Motion.View animate={{ x: colorScheme === "light" ? 0 : 32 }}>
             {colorScheme === "dark" ? (
