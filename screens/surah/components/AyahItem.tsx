@@ -1,6 +1,6 @@
 import { Text, View } from "react-native";
 import { AyaCard } from "./AyaCard";
-import { memo } from "react";
+import { memo, useState } from "react";
 import { Ayah } from "@/types";
 import { AyatBottomNav } from "@/screens/jozz/components/AyatBottomNav";
 
@@ -10,26 +10,31 @@ export const AyahItem = memo(
     index,
     data,
     id,
+    onPress,
   }: {
     item: Ayah;
     index: number;
     data: any;
     id: string;
-  }) => (
-    <View className="bg-lotion dark:bg-blackCoral h-30" key={index}>
-      {id !== "1" && id !== "9" && index === 0 && (
-        <Text className="mt-5 text-primary dark:text-primaryDark font-UthmanicHafs text-lg text-center ">
-          بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ
-        </Text>
-      )}
-      <AyaCard
-        ayah={item}
-        isFirst={index === 0}
-        isLast={index + 1 !== data?.ayat.length}
-      />
-      {data?.ayat?.length - 1 === index && <AyatBottomNav type="surah" />}
-    </View>
-  ),
+    onPress?: () => void;
+  }) => {
+    return (
+      <View className="bg-lotion dark:bg-blackCoral h-30" key={index}>
+        {id !== "1" && id !== "9" && index === 0 && (
+          <Text className="mt-5 text-primary dark:text-primaryDark font-UthmanicHafs text-lg text-center ">
+            بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ
+          </Text>
+        )}
+        <AyaCard
+          ayah={item}
+          isFirst={index === 0}
+          isLast={index + 1 !== data?.ayat.length}
+          onPress={onPress}
+        />
+        {data?.ayat?.length - 1 === index && <AyatBottomNav type="surah" />}
+      </View>
+    );
+  },
 
   (prevProps, nextProps) => {
     return prevProps.item.aya_no === nextProps.item.aya_no;

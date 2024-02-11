@@ -4,6 +4,7 @@ import useOnAyaScrolling from "@/utils/useOnAyaScrolling";
 import useScrollToAya from "@/utils/useScrollToAya";
 import { AyahItem } from "./AyahItem";
 import { Ayah, Surah as SurahType } from "@/types";
+import usePlayAyah from "@/utils/usePlayAyah";
 
 interface SurahwithAyat extends SurahType {
   ayat: Ayah[];
@@ -29,7 +30,10 @@ export function AyatView({ data }: PageProps) {
       }
       onScrollToIndexFailed={onScrollToIndexFailed}
       renderItem={({ item, index }) => (
-        <AyahItem {...{ item, id: local.id as string, index, data: data }} />
+        <AyahItem
+          onPress={() => {}}
+          {...{ item, id: local.id as string, index, data: data }}
+        />
       )}
       className="w-full bg-lotion dark:bg-blackCoral h-[93%] px-5 overflow-hidden"
     />

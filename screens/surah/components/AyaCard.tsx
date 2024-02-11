@@ -1,5 +1,5 @@
 import { Ayah } from "@/types";
-import { Text, View } from "react-native";
+import { Pressable, Text, View } from "react-native";
 import Bookmark from "@/assets/icons/bookmark.svg";
 import { useMemo, useState } from "react";
 import { useColorScheme } from "nativewind";
@@ -8,10 +8,12 @@ export function AyaCard({
   ayah,
   isLast,
   isFirst,
+  onPress,
 }: {
   ayah: Ayah;
   isLast: boolean;
   isFirst: boolean;
+  onPress?: () => void;
 }) {
   const [bookmark, setBookmark] = useState(false);
   const { colorScheme } = useColorScheme();
@@ -20,8 +22,10 @@ export function AyaCard({
     () => (colorScheme === "dark" ? "#FAF0E6" : "#544981"),
     [colorScheme]
   );
+
   return (
-    <View
+    <Pressable
+      onPress={onPress}
       className={`bg-lotion dark:bg-blackCoral pt-4 relative  ${
         isFirst && "mt-5"
       } `}
@@ -48,6 +52,6 @@ export function AyaCard({
           {ayah.aya_text} {`﴿${ayah.aya_no}﴾`}
         </Text>
       </View>
-    </View>
+    </Pressable>
   );
 }
