@@ -4,15 +4,15 @@ import useOnAyaScrolling from "@/utils/useOnAyaScrolling";
 import useScrollToAya from "@/utils/useScrollToAya";
 import { AyahItem } from "./AyahItem";
 import { Ayah, Surah as SurahType } from "@/types";
-import usePlayAyah from "@/utils/usePlayAyah";
 
 interface SurahwithAyat extends SurahType {
   ayat: Ayah[];
 }
 export interface PageProps {
   data?: SurahwithAyat;
+  onPressAyah?: (aya: Ayah) => void;
 }
-export function AyatView({ data }: PageProps) {
+export function AyatView({ data, onPressAyah }: PageProps) {
   const local = useLocalSearchParams();
 
   const { flatListRef, onScrollToIndexFailed } = useScrollToAya();
@@ -31,7 +31,9 @@ export function AyatView({ data }: PageProps) {
       onScrollToIndexFailed={onScrollToIndexFailed}
       renderItem={({ item, index }) => (
         <AyahItem
-          onPress={() => {}}
+          onPress={() => {
+            onPressAyah?.(item);
+          }}
           {...{ item, id: local.id as string, index, data: data }}
         />
       )}

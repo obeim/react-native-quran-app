@@ -7,6 +7,7 @@ import { QueryClient, QueryClientProvider } from "react-query";
 import { useColorScheme } from "nativewind";
 import RNAppRestart from "@brandingbrand/react-native-app-restart";
 import { storage } from "@/utils";
+import { RootSiblingParent } from "react-native-root-siblings";
 
 SplashScreen.preventAutoHideAsync();
 export default function RootLayout(): ReactNode {
@@ -41,29 +42,31 @@ export default function RootLayout(): ReactNode {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <SafeAreaView
-        onLayout={() => {
-          onLayoutRootView();
-        }}
-        style={{
-          ...styles.container,
-          backgroundColor: colorScheme === "dark" ? "#352F44" : "white",
-        }}
-        className=" bg-white dark:bg-darkBg "
-      >
-        <Stack
-          screenOptions={{
-            headerShown: false,
-            statusBarColor: "#352F44",
-            contentStyle: {
-              padding: 0,
-              margin: 0,
-              backgroundColor: colorScheme === "dark" ? "#352F44" : "white",
-            },
-            animation: "slide_from_bottom",
+      <RootSiblingParent>
+        <SafeAreaView
+          onLayout={() => {
+            onLayoutRootView();
           }}
-        />
-      </SafeAreaView>
+          style={{
+            ...styles.container,
+            backgroundColor: colorScheme === "dark" ? "#352F44" : "white",
+          }}
+          className=" bg-white dark:bg-darkBg "
+        >
+          <Stack
+            screenOptions={{
+              headerShown: false,
+              statusBarColor: "#352F44",
+              contentStyle: {
+                padding: 0,
+                margin: 0,
+                backgroundColor: colorScheme === "dark" ? "#352F44" : "white",
+              },
+              animation: "slide_from_bottom",
+            }}
+          />
+        </SafeAreaView>
+      </RootSiblingParent>
     </QueryClientProvider>
   );
 }

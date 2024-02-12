@@ -25,7 +25,6 @@ export function AyaCard({
 
   return (
     <Pressable
-      onPress={onPress}
       className={`bg-lotion dark:bg-blackCoral pt-4 relative  ${
         isFirst && "mt-5"
       } `}
@@ -46,7 +45,8 @@ export function AyaCard({
         } border-primary/5 dark:border-primaryDark/10 pb-3`}
       >
         <Text
-          className=" text-xl py-3 text-primary dark:text-primaryDark !font-UthmanicHafs w-full"
+          onPress={onPress}
+          className=" text-xl py-3 text-primary  dark:text-primaryDark !font-UthmanicHafs "
           key={ayah.aya_no}
         >
           {ayah.aya_text} {`﴿${ayah.aya_no}﴾`}

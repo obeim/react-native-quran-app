@@ -1,6 +1,6 @@
 import { Text, View } from "react-native";
 import { AyaCard } from "./AyaCard";
-import { memo, useState } from "react";
+import { memo } from "react";
 import { Ayah } from "@/types";
 import { AyatBottomNav } from "@/screens/jozz/components/AyatBottomNav";
 

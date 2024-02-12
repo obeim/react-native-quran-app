@@ -5,9 +5,8 @@ import { PageProps } from "./AyatView";
 import { PageBottomBar } from "./PageBottomBar";
 import { LegacyRef, useEffect, useRef } from "react";
 import { storage } from "@/utils";
-import usePlayAyah from "@/utils/usePlayAyah";
 
-export const PageView = ({ data }: PageProps) => {
+export const PageView = ({ data, onPressAyah }: PageProps) => {
   const listRef = useRef<ScrollView>();
 
   const { ayat, nextPage, PrevPage, totalPages, currentPage, isLast } =
@@ -49,7 +48,14 @@ export const PageView = ({ data }: PageProps) => {
           <View className="bg-lotion dark:bg-blackCoral mb-9">
             <Text className="text-justify text-[19px] py-1 px-2  leading-[49px] text-primary dark:text-primaryDark !font-UthmanicHafs w-full">
               {ayat.map((aya: Ayah) => (
-                <Text key={aya.id}>{aya.aya_text + `﴿${aya.aya_no}﴾ `}</Text>
+                <Text
+                  onPress={() => {
+                    onPressAyah?.(aya);
+                  }}
+                  key={aya.id}
+                >
+                  {aya.aya_text + `﴿${aya.aya_no}﴾ `}
+                </Text>
               ))}
             </Text>
           </View>
