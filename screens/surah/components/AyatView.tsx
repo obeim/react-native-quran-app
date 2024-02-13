@@ -4,6 +4,7 @@ import useOnAyaScrolling from "@/utils/useOnAyaScrolling";
 import useScrollToAya from "@/utils/useScrollToAya";
 import { AyahItem } from "./AyahItem";
 import { Ayah, Surah as SurahType } from "@/types";
+import { FavType } from "@/utils/Favs";
 
 interface SurahwithAyat extends SurahType {
   ayat: Ayah[];
@@ -11,8 +12,9 @@ interface SurahwithAyat extends SurahType {
 export interface PageProps {
   data?: SurahwithAyat;
   onPressAyah?: (aya: Ayah) => void;
+  Favs?: FavType[];
 }
-export function AyatView({ data, onPressAyah }: PageProps) {
+export function AyatView({ data, onPressAyah, Favs }: PageProps) {
   const local = useLocalSearchParams();
 
   const { flatListRef, onScrollToIndexFailed } = useScrollToAya();
@@ -31,6 +33,7 @@ export function AyatView({ data, onPressAyah }: PageProps) {
       onScrollToIndexFailed={onScrollToIndexFailed}
       renderItem={({ item, index }) => (
         <AyahItem
+          marked={Favs?.some((fav) => fav.id == item.id) || false}
           onPress={() => {
             onPressAyah?.(item);
           }}

@@ -11,12 +11,14 @@ export const AyahItem = memo(
     data,
     id,
     onPress,
+    marked,
   }: {
     item: Ayah;
     index: number;
     data: any;
     id: string;
     onPress?: () => void;
+    marked: boolean;
   }) => {
     return (
       <View className="bg-lotion dark:bg-blackCoral h-30" key={index}>
@@ -26,6 +28,7 @@ export const AyahItem = memo(
           </Text>
         )}
         <AyaCard
+          marked={marked}
           ayah={item}
           isFirst={index === 0}
           isLast={index + 1 !== data?.ayat.length}

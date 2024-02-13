@@ -9,6 +9,7 @@ import { AyatView } from "./components/AyaView";
 import { PageView } from "./components/PageView";
 import { AyahActionsWrapper } from "../surah/components/AyahActionsWrapper";
 import { Ayah } from "@/types";
+import Fav from "@/utils/Favs";
 
 const Jozz = () => {
   const local = useLocalSearchParams();
@@ -28,6 +29,10 @@ const Jozz = () => {
     },
     { cacheTime: Infinity }
   );
+
+  const { data: Favs } = useQuery("favs", () => {
+    return Fav.getFav();
+  });
 
   const onPressAyah = (aya: Ayah) => {
     setActiveAya(aya);
@@ -52,8 +57,8 @@ const Jozz = () => {
         <View className=" bg-white dark:bg-darkBg">
           {
             {
-              ayat: <AyatView onPress={onPressAyah} data={data} />,
-              page: <PageView onPress={onPressAyah} data={data} />,
+              ayat: <AyatView Favs={Favs} onPress={onPressAyah} data={data} />,
+              page: <PageView Favs={Favs} onPress={onPressAyah} data={data} />,
             }[layout]
           }
         </View>

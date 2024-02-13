@@ -6,7 +6,7 @@ import { PageBottomBar } from "./PageBottomBar";
 import { LegacyRef, useEffect, useRef } from "react";
 import { storage } from "@/utils";
 
-export const PageView = ({ data, onPressAyah }: PageProps) => {
+export const PageView = ({ data, onPressAyah, Favs }: PageProps) => {
   const listRef = useRef<ScrollView>();
 
   const { ayat, nextPage, PrevPage, totalPages, currentPage, isLast } =

@@ -9,6 +9,7 @@ import { AyatView } from "./components/AyatView";
 import { storage } from "@/utils";
 import { Ayah } from "@/types";
 import { AyahActionsWrapper } from "./components/AyahActionsWrapper";
+import Fav from "@/utils/Favs";
 
 const Surah = () => {
   const local = useLocalSearchParams();
@@ -26,6 +27,10 @@ const Surah = () => {
     },
     { cacheTime: Infinity }
   );
+
+  const { data: Favs } = useQuery("favs", () => {
+    return Fav.getFav();
+  });
 
   const onPressAyah = (aya: Ayah) => {
     setSelectedAyah(aya);
@@ -52,8 +57,12 @@ const Surah = () => {
         <View className=" bg-white dark:bg-darkBg">
           {
             {
-              page: <PageView onPressAyah={onPressAyah} data={data} />,
-              ayat: <AyatView onPressAyah={onPressAyah} data={data} />,
+              page: (
+                <PageView Favs={Favs} onPressAyah={onPressAyah} data={data} />
+              ),
+              ayat: (
+                <AyatView Favs={Favs} onPressAyah={onPressAyah} data={data} />
+              ),
             }[layout]
           }
         </View>

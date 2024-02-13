@@ -4,12 +4,14 @@ import useOnAyaScrolling from "@/utils/useOnAyaScrolling";
 import useScrollToAya from "@/utils/useScrollToAya";
 import { AyahItem } from "./AyahItem";
 import { Ayah } from "@/types";
+import { FavType } from "@/utils/Favs";
 
 export interface PageProps {
   data?: Ayah[];
   onPress?: (aya: Ayah) => void;
+  Favs?: FavType[];
 }
-export function AyatView({ data, onPress }: PageProps) {
+export function AyatView({ data, onPress, Favs }: PageProps) {
   const local = useLocalSearchParams();
 
   const { flatListRef, onScrollToIndexFailed } = useScrollToAya();
@@ -31,6 +33,7 @@ export function AyatView({ data, onPress }: PageProps) {
       renderItem={({ item, index }) => (
         <AyahItem
           key={index}
+          marked={Favs?.some((fav) => fav.id == item.id) || false}
           onPress={() => {
             onPress?.(item);
           }}

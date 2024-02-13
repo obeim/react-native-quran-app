@@ -3,20 +3,25 @@ import { Pressable, Text, View } from "react-native";
 import Bookmark from "@/assets/icons/bookmark.svg";
 import { useMemo, useState } from "react";
 import { useColorScheme } from "nativewind";
+import Fav from "@/utils/Favs";
+import { useQueryClient } from "react-query";
 
 export function AyaCard({
   ayah,
   isLast,
   isFirst,
   onPress,
+  marked,
 }: {
   ayah: Ayah;
   isLast: boolean;
   isFirst: boolean;
   onPress?: () => void;
+  marked: boolean;
 }) {
-  const [bookmark, setBookmark] = useState(false);
+  const [bookmark, setBookmark] = useState(marked);
   const { colorScheme } = useColorScheme();
+  const queryClient = useQueryClient();
 
   const currentColor = useMemo(
     () => (colorScheme === "dark" ? "#FAF0E6" : "#544981"),
@@ -32,6 +37,16 @@ export function AyaCard({
       <Bookmark
         onPress={() => {
           setBookmark(!bookmark);
+          if (!bookmark)
+            Fav.addFav({
+              text: ayah.aya_text,
+              id: ayah.id,
+              sora_name: ayah.sora_name_ar,
+              number: ayah.aya_no,
+              sora: ayah.sora,
+            });
+          else Fav.deleteFav(ayah.id);
+          queryClient.invalidateQueries({ queryKey: ["favs"] });
         }}
         fill={bookmark ? currentColor : "none"}
         color={currentColor}

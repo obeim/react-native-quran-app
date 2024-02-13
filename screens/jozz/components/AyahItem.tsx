@@ -11,11 +11,13 @@ export const AyahItem = memo(
     index,
     data,
     onPress,
+    marked,
   }: {
     item: Ayah;
     index: number;
     data: any;
     onPress?: () => void;
+    marked: boolean;
   }) => (
     <View className="bg-lotion dark:bg-blackCoral">
       {!item.sora_name_ar.includes("no") && (
@@ -24,6 +26,7 @@ export const AyahItem = memo(
         </Text>
       )}
       <AyaCard
+        marked={marked}
         onPress={onPress}
         ayah={item}
         isFirst={index === 0}
