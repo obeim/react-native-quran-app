@@ -1,6 +1,5 @@
 import { Modal, Pressable, Text, View } from "react-native";
 import { FontAwesome5 } from "@expo/vector-icons";
-import { Motion } from "@legendapp/motion";
 export function AyahActionModal({
   opened,
   close,
@@ -28,7 +27,7 @@ export function AyahActionModal({
         className="bg-black/40 w-full h-full absolute"
       ></Pressable>
       <View
-        className="bg-darkBg bottom-0  w-1/2 shadow my-auto mx-auto rounded-xl items-center pt-2 border  border-primary dark:border-primaryDark"
+        className="bg-darkBg bottom-0  w-1/3 shadow my-auto mx-auto rounded-xl items-center pt-2  border  border-primary dark:border-primaryDark"
         style={{
           shadowRadius: 5,
           shadowOffset: {

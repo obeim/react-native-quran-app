@@ -6,7 +6,17 @@ import { AyaCard } from "@/screens/surah/components/AyaCard";
 import { AyatBottomNav } from "./AyatBottomNav";
 
 export const AyahItem = memo(
-  ({ item, index, data }: { item: Ayah; index: number; data: any }) => (
+  ({
+    item,
+    index,
+    data,
+    onPress,
+  }: {
+    item: Ayah;
+    index: number;
+    data: any;
+    onPress?: () => void;
+  }) => (
     <View className="bg-lotion dark:bg-blackCoral">
       {!item.sora_name_ar.includes("no") && (
         <Text className="my-2  bg-primary dark:bg-darkBg mx-auto text-white dark:text-primaryDark font-UthmanicHafs text-lg w-full text-center">
@@ -14,6 +24,7 @@ export const AyahItem = memo(
         </Text>
       )}
       <AyaCard
+        onPress={onPress}
         ayah={item}
         isFirst={index === 0}
         isLast={index + 1 !== data?.length}

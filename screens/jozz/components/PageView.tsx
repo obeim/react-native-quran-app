@@ -6,7 +6,7 @@ import { PageBottomBar } from "@/screens/surah/components/PageBottomBar";
 import { LegacyRef, useEffect, useRef } from "react";
 import { storage } from "@/utils";
 
-export const PageView = ({ data }: PageProps) => {
+export const PageView = ({ data, onPress }: PageProps) => {
   const listRef = useRef<ScrollView>();
   const { ayat, nextPage, PrevPage, totalPages, currentPage } = usePagedAyat({
     data: data,
@@ -46,6 +46,7 @@ export const PageView = ({ data }: PageProps) => {
                   key={i}
                   onPress={() => {
                     // clicking on aya view
+                    onPress?.(aya);
                   }}
                 >
                   {!aya.sora_name_ar.includes("no") && (

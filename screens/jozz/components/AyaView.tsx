@@ -7,8 +7,9 @@ import { Ayah } from "@/types";
 
 export interface PageProps {
   data?: Ayah[];
+  onPress?: (aya: Ayah) => void;
 }
-export function AyatView({ data }: PageProps) {
+export function AyatView({ data, onPress }: PageProps) {
   const local = useLocalSearchParams();
 
   const { flatListRef, onScrollToIndexFailed } = useScrollToAya();
@@ -30,6 +31,9 @@ export function AyatView({ data }: PageProps) {
       renderItem={({ item, index }) => (
         <AyahItem
           key={index}
+          onPress={() => {
+            onPress?.(item);
+          }}
           {...{ item, id: local.id as string, index, data: data }}
         />
       )}

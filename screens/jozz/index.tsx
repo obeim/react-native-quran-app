@@ -7,9 +7,14 @@ import { useState } from "react";
 import { storage } from "@/utils";
 import { AyatView } from "./components/AyaView";
 import { PageView } from "./components/PageView";
+import { AyahActionsWrapper } from "../surah/components/AyahActionsWrapper";
+import { Ayah } from "@/types";
 
 const Jozz = () => {
   const local = useLocalSearchParams();
+  const [openAyaAction, setOpenAyaAction] = useState(false);
+  const [activeAya, setActiveAya] = useState<Ayah>();
+
   const [layout, setLayout] = useState<"page" | "ayat">(
     (storage.getString("view_pref") as "page") || "ayat" || "ayat"
   );
@@ -24,10 +29,21 @@ const Jozz = () => {
     { cacheTime: Infinity }
   );
 
+  const onPressAyah = (aya: Ayah) => {
+    setActiveAya(aya);
+    setOpenAyaAction(true);
+  };
   return (
     !isLoading &&
     isFetched && (
       <View className="h-full">
+        <AyahActionsWrapper
+          opened={openAyaAction}
+          close={() => {
+            setOpenAyaAction(false);
+          }}
+          ayah={activeAya}
+        />
         <Header
           setLayout={setLayout}
           layout={layout}
@@ -35,9 +51,10 @@ const Jozz = () => {
         />
         <View className=" bg-white dark:bg-darkBg">
           {
-            { ayat: <AyatView data={data} />, page: <PageView data={data} /> }[
-              layout
-            ]
+            {
+              ayat: <AyatView onPress={onPressAyah} data={data} />,
+              page: <PageView onPress={onPressAyah} data={data} />,
+            }[layout]
           }
         </View>
       </View>

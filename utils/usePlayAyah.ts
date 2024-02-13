@@ -21,9 +21,7 @@ const usePlayAyah = () => {
     return sound
       ? () => {
           console.log("Unloading Sound");
-          sound.unloadAsync().then(() => {
-            setSound(undefined);
-          });
+          sound.unloadAsync();
         }
       : undefined;
   }, [sound]);
