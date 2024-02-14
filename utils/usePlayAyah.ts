@@ -25,7 +25,20 @@ const usePlayAyah = () => {
         }
       : undefined;
   }, [sound]);
-  return { playAyah, isPlaying, stop: sound?.stopAsync };
+  return {
+    playAyah,
+    isPlaying,
+    sound: sound,
+    stop: () => {
+      sound?.stopAsync();
+    },
+    pause: () => {
+      sound?.pauseAsync();
+    },
+    resume: () => {
+      sound?.setStatusAsync({ shouldPlay: true });
+    },
+  };
 };
 
 export default usePlayAyah;
