@@ -10,6 +10,7 @@ import { storage } from "@/utils";
 import { Ayah } from "@/types";
 import { AyahActionsWrapper } from "./components/AyahActionsWrapper";
 import Fav from "@/utils/Favs";
+import usePlayAyah from "@/utils/usePlayAyah";
 
 const Surah = () => {
   const local = useLocalSearchParams();
@@ -32,6 +33,8 @@ const Surah = () => {
     return Fav.getFav();
   });
 
+  const { playAyah, stop, isPlaying, isLoading: soundLoading } = usePlayAyah();
+
   const onPressAyah = (aya: Ayah) => {
     setSelectedAyah(aya);
     setOpenModal(true);
@@ -42,11 +45,15 @@ const Surah = () => {
     isFetched && (
       <View className="h-full">
         <AyahActionsWrapper
+          playAyah={playAyah}
           close={() => setOpenModal(false)}
           opened={openedModal}
           ayah={selectedAyah}
         />
         <Header
+          stop={stop}
+          isPlaying={isPlaying}
+          isLoading={soundLoading || false}
           layout={layout}
           setLayout={setLayout}
           title={data?.name_ar?.slice(5)}

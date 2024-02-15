@@ -10,13 +10,14 @@ export function AyahActionsWrapper({
   close,
   opened,
   ayah,
+  playAyah,
 }: {
   close: () => void;
   opened: boolean;
   ayah?: Ayah;
+  playAyah: (id: number) => Promise<void>;
 }) {
   const [openMeaning, setOpenMeaning] = useState(false);
-  const { playAyah } = usePlayAyah();
 
   return (
     <View>

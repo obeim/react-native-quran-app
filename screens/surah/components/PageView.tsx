@@ -35,7 +35,7 @@ export const PageView = ({ data, onPressAyah, Favs }: PageProps) => {
         className=" px-2 h-[94%] py-3 mb-9 "
       >
         <Text className="text-primary/30 dark:text-primaryDark/40 px-3">
-          الجزء {ayat[ayat.length - 1].jozz}
+          الجزء {ayat[ayat?.length - 1].jozz}
         </Text>
         {currentPage === 1 &&
           (ayat[0] as Ayah).sora !== 1 &&

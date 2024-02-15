@@ -10,6 +10,7 @@ import { PageView } from "./components/PageView";
 import { AyahActionsWrapper } from "../surah/components/AyahActionsWrapper";
 import { Ayah } from "@/types";
 import Fav from "@/utils/Favs";
+import usePlayAyah from "@/utils/usePlayAyah";
 
 const Jozz = () => {
   const local = useLocalSearchParams();
@@ -33,7 +34,7 @@ const Jozz = () => {
   const { data: Favs } = useQuery("favs", () => {
     return Fav.getFav();
   });
-
+  const { playAyah, stop, isPlaying, isLoading: soundLoading } = usePlayAyah();
   const onPressAyah = (aya: Ayah) => {
     setActiveAya(aya);
     setOpenAyaAction(true);
@@ -43,6 +44,7 @@ const Jozz = () => {
     isFetched && (
       <View className="h-full">
         <AyahActionsWrapper
+          playAyah={playAyah}
           opened={openAyaAction}
           close={() => {
             setOpenAyaAction(false);
@@ -50,6 +52,9 @@ const Jozz = () => {
           ayah={activeAya}
         />
         <Header
+          stop={stop}
+          isPlaying={isPlaying}
+          isLoading={soundLoading || false}
           setLayout={setLayout}
           layout={layout}
           title={`الجزء ${(local.id as string).split("s")[0]}`}

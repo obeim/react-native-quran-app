@@ -1,4 +1,4 @@
-import { Pressable, View } from "react-native";
+import { ActivityIndicator, Pressable, View } from "react-native";
 import { Text } from "react-native";
 import { router } from "expo-router";
 import { useColorScheme } from "nativewind";
@@ -9,15 +9,40 @@ export function Header({
   title,
   layout,
   setLayout,
+  isLoading,
+  isPlaying,
+  stop,
 }: {
   title?: string;
   setLayout: React.Dispatch<React.SetStateAction<"ayat" | "page">>;
   layout: "ayat" | "page";
+  stop: () => void;
+  isPlaying: boolean;
+  isLoading: boolean;
 }) {
   const { colorScheme } = useColorScheme();
 
   return (
     <View className="flex flex-row justify-between pl-4 py-4 h-[8%] bg-white dark:bg-darkBg items-center">
+      <Pressable
+        onPress={() => {
+          stop();
+        }}
+        className="  z-40 right-3 flex-2 items-center w-32 absolute bg-red-400 "
+      >
+        {isPlaying && !isLoading && (
+          <AntDesign
+            name="pause"
+            size={27}
+            color={colorScheme === "dark" ? "#FAF0E6" : "#544981"}
+          />
+        )}
+        {isLoading && (
+          <ActivityIndicator
+            color={colorScheme === "dark" ? "#FAF0E6" : "#544981"}
+          />
+        )}
+      </Pressable>
       <View className="inline-flex flex-row items-center justify-center h-full">
         <Pressable
           onPress={() => {
