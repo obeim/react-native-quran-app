@@ -15,7 +15,7 @@ import usePlayAyah from "@/utils/usePlayAyah";
 const Surah = () => {
   const local = useLocalSearchParams();
   const [layout, setLayout] = useState<"page" | "ayat">(
-    (storage.getString("view_pref") as "page") || "ayat" || "ayat"
+    (storage.getString("view_pref") as "page") || "ayat"
   );
 
   const [openedModal, setOpenModal] = useState(false);

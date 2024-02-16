@@ -9,18 +9,23 @@ interface PageProps {
 const usePagedAyat = ({ data }: PageProps) => {
   const local = useLocalSearchParams();
   const [activePage, setActive] = useState(
-    parseInt((local.id as string).split("s")[1]) - 1 || 0
+    parseInt((local.id as string).split("s")[1]) > 0
+      ? parseInt((local.id as string).split("s")[1]) - 1
+      : 0 || 0
   );
   const [isLast, setIsLast] = useState(false);
 
   const formatedData = useMemo(() => {
     let newData = { ...data };
     const pagedAyat = groupBy(data, (item: Ayah) => item.page);
+
     newData = pagedAyat;
     return newData as any;
   }, [data]);
 
   const currentPageAyat = useMemo(() => {
+    console.log(activePage, "data is ok tho ?");
+
     return (formatedData as any)[Object.keys(formatedData as any)[activePage]];
   }, [activePage, formatedData]);
 

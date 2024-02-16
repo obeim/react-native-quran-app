@@ -6,7 +6,7 @@ import { PageBottomBar } from "./PageBottomBar";
 import { LegacyRef, useEffect, useRef } from "react";
 import { storage } from "@/utils";
 
-export const PageView = ({ data, onPressAyah, Favs }: PageProps) => {
+export const PageView = ({ data, onPressAyah }: PageProps) => {
   const listRef = useRef<ScrollView>();
 
   const { ayat, nextPage, PrevPage, totalPages, currentPage, isLast } =
@@ -15,15 +15,31 @@ export const PageView = ({ data, onPressAyah, Favs }: PageProps) => {
     });
 
   useEffect(() => {
-    storage.set(
-      "recent",
-      JSON.stringify({
-        type: "surah",
-        name: data?.name_ar.replace("سورة", ""),
-        page: currentPage,
-        id: data?.id,
-      })
-    );
+    if (data)
+      storage.set(
+        "recent",
+        JSON.stringify({
+          type: "surah",
+          name: data?.name_ar.replace("سورة", ""),
+          page: currentPage,
+          id: data?.id,
+        })
+      );
+  }, []);
+
+  useEffect(() => {
+    console.log("current page", currentPage);
+
+    if (data)
+      storage.set(
+        "recent",
+        JSON.stringify({
+          type: "surah",
+          name: data?.name_ar.replace("سورة", ""),
+          page: currentPage,
+          id: data?.id,
+        })
+      );
   }, [currentPage, data]);
 
   return (

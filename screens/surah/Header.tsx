@@ -76,8 +76,8 @@ export function Header({
         className=" w-[70px] pr-4 h-32 inline-flex justify-center "
         onPress={() => {
           if (layout === "ayat") {
-            storage.set("view_pref", "page");
             setLayout("page");
+            storage.set("view_pref", "page");
           } else {
             setLayout("ayat");
             storage.set("view_pref", "ayat");
