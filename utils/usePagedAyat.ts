@@ -24,8 +24,6 @@ const usePagedAyat = ({ data }: PageProps) => {
   }, [data]);
 
   const currentPageAyat = useMemo(() => {
-    console.log(activePage, "data is ok tho ?");
-
     return (formatedData as any)[Object.keys(formatedData as any)[activePage]];
   }, [activePage, formatedData]);
 

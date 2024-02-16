@@ -29,3 +29,16 @@ export interface Recent {
   index: number;
   id: number;
 }
+
+export interface category {
+  cat_name: string;
+}
+
+export interface Azkar {
+  category: string;
+  zekr: string;
+  description: string;
+  count: number;
+  reference: string;
+  search: string;
+}

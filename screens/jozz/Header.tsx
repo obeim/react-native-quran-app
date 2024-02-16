@@ -14,11 +14,11 @@ export function Header({
   stop,
 }: {
   title?: string;
-  setLayout: React.Dispatch<React.SetStateAction<"ayat" | "page">>;
-  layout: "ayat" | "page";
-  stop: () => void;
-  isPlaying: boolean;
-  isLoading: boolean;
+  setLayout?: React.Dispatch<React.SetStateAction<"ayat" | "page">>;
+  layout?: "ayat" | "page";
+  stop?: () => void;
+  isPlaying?: boolean;
+  isLoading?: boolean;
 }) {
   const { colorScheme } = useColorScheme();
 
@@ -26,9 +26,9 @@ export function Header({
     <View className="flex flex-row justify-between pl-4 py-4 h-[8%] bg-white dark:bg-darkBg items-center">
       <Pressable
         onPress={() => {
-          stop();
+          stop?.();
         }}
-        className="  z-40 right-3 flex-2 items-center w-32 absolute bg-red-400 "
+        className="  z-40 right-12 flex-2 items-center w-20 absolute  "
       >
         {isPlaying && !isLoading && (
           <AntDesign
@@ -67,34 +67,36 @@ export function Header({
           </Text>
         </Pressable>
       </View>
-      <Pressable
-        className=" w-24 pr-4  h-32  inline-flex justify-center"
-        onPress={() => {
-          if (layout === "ayat") {
-            storage.set("view_pref", "page");
-            setLayout("page");
-          } else {
-            setLayout("ayat");
-            storage.set("view_pref", "ayat");
-          }
-        }}
-      >
-        {layout === "ayat" && (
-          <Entypo
-            size={24}
-            name="text"
-            color={colorScheme === "dark" ? "#FAF0E6" : "#544981"}
-          />
-        )}
+      {layout && (
+        <Pressable
+          className=" w-24 pr-4  h-32  inline-flex justify-center"
+          onPress={() => {
+            if (layout === "ayat") {
+              storage.set("view_pref", "page");
+              setLayout?.("page");
+            } else {
+              setLayout?.("ayat");
+              storage.set("view_pref", "ayat");
+            }
+          }}
+        >
+          {layout === "ayat" && (
+            <Entypo
+              size={24}
+              name="text"
+              color={colorScheme === "dark" ? "#FAF0E6" : "#544981"}
+            />
+          )}
 
-        {layout === "page" && (
-          <Feather
-            name="list"
-            size={24}
-            color={colorScheme === "dark" ? "#FAF0E6" : "#544981"}
-          />
-        )}
-      </Pressable>
+          {layout === "page" && (
+            <Feather
+              name="list"
+              size={24}
+              color={colorScheme === "dark" ? "#FAF0E6" : "#544981"}
+            />
+          )}
+        </Pressable>
+      )}
     </View>
   );
 }

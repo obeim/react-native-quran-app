@@ -4,6 +4,7 @@ import Tabs from "@/components/Tabs";
 import SurahTab from "./SurahTab";
 import JozzTab from "./JozzTab";
 import { Surah } from "@/types";
+import { AzkarTab } from "./AzkarTab";
 
 export const TypeTabs = (props: { data: Surah[]; search: string }) => {
   const [tab, setTab] = useState<string>("surah");
@@ -28,5 +29,9 @@ export const tabs = (props: { data: Surah[]; search: string }) => [
     title: "جزء",
     component: <JozzTab search={props.search} />,
   },
-  { name: "azkar", title: "الأذكار" },
+  {
+    name: "azkar",
+    title: "أذكار",
+    component: <AzkarTab search={props.search} />,
+  },
 ];

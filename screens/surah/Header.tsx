@@ -29,7 +29,7 @@ export function Header({
         onPress={() => {
           stop();
         }}
-        className="  z-20 right-3 flex-2 items-center w-32 absolute "
+        className="z-20 right-3 flex-2 items-center w-32 absolute "
       >
         {isPlaying && !isLoading && (
           <AntDesign

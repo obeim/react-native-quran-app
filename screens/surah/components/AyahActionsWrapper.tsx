@@ -33,7 +33,7 @@ export function AyahActionsWrapper({
           }}
           className="bg-black/40 w-full h-full absolute"
         ></Pressable>
-        <View className=" bg-darkBg bottom-0 max-w-[300px] shadow my-auto mx-auto rounded-xl p-4 border border-primary dark:border-primaryDark">
+        <View className="bg-lotion dark:bg-darkBg bottom-0 max-w-[300px] shadow my-auto mx-auto rounded-xl p-4 border border-primary dark:border-primaryDark">
           <Text className="text-primary dark:text-primaryDark font-HelveticaBold text-xl mb-2">
             معاني الأية
           </Text>

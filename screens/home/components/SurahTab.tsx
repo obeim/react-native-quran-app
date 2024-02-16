@@ -7,7 +7,7 @@ import { useMemo } from "react";
 const SurahTab = ({ data, search }: { data: Surah[]; search: string }) => {
   const filterdData = useMemo(
     () =>
-      data.filter ? data?.filter((item) => item.name_ar.includes(search)) : [],
+      data?.filter ? data?.filter((item) => item.name_ar.includes(search)) : [],
     [search, data]
   );
 
