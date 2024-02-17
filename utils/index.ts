@@ -38,6 +38,7 @@ export const onAyaChanged = ({
             type: type,
             name: viewableItems[0].item.sora_name_ar.split(",")[0],
             aya: viewableItems[0].item.aya_no,
+            page: 1,
             index: viewableItems[0].index,
             id:
               type === "jozz"

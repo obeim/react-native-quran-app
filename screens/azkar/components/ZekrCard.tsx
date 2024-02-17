@@ -1,10 +1,14 @@
 import { Text, View } from "react-native";
 import { Azkar } from "@/types";
-import { Motion } from "@legendapp/motion";
-import { useEffect, useState } from "react";
-import FingerPress from "@/assets/icons/finger_press.svg";
-import { useColorScheme } from "nativewind";
-export function ZekrCard({ zekr }: { zekr: Azkar }) {
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { ZekerCount } from "./ZekerCount";
+export function ZekrCard({
+  zekr,
+  setCompletedCount,
+}: {
+  zekr: Azkar;
+  setCompletedCount?: Dispatch<SetStateAction<number>>;
+}) {
   const [currentCount, setCount] = useState<number>(zekr?.count);
   useEffect(() => {
     if (zekr.count) setCount(zekr.count);
@@ -29,73 +33,15 @@ export function ZekrCard({ zekr }: { zekr: Azkar }) {
         <ZekerCount
           currentCount={currentCount}
           onPress={() => {
+            if (currentCount == 1) setCompletedCount?.((pre) => pre + 1);
             if (currentCount > 0) setCount(currentCount - 1);
           }}
           onReset={() => {
             setCount(zekr.count);
+            if (currentCount === 0) setCompletedCount?.((pre) => pre - 1);
           }}
         />
       )}
-    </View>
-  );
-}
-function ZekerCount({
-  onPress,
-  currentCount,
-  onReset,
-}: {
-  onPress: () => void;
-  currentCount: number;
-  onReset: () => void;
-}) {
-  const { colorScheme } = useColorScheme();
-
-  return (
-    <View className="flex-2 flex-row justify-between w-full items-center">
-      <Motion.Pressable
-        className=" w-1/2"
-        onPress={() => {
-          onReset();
-        }}
-      >
-        <Motion.View
-          whileTap={{ scale: 0.9 }}
-          transition={{
-            type: "spring",
-            damping: 20,
-            stiffness: 300,
-          }}
-        >
-          <Text className="text-primary dark:text-primaryDark text-center font-HelveticaRoman">
-            أعادة تعيين
-          </Text>
-        </Motion.View>
-      </Motion.Pressable>
-
-      <Motion.Pressable
-        className=" w-1/2"
-        onPress={() => {
-          onPress();
-        }}
-      >
-        <Motion.View
-          whileTap={{ scale: 0.9 }}
-          className="flex-row items-center justify-center bg-neutral-200  dark:bg-[#1D1924]/70 py-3 rounded mt-2"
-          transition={{
-            type: "spring",
-            damping: 20,
-            stiffness: 300,
-          }}
-        >
-          <Text className="text-primary dark:text-primaryDark  text-center">
-            {currentCount}
-          </Text>
-          <FingerPress
-            height={24}
-            color={colorScheme === "dark" ? "#FAF0E6" : "#544981"}
-          />
-        </Motion.View>
-      </Motion.Pressable>
     </View>
   );
 }

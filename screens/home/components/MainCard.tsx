@@ -8,11 +8,14 @@ import { NoRecentView } from "./NoRecentView";
 
 export function MainCard() {
   const [recent, setRecent] = useState<Recent>();
+  const [view, setView] = useState<"page" | "ayat">();
 
   useFocusEffect(
     useCallback(() => {
-      let recentJSON = storage.getString("recent");
+      const recentJSON = storage.getString("recent");
+      const viewString = storage.getString("view_pref");
       if (recentJSON) setRecent(JSON.parse(recentJSON));
+      if (viewString) setView(viewString as "page" | "ayat");
     }, [])
   );
 
@@ -39,11 +42,13 @@ export function MainCard() {
           primary_text={
             recent.type === "surah" ? recent?.name : `الجزء ${recent.id}`
           }
-          secondary_text={recent.page ? pageTextAya : noPageAyaText}
+          secondary_text={
+            recent.page && view === "page" ? pageTextAya : noPageAyaText
+          }
           onClick={() => {
             router.push(
               `/${recent.type === "surah" ? "surah" : "jozz"}/${recent.id}s${
-                recent.page ? recent.page : recent.index
+                recent.page && view === "page" ? recent.page : recent.index
               }`
             );
           }}
