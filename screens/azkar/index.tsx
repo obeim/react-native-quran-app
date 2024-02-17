@@ -1,4 +1,4 @@
-import { Alert, ScrollView, Text, View } from "react-native";
+import { Alert, Dimensions, ScrollView, Text, View } from "react-native";
 import { Header } from "../jozz/Header";
 import { useLocalSearchParams } from "expo-router";
 import { useQuery } from "react-query";
@@ -6,9 +6,12 @@ import { getAzkarByCate } from "@/db/repos/AzkarRepo";
 import { ZekrCard } from "./components/ZekrCard";
 import { useEffect, useState } from "react";
 import CompletedModal from "./components/CompletedModal";
+import { Bar } from "react-native-progress";
+import { useColorScheme } from "nativewind";
 
 export const Azkar = () => {
   const local = useLocalSearchParams();
+  const { colorScheme } = useColorScheme();
   const [completedCount, setCompletedCount] = useState<number>(0);
   const [completeModal, setCompleteModal] = useState(false);
 
@@ -31,6 +34,15 @@ export const Azkar = () => {
         close={() => setCompleteModal(false)}
       />
       <Header title={`${local.category}`} />
+      {data && (
+        <Bar
+          progress={completedCount / data?.length}
+          width={Dimensions.get("screen").width}
+          color={colorScheme === "dark" ? "#FAF0E6" : "#544981"}
+          borderWidth={0}
+          height={1}
+        />
+      )}
       <ScrollView className=" w-full bg-white  dark:bg-blackCoral h-[93%] px-5 overflow-hidden">
         {isLoading && (
           <Text className="text-center font-HelveticaRoman mt-5 text-primary dark:text-primaryDark">
