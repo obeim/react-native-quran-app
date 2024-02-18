@@ -61,7 +61,7 @@ export function AyaCard({
       >
         <Text
           onPress={onPress}
-          className=" text-xl py-3 text-primary  dark:text-primaryDark !font-UthmanicHafs "
+          className=" text-xl min-[600px]:text-3xl py-3 text-primary  dark:text-primaryDark !font-UthmanicHafs "
           key={ayah.aya_no}
         >
           {ayah.aya_text} {`﴿${ayah.aya_no}﴾`}

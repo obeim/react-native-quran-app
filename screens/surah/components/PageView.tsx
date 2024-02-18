@@ -62,7 +62,7 @@ export const PageView = ({ data, onPressAyah }: PageProps) => {
           )}
         {ayat && (
           <View className="bg-lotion dark:bg-blackCoral mb-9">
-            <Text className="text-justify text-[19px] py-1 px-2  leading-[49px] text-primary dark:text-primaryDark !font-UthmanicHafs w-full">
+            <Text className="text-justify text-[20px] min-[600px]:text-4xl py-1 px-2  leading-[49px] text-primary dark:text-primaryDark !font-UthmanicHafs w-full">
               {ayat.map((aya: Ayah) => (
                 <Text
                   onPress={() => {

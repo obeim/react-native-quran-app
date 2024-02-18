@@ -29,7 +29,7 @@ const JozzTab = ({ search }: { search: string }) => {
     <FlatList
       data={filterdData}
       scrollEnabled
-      className="h-[60%] flex-2 flex-col mt-3"
+      className="h-[60%] min-[600px]:h-[62%] flex-2 flex-col mt-3"
       numColumns={2}
       contentContainerStyle={{ gap: 2 }}
       columnWrapperStyle={{ gap: 10 }}

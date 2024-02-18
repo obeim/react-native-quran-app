@@ -40,7 +40,7 @@ export const PageView = ({ data, onPress }: PageProps) => {
         )}
         {ayat && (
           <View className="bg-lotion dark:bg-blackCoral mb-9 flex flex-col items-start">
-            <Text className="text-[20px] leading-[49px] text-primary dark:text-primaryDark !font-UthmanicHafs w-full text-justify px-2 ">
+            <Text className="text-[20px] min-[600px]:text-4xl leading-[49px] text-primary dark:text-primaryDark !font-UthmanicHafs w-full text-justify px-2 ">
               {ayat.map((aya: Ayah, i: number) => (
                 <Text
                   key={i}
