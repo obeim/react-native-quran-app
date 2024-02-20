@@ -28,8 +28,6 @@ export const PageView = ({ data, onPressAyah }: PageProps) => {
   }, []);
 
   useEffect(() => {
-    console.log("current page", currentPage);
-
     if (data)
       storage.set(
         "recent",

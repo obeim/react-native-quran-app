@@ -22,7 +22,7 @@ export function MainCard() {
   const noPageAyaText = useMemo(
     () =>
       recent?.type === "surah"
-        ? `الأية : ${recent?.aya}`
+        ? `الأية : ${recent?.aya || 1}`
         : `${recent?.name} الأية : ${recent?.aya}`,
     [recent]
   );
@@ -48,7 +48,7 @@ export function MainCard() {
           onClick={() => {
             router.push(
               `/${recent.type === "surah" ? "surah" : "jozz"}/${recent.id}s${
-                recent.page && view === "page" ? recent.page : recent.index
+                recent.page && view === "page" ? recent.page : recent.index || 1
               }`
             );
           }}

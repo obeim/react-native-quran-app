@@ -43,7 +43,7 @@ export const Azkar = () => {
           height={1}
         />
       )}
-      <ScrollView className=" w-full bg-white  dark:bg-blackCoral h-[93%] px-5 overflow-hidden">
+      <ScrollView className=" w-full bg-white  dark:bg-blackCoral h-[93%] px-5 ">
         {isLoading && (
           <Text className="text-center font-HelveticaRoman mt-5 text-primary dark:text-primaryDark">
             جاري التحميل...
