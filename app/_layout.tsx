@@ -10,6 +10,8 @@ import { storage } from "@/utils";
 import { RootSiblingParent } from "react-native-root-siblings";
 
 SplashScreen.preventAutoHideAsync();
+openDatabase();
+
 export default function RootLayout(): ReactNode {
   const queryClient = new QueryClient();
   const { colorScheme, setColorScheme } = useColorScheme();
@@ -20,7 +22,6 @@ export default function RootLayout(): ReactNode {
     "HelveticaNeueLTArabic-Light": require("../assets/fonts/HelveticaNeueLTArabic-Light.ttf"),
     UthmanicHafs: require("../assets/fonts/UthmanicHafs.ttf"),
   });
-  openDatabase();
 
   I18nManager.allowRTL(true);
   I18nManager.forceRTL(true);

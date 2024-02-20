@@ -1,13 +1,15 @@
 import { Text, View } from "react-native";
 import { MainCard } from "./components/MainCard";
 import { TypeTabs } from "./components/TypeTabs";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useQuery } from "react-query";
 import SurahsRepo from "@/db/repos/SurahsRepo";
 import { SearchInput } from "./components/SearchInput";
 import InnerSplash from "@/components/InnerSplash";
 import { Header } from "./components/Header";
 import { useFocusEffect } from "expo-router";
+import * as FileSystem from "expo-file-system";
+import RNAppRestart from "@brandingbrand/react-native-app-restart";
 
 import { ContinePopup } from "./ContinePopup";
 
@@ -15,7 +17,7 @@ const Home = () => {
   const [search, setSearch] = useState<string>("");
   const [openCont, setOpenCont] = useState(false);
 
-  const { data, isFetched } = useQuery(
+  const { data, isFetched, isError } = useQuery(
     "suar",
     async () => {
       return await SurahsRepo.query({ order: { number: "ASC" } });
@@ -29,6 +31,17 @@ const Home = () => {
     }, [])
   );
 
+  useEffect(() => {
+    async function deleteData() {
+      await FileSystem.deleteLegacyDocumentDirectoryAndroid();
+      await FileSystem.deleteAsync(FileSystem.documentDirectory || "");
+      await FileSystem.deleteAsync(FileSystem.cacheDirectory || "");
+      RNAppRestart.restartApplication();
+    }
+    if (isError) {
+      deleteData();
+    }
+  }, [isError]);
   return data && isFetched ? (
     <View
       className=" w-full h-screen bg-white dark:bg-darkBg "
