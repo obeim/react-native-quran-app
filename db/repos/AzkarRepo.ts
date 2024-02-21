@@ -1,14 +1,8 @@
-import AzkarModal from "@/models/Azkar";
-import { Repository } from "expo-sqlite-orm";
-
-const AzkarRepo = new Repository("quran.db", "azkar", AzkarModal);
+import azkarData from "@/assets/data/azkar";
 
 export const getAzkarByCate = async (category: string) => {
-  let azkar = await AzkarRepo.query({
-    where: { category: { equals: category } },
-    order: { category: "ASC" },
-  });
+  let azkar = azkarData.filter((zeker) => zeker.category === category);
   return azkar;
 };
 
-export default AzkarRepo;
+export default { getAzkarByCate };

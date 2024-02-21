@@ -1,11 +1,8 @@
-import CategoryModal from "@/models/Category";
-import { Repository } from "expo-sqlite-orm";
+import categoryData from "@/assets/data/category";
 
-const CategoryRepo = new Repository("quran.db", "category", CategoryModal);
-
-export const getCategories = async () => {
-  let categories = await CategoryRepo.query({ order: { cat_name: "ASC" } });
+export const getCategories = () => {
+  let categories = categoryData;
   return categories;
 };
 
-export default CategoryRepo;
+export default { getCategories };

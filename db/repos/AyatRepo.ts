@@ -1,13 +1,7 @@
-import AyahModal from "@/models/Ayah";
-import { Repository } from "expo-sqlite-orm";
-
-const AyatRepo = new Repository("quran.db", "ayat", AyahModal);
+import ayatData from "@/assets/data/ayat";
 
 export const getAyatAsJozz = async (id: number) => {
-  let ayat = await AyatRepo.query({
-    where: { jozz: { equals: id } },
-    order: { sora: "ASC", aya_no: "ASC" },
-  });
+  let ayat = ayatData.filter((aya) => aya.jozz === id);
   ayat = ayat.map((aya, index) => {
     if (index > 0 && aya.sora === ayat[index - 1].sora)
       return { ...aya, sora_name_ar: `${aya.sora_name_ar},no` };
@@ -16,4 +10,4 @@ export const getAyatAsJozz = async (id: number) => {
   return ayat;
 };
 
-export default AyatRepo;
+export default { getAyatAsJozz };

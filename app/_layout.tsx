@@ -2,7 +2,6 @@ import { useCallback, type ReactNode } from "react";
 import { SplashScreen, Stack } from "expo-router";
 import { SafeAreaView, StyleSheet, I18nManager } from "react-native";
 import { useFonts } from "expo-font";
-import { openDatabase } from "@/db/utils";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { useColorScheme } from "nativewind";
 import RNAppRestart from "@brandingbrand/react-native-app-restart";
@@ -10,7 +9,6 @@ import { storage } from "@/utils";
 import { RootSiblingParent } from "react-native-root-siblings";
 
 SplashScreen.preventAutoHideAsync();
-openDatabase();
 
 export default function RootLayout(): ReactNode {
   const queryClient = new QueryClient();

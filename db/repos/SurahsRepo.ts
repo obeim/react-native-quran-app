@@ -1,19 +1,13 @@
-import SurahModal from "@/models/Surah";
-import { Repository } from "expo-sqlite-orm";
-import AyatRepo from "./AyatRepo";
+import ayatData from "@/assets/data/ayat";
+import surahsData from "@/assets/data/surahs";
 
-const SurahsRepo = new Repository("quran.db", "surahs", SurahModal);
-
-export default SurahsRepo;
-
-export const getSuraWithAyat = async (id: number) => {
-  return await SurahsRepo.find(id).then(async (value) => {
-    if (value) {
-      let ayat = await AyatRepo.query({
-        where: { sora: { equals: id } },
-        order: { aya_no: "ASC" },
-      });
-      return { ...value, ayat: ayat };
-    }
-  });
+export const getSuraWithAyat = (id: number) => {
+  let sora = surahsData.filter((sora) => sora.number === id)[0];
+  let ayat = ayatData.filter((aya) => aya.sora === id);
+  return { ...sora, ayat: ayat };
 };
+
+export const getSuar = () => {
+  return surahsData;
+};
+export default { getSuraWithAyat, getSuar };
