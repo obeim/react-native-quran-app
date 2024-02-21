@@ -30,7 +30,7 @@ export const AzkarTab = ({ search }: { search: string }) => {
         <FlatList
           data={filterdData}
           scrollEnabled
-          className="h-[72%] flex-col mt-3"
+          className="h-[90%] flex-col mt-3"
           contentContainerStyle={{ gap: 2 }}
           initialNumToRender={data.length}
           showsVerticalScrollIndicator={false}

@@ -16,7 +16,7 @@ export function ZekrCard({
 
   return (
     <View className="bg-lotion w-full dark:bg-darkBg my-2  pt-5 rounded-xl overflow-hidden">
-      <Text className="font-UthmanicHafs text-primary dark:text-primaryDark text-lg min-[600px]:text-3xl   text-center px-5 pb-3">
+      <Text className="font-UthmanicHafs text-primary dark:text-primaryDark text-lg min-[600px]:text-3xl text-justify px-5 pb-3">
         {zekr.zekr
           .replace("(", "")
           .replace(")", "")
@@ -28,8 +28,7 @@ export function ZekrCard({
           {zekr.description} - {zekr.reference}
         </Text>
       )}
-
-      {zekr.count && (
+      {zekr.count != 0 && (
         <ZekerCount
           currentCount={currentCount}
           onPress={() => {

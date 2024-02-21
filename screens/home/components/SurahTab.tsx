@@ -15,7 +15,7 @@ const SurahTab = ({ data, search }: { data: Surah[]; search: string }) => {
     <FlatList
       data={filterdData}
       scrollEnabled
-      className="h-[57%] mt-2 flex-2 flex-col "
+      className="h-[80%] flex-col mt-3"
       numColumns={2}
       contentContainerStyle={{ gap: 2 }}
       ListEmptyComponent={
