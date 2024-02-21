@@ -32,7 +32,7 @@ const Home = () => {
         if (openCont) setOpenCont(false);
       }}
     >
-      <View className="h-[40%] min-[400px]:h-[30%] ">
+      <View className="h-[36%] ">
         <Header />
         <View className="mt-3 w-full px-4">
           <Text className="text-lg font-HelveticaBold mb-2 text-primary/40 dark:text-primaryDark">

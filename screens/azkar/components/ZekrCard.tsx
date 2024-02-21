@@ -23,9 +23,9 @@ export function ZekrCard({
           .replace(")", "")
           .replace("(", "")}
       </Text>
-      {zekr.reference && (
+      {zekr.reference && zekr.reference.trim().length > 0 && (
         <Text className="text-primary/40 dark:text-primaryDark/30 mb-3 px-3 text-right font-UthmanicHafs">
-          {zekr.reference}
+          {zekr.description} - {zekr.reference}
         </Text>
       )}
 
