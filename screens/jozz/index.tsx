@@ -2,7 +2,7 @@ import { View } from "react-native";
 import { useQuery } from "react-query";
 import { useLocalSearchParams } from "expo-router";
 import { Header } from "./Header";
-import { getAyatAsJozz } from "@/db/repos/AyatRepo";
+import { getAyatAsJozz } from "@/repos/AyatRepo";
 import { useState } from "react";
 import { storage } from "@/utils";
 import { AyatView } from "./components/AyaView";

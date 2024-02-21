@@ -2,7 +2,7 @@ import { useLocalSearchParams } from "expo-router";
 import { Header } from "./Header";
 import { View } from "react-native";
 import { useQuery } from "react-query";
-import { getSuraWithAyat } from "@/db/repos/SurahsRepo";
+import { getSuraWithAyat } from "@/repos/SurahsRepo";
 import { useState } from "react";
 import { PageView } from "./components/PageView";
 import { AyatView } from "./components/AyatView";
