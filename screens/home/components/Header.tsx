@@ -5,12 +5,15 @@ import Menu from "@/assets/icons/Menu.svg";
 import { useColorScheme } from "nativewind";
 import { storage } from "@/utils";
 import { Motion } from "@legendapp/motion";
-export function Header() {
+export function Header({ onClickMenu }: { onClickMenu?: () => void }) {
   const { colorScheme, toggleColorScheme } = useColorScheme();
 
   return (
     <View className="flex-1 flex-row justify-between ">
-      <Pressable className=" h-18 w-32 pl-4  items-start justify-start ">
+      <Pressable
+        onPress={onClickMenu}
+        className=" h-18 w-32 pl-4  items-start justify-start "
+      >
         <Menu
           className="my-auto"
           color={colorScheme === "dark" ? "#FAF0E6" : "#544981"}

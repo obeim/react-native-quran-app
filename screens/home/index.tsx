@@ -9,11 +9,13 @@ import InnerSplash from "@/components/InnerSplash";
 import { Header } from "./components/Header";
 import { useFocusEffect } from "expo-router";
 
-import { ContinePopup } from "./ContinePopup";
+import { ContinePopup } from "./components/ContinePopup";
+import BottomMenu from "./components/MainDrawer";
 
 const Home = () => {
   const [search, setSearch] = useState<string>("");
   const [openCont, setOpenCont] = useState(false);
+  const [openMenu, setOpenMenu] = useState(false);
 
   const { data, isFetched } = useQuery("suar", async () => getSuar(), {
     cacheTime: Infinity,
@@ -33,7 +35,7 @@ const Home = () => {
       }}
     >
       <View className="h-[35%]">
-        <Header />
+        <Header onClickMenu={() => setOpenMenu(true)} />
         <View className="mt-3 w-full px-4">
           <Text className="text-lg font-HelveticaBold mb-2 text-primary/40 dark:text-primaryDark">
             بسم الله الرحمن الرحيم
@@ -44,6 +46,12 @@ const Home = () => {
       </View>
       {data && <TypeTabs search={search} data={data} />}
       <ContinePopup isOpen={openCont} />
+      <BottomMenu
+        isOpen={openMenu}
+        close={() => {
+          setOpenMenu(false);
+        }}
+      />
     </View>
   ) : (
     <InnerSplash />

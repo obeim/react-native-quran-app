@@ -1,7 +1,7 @@
 import { Text, View } from "react-native";
 import { Motion } from "@legendapp/motion";
 import useGoToRecent from "@/utils/useGoToRecent";
-import { ContinueReadingButton } from "./components/ContinueReadingButton";
+import { ContinueReadingButton } from "./ContinueReadingButton";
 
 export function ContinePopup({ isOpen }: { isOpen?: boolean }) {
   const { goToRecent, haveRecent } = useGoToRecent();

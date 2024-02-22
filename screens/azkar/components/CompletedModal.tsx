@@ -2,7 +2,7 @@ import { AntDesign } from "@expo/vector-icons";
 import { Motion } from "@legendapp/motion";
 import { router, useLocalSearchParams } from "expo-router";
 import React from "react";
-import { Modal, Pressable, Text, View } from "react-native";
+import { Modal, Pressable, Text } from "react-native";
 
 const CompletedModal = ({
   opened,

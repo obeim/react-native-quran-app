@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Audio } from "expo-av";
+import { storage } from ".";
 const usePlayAyah = () => {
   const [sound, setSound] = useState<Audio.Sound>();
   const [isPlaying, setIsPlaying] = useState(false);
@@ -9,7 +10,9 @@ const usePlayAyah = () => {
     setLoading(true);
 
     const { sound } = await Audio.Sound.createAsync({
-      uri: `https://cdn.islamic.network/quran/audio/64/ar.alafasy/${id}.mp3`,
+      uri: `https://cdn.islamic.network/quran/audio/64/${
+        storage.getString("reader") || "ar.alafasy"
+      }/${id}.mp3`,
     });
     setSound(sound);
     await sound.playAsync();
@@ -22,7 +25,6 @@ const usePlayAyah = () => {
   useEffect(() => {
     return sound
       ? () => {
-          console.log("Unloading Sound");
           sound.unloadAsync();
         }
       : undefined;

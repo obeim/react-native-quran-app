@@ -61,10 +61,16 @@ export function AyaCard({
       >
         <Text
           onPress={onPress}
-          className=" text-xl min-[600px]:text-3xl py-3 text-primary  dark:text-primaryDark !font-UthmanicHafs "
+          className=" text-xl min-[600px]:text-2xl py-3 text-primary  dark:text-primaryDark !font-UthmanicHafs "
           key={ayah.aya_no}
         >
-          {ayah.aya_text} {`﴿${ayah.aya_no}﴾`}
+          {ayah.sora !== 1
+            ? ayah.aya_text.replace(
+                "بِسۡمِ ٱللَّهِ ٱلرَّحۡمَٰنِ ٱلرَّحِيمِ",
+                ""
+              )
+            : ayah.aya_text}{" "}
+          {`﴿${ayah.aya_no}﴾`}
         </Text>
       </View>
     </Pressable>

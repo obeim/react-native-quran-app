@@ -60,7 +60,7 @@ export const PageView = ({ data, onPressAyah }: PageProps) => {
           )}
         {ayat && (
           <View className="bg-lotion dark:bg-blackCoral mb-9">
-            <Text className="text-justify text-[20px] min-[600px]:text-4xl py-1 px-2  leading-[49px] text-primary dark:text-primaryDark !font-UthmanicHafs w-full">
+            <Text className="text-justify text-[20px] min-[600px]:text-3xl py-1 px-2  leading-[49px] text-primary dark:text-primaryDark !font-UthmanicHafs w-full">
               {ayat.map((aya: Ayah) => (
                 <Text
                   onPress={() => {
@@ -68,7 +68,12 @@ export const PageView = ({ data, onPressAyah }: PageProps) => {
                   }}
                   key={aya.id}
                 >
-                  {aya.aya_text + `﴿${aya.aya_no}﴾ `}
+                  {(aya.sora !== 1
+                    ? aya.aya_text.replace(
+                        "بِسۡمِ ٱللَّهِ ٱلرَّحۡمَٰنِ ٱلرَّحِيمِ",
+                        ""
+                      )
+                    : aya.aya_text) + `﴿${aya.aya_no}﴾ `}
                 </Text>
               ))}
             </Text>
