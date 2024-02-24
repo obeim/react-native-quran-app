@@ -1,7 +1,7 @@
 import { FlatList, Pressable, Text, View } from "react-native";
 import { useMemo } from "react";
 import { useQuery } from "react-query";
-import { getCategories } from "@/repos/CategoryRepo";
+import { getCategories } from "@/services/CategoryService";
 import { router } from "expo-router";
 
 export const AzkarTab = ({ search }: { search: string }) => {

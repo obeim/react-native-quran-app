@@ -3,7 +3,7 @@ import { MainCard } from "./components/MainCard";
 import { TypeTabs } from "./components/TypeTabs";
 import { useCallback, useEffect, useState } from "react";
 import { useQuery } from "react-query";
-import { getSuar } from "@/repos/SurahsRepo";
+import { getSuar } from "@/services/SurahsService";
 import { SearchInput } from "./components/SearchInput";
 import InnerSplash from "@/components/InnerSplash";
 import { Header } from "./components/Header";

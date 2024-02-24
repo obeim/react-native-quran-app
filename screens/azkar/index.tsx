@@ -2,7 +2,7 @@ import { Alert, Dimensions, ScrollView, Text, View } from "react-native";
 import { Header } from "../jozz/Header";
 import { useLocalSearchParams } from "expo-router";
 import { useQuery } from "react-query";
-import { getAzkarByCate } from "@/repos/AzkarRepo";
+import { getAzkarByCate } from "@/services/AzkarService";
 import { ZekrCard } from "./components/ZekrCard";
 import { useEffect, useState } from "react";
 import CompletedModal from "./components/CompletedModal";

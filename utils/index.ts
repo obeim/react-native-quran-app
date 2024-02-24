@@ -1,6 +1,8 @@
 import { MMKV } from "react-native-mmkv";
 import { Clipboard } from "react-native";
 import Toast from "react-native-root-toast";
+import * as Location from "expo-location";
+
 export function onChangeDelayed({
   event,
   onChange,
@@ -62,4 +64,16 @@ export function groupBy(xs: any, f: any) {
 export function copyToCliporad(text: string) {
   Clipboard.setString(text);
   Toast.show("تم نسخ النص بنجاح");
+}
+
+export async function getUserLocation() {
+  let { status } = await Location.requestForegroundPermissionsAsync();
+  if (status !== "granted") {
+    Toast.show("لم يتم منح صلاحية الموقع");
+    return;
+  } else {
+    let location = await Location.getCurrentPositionAsync({});
+    const { latitude, longitude } = location.coords;
+    return { latitude, longitude };
+  }
 }
