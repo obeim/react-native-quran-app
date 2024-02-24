@@ -6,6 +6,7 @@ import { MaterialIcons } from "@expo/vector-icons";
 import { useColorScheme } from "nativewind";
 import { MenuItem } from "./MenuItem";
 import { ReaderDropDown } from "./ReaderDropDown";
+import { router } from "expo-router";
 
 const MainDrawer: FC<{
   isOpen: boolean;
@@ -37,6 +38,10 @@ const MainDrawer: FC<{
       },
       {
         title: "أتجاه القبلة",
+        onPress: () => {
+          props.close();
+          router.push("/qibla/");
+        },
         icon: (
           <MaterialIcons
             name="location-searching"

@@ -3,7 +3,7 @@ import { Pressable, Text, View } from "react-native";
 interface ItemProps {
   icon: React.JSX.Element;
   title: string;
-  onPress?: () => {};
+  onPress?: () => void;
 }
 export function MenuItem({ icon, title, onPress }: ItemProps) {
   return (

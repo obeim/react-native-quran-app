@@ -10,7 +10,7 @@ import { Header } from "./components/Header";
 import { useFocusEffect } from "expo-router";
 
 import { ContinePopup } from "./components/ContinePopup";
-import BottomMenu from "./components/MainDrawer";
+import MainDrawer from "./components/MainDrawer";
 
 const Home = () => {
   const [search, setSearch] = useState<string>("");
@@ -46,7 +46,7 @@ const Home = () => {
       </View>
       {data && <TypeTabs search={search} data={data} />}
       <ContinePopup isOpen={openCont} />
-      <BottomMenu
+      <MainDrawer
         isOpen={openMenu}
         close={() => {
           setOpenMenu(false);
