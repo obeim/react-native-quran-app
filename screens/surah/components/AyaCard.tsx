@@ -1,10 +1,11 @@
 import { Ayah } from "@/types";
-import { Pressable, Text, View } from "react-native";
+import { Pressable, Text, View, Clipboard } from "react-native";
 import Bookmark from "@/assets/icons/bookmark.svg";
 import { useMemo, useState } from "react";
 import { useColorScheme } from "nativewind";
 import Fav from "@/utils/Favs";
 import { useQueryClient } from "react-query";
+import { copyToCliporad } from "@/utils";
 
 export function AyaCard({
   ayah,
@@ -61,6 +62,9 @@ export function AyaCard({
       >
         <Text
           onPress={onPress}
+          onLongPress={() => {
+            copyToCliporad(ayah.aya_text);
+          }}
           className=" text-xl min-[600px]:text-2xl py-3 text-primary  dark:text-primaryDark !font-UthmanicHafs "
           key={ayah.aya_no}
         >

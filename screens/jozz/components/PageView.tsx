@@ -4,7 +4,7 @@ import usePagedAyat from "@/utils/usePagedAyat";
 import { PageProps } from "./AyaView";
 import { PageBottomBar } from "@/screens/surah/components/PageBottomBar";
 import { LegacyRef, useEffect, useRef } from "react";
-import { storage } from "@/utils";
+import { copyToCliporad, storage } from "@/utils";
 
 export const PageView = ({ data, onPress }: PageProps) => {
   const listRef = useRef<ScrollView>();
@@ -44,6 +44,9 @@ export const PageView = ({ data, onPress }: PageProps) => {
               {ayat.map((aya: Ayah, i: number) => (
                 <Text
                   key={i}
+                  onLongPress={() => {
+                    copyToCliporad(aya.aya_text);
+                  }}
                   onPress={() => {
                     // clicking on aya view
                     onPress?.(aya);

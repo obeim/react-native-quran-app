@@ -43,7 +43,6 @@
     "react-native-safe-area-context": "4.6.3",
     "react-native-screens": "~3.22.0",
     "react-native-svg": "^14.1.0",
-    "react-native-switch-with-icons": "^3.0.1",
     "react-native-web": "~0.19.6",
     "react-query": "^3.39.3"
   },

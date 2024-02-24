@@ -4,7 +4,7 @@ import usePagedAyat from "@/utils/usePagedAyat";
 import { PageProps } from "./AyatView";
 import { PageBottomBar } from "./PageBottomBar";
 import { LegacyRef, useEffect, useRef } from "react";
-import { storage } from "@/utils";
+import { copyToCliporad, storage } from "@/utils";
 
 export const PageView = ({ data, onPressAyah }: PageProps) => {
   const listRef = useRef<ScrollView>();
@@ -65,6 +65,9 @@ export const PageView = ({ data, onPressAyah }: PageProps) => {
                 <Text
                   onPress={() => {
                     onPressAyah?.(aya);
+                  }}
+                  onLongPress={() => {
+                    copyToCliporad(aya.aya_text);
                   }}
                   key={aya.id}
                 >

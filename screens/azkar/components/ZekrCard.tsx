@@ -1,7 +1,8 @@
-import { Text, View } from "react-native";
+import { Clipboard, Text, View } from "react-native";
 import { Azkar } from "@/types";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { ZekerCount } from "./ZekerCount";
+import { copyToCliporad } from "@/utils";
 export function ZekrCard({
   zekr,
   setCompletedCount,
@@ -16,7 +17,18 @@ export function ZekrCard({
 
   return (
     <View className="bg-lotion w-full dark:bg-darkBg my-2  pt-5 rounded-xl overflow-hidden">
-      <Text className="font-UthmanicHafs text-primary dark:text-primaryDark text-lg min-[600px]:text-3xl text-justify px-5 pb-3">
+      <Text
+        onLongPress={() => {
+          copyToCliporad(
+            zekr.zekr
+              .replace("(", "")
+              .replace(")", "")
+              .replace(")", "")
+              .replace("(", "")
+          );
+        }}
+        className="font-UthmanicHafs text-primary dark:text-primaryDark text-lg min-[600px]:text-3xl text-justify px-5 pb-3"
+      >
         {zekr.zekr
           .replace("(", "")
           .replace(")", "")

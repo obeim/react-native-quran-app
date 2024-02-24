@@ -1,5 +1,6 @@
 import { MMKV } from "react-native-mmkv";
-
+import { Clipboard } from "react-native";
+import Toast from "react-native-root-toast";
 export function onChangeDelayed({
   event,
   onChange,
@@ -56,4 +57,9 @@ export function groupBy(xs: any, f: any) {
     ),
     {}
   );
+}
+
+export function copyToCliporad(text: string) {
+  Clipboard.setString(text);
+  Toast.show("تم نسخ النص بنجاح");
 }
