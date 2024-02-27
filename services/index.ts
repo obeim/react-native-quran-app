@@ -1,17 +1,18 @@
 import { PrayerTime } from "@/types";
 
+export type PrayerResponse = PrayerTime[];
 export async function getPrayerTimes({
-  year,
   lat,
   long,
 }: {
-  year: number;
   lat: number;
   long: number;
 }) {
   const response = await fetch(
-    `http://api.aladhan.com/v1/calendar/${year}?latitude=${lat}&longitude=${long}&method=2`
+    `http://api.aladhan.com/v1/calendar/${new Date().getFullYear()}/${
+      new Date().getMonth() + 1
+    }?latitude=${lat}&longitude=${long}`
   );
-
-  return (await response.json()) as PrayerTime[];
+  const dataResponse = await response.json();
+  return dataResponse.data as PrayerResponse;
 }

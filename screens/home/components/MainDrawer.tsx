@@ -27,7 +27,7 @@ const MainDrawer: FC<{
         ),
       },
       {
-        title: "مواعيد الصلاة",
+        title: "مواقيت الصلاة",
         icon: (
           <MaterialIcons
             name="timer"
