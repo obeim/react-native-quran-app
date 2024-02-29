@@ -11,7 +11,7 @@ I Started this app for the purpose of learning mobile development with react nat
 
 
 ## Note
-- note about the stupid expo issues that may occur 
+- note about the issues that may occur 
 
 ## Installation 
 - installation guide
