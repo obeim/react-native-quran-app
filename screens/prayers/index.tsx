@@ -1,10 +1,9 @@
-import { Timings } from "@/types";
 import useGetPrayersTime from "@/utils/useGetPrayersTime";
 import { AntDesign } from "@expo/vector-icons";
 import { router } from "expo-router";
 import { useColorScheme } from "nativewind";
 import { ScrollView, Text, View } from "react-native";
-import { Circle } from "react-native-progress";
+import { Prayer } from "./components/Prayer";
 
 const PrayerTimes = () => {
   const { timings, isLoading, error } = useGetPrayersTime();
@@ -32,7 +31,11 @@ const PrayerTimes = () => {
           جاري التحميل...
         </Text>
       )}
-      {!isLoading && error && <Text>{error}</Text>}
+      {!isLoading && error && (
+        <Text className="text-center mt-6 text-primary dark:text-primaryDark font-HelveticaRoman">
+          {error}
+        </Text>
+      )}
       {timings && (
         <ScrollView className="flex-col mt-6 h-[90%]">
           <Prayer title="الفجر" value={timings.Fajr.split(" ")[0]} />
@@ -48,15 +51,3 @@ const PrayerTimes = () => {
 };
 
 export default PrayerTimes;
-function Prayer({ title, value }: { title: string; value: string }) {
-  return (
-    <View className="flex-row justify-between items-center bg-lotion dark:bg-blackCoral p-5 rounded-md mt-5">
-      <Text className="text-2xl font-HelveticaRoman text-primary dark:text-primaryDark">
-        {title}
-      </Text>
-      <Text className="text-xl font-HelveticaRoman text-primary dark:text-primaryDark">
-        {value}
-      </Text>
-    </View>
-  );
-}

@@ -18,7 +18,7 @@ export const Azkar = () => {
   const { data, isLoading } = useQuery(
     "azkar",
     async () => getAzkarByCate(local.category as string),
-    { cacheTime: Infinity }
+    { staleTime: Infinity }
   );
 
   useEffect(() => {

@@ -25,6 +25,10 @@ const MainDrawer: FC<{
             color={colorScheme === "dark" ? "#FAF0E6" : "#544981"}
           />
         ),
+        onPress: () => {
+          props.close();
+          router.push("/favs/");
+        },
       },
       {
         title: "مواقيت الصلاة",
