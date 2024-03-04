@@ -63,16 +63,9 @@ const MainDrawer: FC<{
 
   return (
     <MyModal {...props}>
-      {props.isOpen && (
-        <View className=" w-full h-full absolute bg-black/30 -z-10"></View>
-      )}
+      <View className=" w-full h-full absolute bg-black/30 -z-10"></View>
       <View className="w-full h-full flex-1 justify-end ">
-        <Motion.View
-          initial={{ x: 3000 }}
-          animate={{ x: props.isOpen ? 0 : 3000 }}
-          transition={{ type: "tween", duration: 50, delay: 50 }}
-          className="bg-lotion shadow-xl dark:bg-darkBg bottom-0 right-0 w-3/5 pt-4 items-start justify-start h-full "
-        >
+        <Motion.View className="bg-lotion shadow-xl dark:bg-darkBg bottom-0 right-0 w-3/5 pt-4 items-start justify-start h-full ">
           <Text className="mx-3 text-lg my-1 text-primary dark:text-primaryDark font-HelveticaBold">
             القائمة
           </Text>

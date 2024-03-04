@@ -10,6 +10,7 @@ import { Magnetometer, MagnetometerMeasurement } from "expo-sensors";
 import * as Location from "expo-location";
 import { moderateScale } from "react-native-size-matters";
 import { Subscription } from "expo-sensors/build/Pedometer";
+import { Motion } from "@legendapp/motion";
 
 export const useQiblaCompass = () => {
   const [subscription, setSubscription] = useState<Subscription | null>();
@@ -220,30 +221,19 @@ const QiblaCompass = forwardRef<
             position: "relative",
           }}
         >
-          <Image
+          <Motion.Image
+            animate={{ rotate: compassRotate + "deg" }}
             source={compassImage || require("@/assets/images/compass.png")}
-            style={[
-              styles.image,
-              {
-                transform: [
-                  {
-                    rotate: compassRotate + "deg",
-                  },
-                ],
-              },
-            ]}
+            style={[styles.image]}
           />
-          <View
+          <Motion.View
+            animate={{ rotate: `${kabaRotate}deg` }}
             style={{
               width: moderateScale(300, 0.25),
               height: moderateScale(300, 0.25),
               position: "absolute",
               alignSelf: "center",
-              transform: [
-                {
-                  rotate: `${kabaRotate}deg`,
-                },
-              ],
+
               flexDirection: "row",
               justifyContent: "center",
               zIndex: 999,
@@ -260,7 +250,7 @@ const QiblaCompass = forwardRef<
                 zIndex: 999,
               }}
             />
-          </View>
+          </Motion.View>
         </View>
       </View>
     );

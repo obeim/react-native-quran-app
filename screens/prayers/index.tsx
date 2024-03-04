@@ -10,7 +10,7 @@ const PrayerTimes = () => {
   const { colorScheme } = useColorScheme();
 
   return (
-    <View className="mt-10 px-5 ">
+    <View className="pt-10 px-5 bg-white dark:bg-darkBg">
       <View className="flex-row justify-between">
         <Text className="text-2xl text-primary dark:text-primaryDark font-HelveticaRoman">
           مواقيت الصلاة

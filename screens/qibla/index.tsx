@@ -7,7 +7,7 @@ import { router } from "expo-router";
 const Qibla = () => {
   const { colorScheme } = useColorScheme();
   return (
-    <View className="mt-10 px-4">
+    <View className="pt-10 px-4 bg-white dark:bg-darkBg">
       <View className="mb-20 flex-row justify-between">
         <Text className="text-2xl text-primary dark:text-primaryDark font-HelveticaRoman">
           أتجاه القبلة

@@ -26,7 +26,7 @@ const Surah = () => {
     () => {
       return getSuraWithAyat(parseInt((local.id as string).split("s")[0]));
     },
-    { staleTime: Infinity }
+    { cacheTime: Infinity }
   );
 
   const { data: Favs } = useQuery("favs", () => {

@@ -12,7 +12,7 @@ const useGetPrayersTime = () => {
     longitude: number;
   }>();
 
-  const { data, refetch } = useQuery(
+  const { data, refetch, isError } = useQuery(
     "prayers",
     (mycoords) => {
       return getPrayerTimes({
@@ -20,7 +20,7 @@ const useGetPrayersTime = () => {
         long: coords?.longitude || 0,
       });
     },
-    { staleTime: 2629800000, enabled: false }
+    { cacheTime: 2629800000, enabled: false }
   );
 
   useEffect(() => {
@@ -38,7 +38,7 @@ const useGetPrayersTime = () => {
         setIsLoading(false);
 
         setError("");
-      } else {
+      } else if (isError) {
         setIsLoading(false);
 
         setError("يرجي أعادة المحاولة");
