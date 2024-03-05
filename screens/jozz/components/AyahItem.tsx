@@ -31,6 +31,7 @@ export const AyahItem = memo(
         ayah={item}
         isFirst={index === 0}
         isLast={index + 1 !== data?.length}
+        index={index}
       />
       {data?.length - 1 === index && <AyatBottomNav type="jozz" />}
     </View>

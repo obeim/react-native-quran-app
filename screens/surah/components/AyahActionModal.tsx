@@ -1,18 +1,24 @@
 import { Modal, Pressable, Text, View } from "react-native";
-import { FontAwesome5 } from "@expo/vector-icons";
+import { FontAwesome5, MaterialIcons } from "@expo/vector-icons";
 import { useColorScheme } from "nativewind";
+import { FavType } from "@/utils/Favs";
+import { storage } from "@/utils";
 export function AyahActionModal({
   opened,
   close,
   onPlay,
   onPressMeaning,
   showMeaning,
+  saved = false,
+  onSave,
 }: {
   opened: boolean;
   close: () => void;
   onPlay?: () => void;
   onPressMeaning?: () => void;
+  onSave?: () => void;
   showMeaning?: boolean;
+  saved: boolean;
 }) {
   const { colorScheme } = useColorScheme();
   return (
@@ -40,6 +46,22 @@ export function AyahActionModal({
           elevation: 4,
         }}
       >
+        {storage.getString("view_pref") === "page" && (
+          <Pressable
+            onPress={onSave}
+            className=" flex-row items-center py-5  border-b-[0.5px] border-primary/40 dark:border-white/40 w-full justify-center"
+          >
+            <MaterialIcons
+              name="bookmark"
+              fill="white"
+              color="white"
+              size={17}
+            />
+            <Text className="text-primary dark:text-white font-HelveticaRoman mx-3 text-sm">
+              {saved ? "الغاء الحفظ" : "حفظ"}
+            </Text>
+          </Pressable>
+        )}
         <Pressable
           onPress={onPlay}
           className=" flex-row items-center py-5  border-b-[0.5px] border-primary/40 dark:border-white/40 w-full justify-center"

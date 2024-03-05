@@ -26,6 +26,11 @@ const Qibla = () => {
         <QiblaCompass
           color={colorScheme === "dark" ? "#FAF0E6" : "#544981"}
           backgroundColor="transparent"
+          compassImage={
+            colorScheme === "dark"
+              ? require("../../assets/images/compass_dark.png")
+              : require("../../assets/images/compass_light.png")
+          }
           textStyles={{
             textAlign: "center",
             fontSize: 24,

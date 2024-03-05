@@ -13,6 +13,7 @@ export interface PageProps {
   data?: SurahwithAyat;
   onPressAyah?: (aya: Ayah) => void;
   Favs?: FavType[];
+  setCurrentPage?: (value: number) => void;
 }
 export function AyatView({ data, onPressAyah, Favs }: PageProps) {
   const local = useLocalSearchParams();

@@ -206,7 +206,11 @@ const QiblaCompass = forwardRef<
             style={[
               styles.directionText,
               {
-                color: compassDegree == Math.round(qiblad) ? "green" : color,
+                color:
+                  compassDegree >= Math.round(qiblad - 4) &&
+                  compassDegree <= Math.round(qiblad + 4)
+                    ? "green"
+                    : color,
                 ...textStyles,
               },
             ]}
@@ -233,7 +237,6 @@ const QiblaCompass = forwardRef<
               height: moderateScale(300, 0.25),
               position: "absolute",
               alignSelf: "center",
-
               flexDirection: "row",
               justifyContent: "center",
               zIndex: 999,

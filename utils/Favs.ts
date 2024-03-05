@@ -1,3 +1,4 @@
+import { router } from "expo-router";
 import { storage } from ".";
 
 const Fav = {
@@ -16,11 +17,25 @@ const Fav = {
     const newFavs = favs.filter((value) => value.id !== id);
     storage.set("fav", JSON.stringify(newFavs));
   },
+  goToFav: ({ sora, index, page }: FavType) => {
+    if (index) {
+      if (storage.getString("view_pref") === "page")
+        storage.set("view_pref", "ayat");
+      if (sora === 1) router.replace(`/surah/${sora}`);
+      else router.push(`/surah/${sora}s${index}`);
+    } else if (page) {
+      if (storage.getString("view_pref") === "ayat")
+        storage.set("view_pref", "page");
+      if (sora === 1) router.replace(`/surah/${sora}`);
+      else router.push(`/surah/${sora}s${page}`);
+    }
+  },
 };
 
 export type FavType = {
   id: number;
   number: number;
+  index?: number;
   sora: number;
   sora_name: string;
   text: string;

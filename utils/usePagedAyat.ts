@@ -1,4 +1,4 @@
-import { Ayah, Surah } from "@/types";
+import { Ayah } from "@/types";
 import { useMemo, useState } from "react";
 import { groupBy } from ".";
 import { useLocalSearchParams } from "expo-router";
@@ -16,15 +16,17 @@ const usePagedAyat = ({ data }: PageProps) => {
   const [isLast, setIsLast] = useState(false);
 
   const formatedData = useMemo(() => {
-    let newData = { ...data };
+    let newData = data ? { ...data } : {};
     const pagedAyat = groupBy(data, (item: Ayah) => item.page);
 
     newData = pagedAyat;
-    return newData as any;
+    return data ? (newData as any) : undefined;
   }, [data]);
 
   const currentPageAyat = useMemo(() => {
-    return (formatedData as any)[Object.keys(formatedData as any)[activePage]];
+    return formatedData
+      ? (formatedData as any)[Object.keys(formatedData as any)[activePage]]
+      : undefined;
   }, [activePage, formatedData]);
 
   const nextPage = () => {
@@ -42,8 +44,8 @@ const usePagedAyat = ({ data }: PageProps) => {
     ayat: currentPageAyat,
     nextPage,
     PrevPage,
-    currentPage: activePage + 1,
-    totalPages: Object.keys(formatedData).length,
+    currentPage: activePage + 1 || 1,
+    totalPages: formatedData ? Object.keys(formatedData).length : 0,
     isLast,
   };
 };

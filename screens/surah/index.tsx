@@ -3,7 +3,7 @@ import { Header } from "./Header";
 import { View } from "react-native";
 import { useQuery } from "react-query";
 import { getSuraWithAyat } from "@/services/SurahsService";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { PageView } from "./components/PageView";
 import { AyatView } from "./components/AyatView";
 import { storage } from "@/utils";
@@ -20,6 +20,7 @@ const Surah = () => {
 
   const [openedModal, setOpenModal] = useState(false);
   const [selectedAyah, setSelectedAyah] = useState<Ayah>();
+  const [currentPage, setCurrentPage] = useState(1);
 
   const { isLoading, data, isFetched } = useQuery(
     "sura",
@@ -45,10 +46,12 @@ const Surah = () => {
     isFetched && (
       <View className="h-full">
         <AyahActionsWrapper
+          Favs={Favs || []}
           playAyah={playAyah}
           close={() => setOpenModal(false)}
           opened={openedModal}
           ayah={selectedAyah}
+          currentPage={currentPage}
         />
         <Header
           stop={stop}
@@ -65,7 +68,12 @@ const Surah = () => {
           {
             {
               page: (
-                <PageView Favs={Favs} onPressAyah={onPressAyah} data={data} />
+                <PageView
+                  setCurrentPage={setCurrentPage}
+                  Favs={Favs}
+                  onPressAyah={onPressAyah}
+                  data={data}
+                />
               ),
               ayat: (
                 <AyatView Favs={Favs} onPressAyah={onPressAyah} data={data} />

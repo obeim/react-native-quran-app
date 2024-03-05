@@ -6,16 +6,15 @@ import { PageBottomBar } from "./PageBottomBar";
 import { LegacyRef, useEffect, useRef } from "react";
 import { copyToCliporad, storage } from "@/utils";
 
-export const PageView = ({ data, onPressAyah }: PageProps) => {
+export const PageView = ({ data, onPressAyah, setCurrentPage }: PageProps) => {
   const listRef = useRef<ScrollView>();
 
-  const { ayat, nextPage, PrevPage, totalPages, currentPage, isLast } =
-    usePagedAyat({
-      data: data?.ayat,
-    });
+  const { ayat, nextPage, PrevPage, totalPages, currentPage } = usePagedAyat({
+    data: data?.ayat,
+  });
 
   useEffect(() => {
-    if (data)
+    if (data && currentPage)
       storage.set(
         "recent",
         JSON.stringify({
@@ -38,6 +37,7 @@ export const PageView = ({ data, onPressAyah }: PageProps) => {
           id: data?.id,
         })
       );
+    setCurrentPage?.(currentPage);
   }, [currentPage, data]);
 
   return (

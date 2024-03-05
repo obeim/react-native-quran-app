@@ -1,5 +1,5 @@
 import { Ayah } from "@/types";
-import { Pressable, Text, View, Clipboard } from "react-native";
+import { Pressable, Text, View } from "react-native";
 import Bookmark from "@/assets/icons/bookmark.svg";
 import { useMemo, useState } from "react";
 import { useColorScheme } from "nativewind";
@@ -13,12 +13,14 @@ export function AyaCard({
   isFirst,
   onPress,
   marked,
+  index,
 }: {
   ayah: Ayah;
   isLast: boolean;
   isFirst: boolean;
   onPress?: () => void;
   marked: boolean;
+  index: number;
 }) {
   const [bookmark, setBookmark] = useState(marked);
   const { colorScheme } = useColorScheme();
@@ -35,26 +37,29 @@ export function AyaCard({
         isFirst && "mt-5"
       } `}
     >
-      <Bookmark
-        onPress={() => {
-          setBookmark(!bookmark);
-          if (!bookmark)
-            Fav.addFav({
-              text: ayah.aya_text,
-              id: ayah.id,
-              sora_name: ayah.sora_name_ar,
-              number: ayah.aya_no,
-              sora: ayah.sora,
-            });
-          else Fav.deleteFav(ayah.id);
-          queryClient.invalidateQueries({ queryKey: ["favs"] });
-        }}
-        fill={bookmark ? currentColor : "none"}
-        color={currentColor}
-        width={20}
-        className="absolute -right-0 top-1 z-20"
-        height={18}
-      />
+      {ayah.sora !== 1 && (
+        <Bookmark
+          onPress={() => {
+            setBookmark(!bookmark);
+            if (!bookmark)
+              Fav.addFav({
+                text: ayah.aya_text,
+                id: ayah.id,
+                index: index,
+                sora_name: ayah.sora_name_ar,
+                number: ayah.aya_no,
+                sora: ayah.sora,
+              });
+            else Fav.deleteFav(ayah.id);
+            queryClient.invalidateQueries({ queryKey: ["favs"] });
+          }}
+          fill={bookmark ? currentColor : "none"}
+          color={currentColor}
+          width={20}
+          className="absolute -right-0 top-1 z-20"
+          height={18}
+        />
+      )}
       <View
         className={`bg-lotion dark:bg-blackCoral flex flex-row justify-between items-start ${
           isLast && "border-b"

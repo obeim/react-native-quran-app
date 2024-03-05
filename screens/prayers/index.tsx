@@ -27,7 +27,7 @@ const PrayerTimes = () => {
       </View>
 
       {isLoading && (
-        <Text className="text-center font-HelveticaRoman mt-5 text-primary dark:text-primaryDark">
+        <Text className="text-center font-HelveticaRoman mt-5 h-[90%] text-primary dark:text-primaryDark">
           جاري التحميل...
         </Text>
       )}

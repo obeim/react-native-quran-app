@@ -44,6 +44,7 @@ const Jozz = () => {
     isFetched && (
       <View className="h-full">
         <AyahActionsWrapper
+          Favs={Favs || []}
           playAyah={playAyah}
           opened={openAyaAction}
           close={() => {

@@ -4,20 +4,26 @@ import { AyahActionModal } from "./AyahActionModal";
 import { Ayah } from "@/types";
 import * as Network from "expo-network";
 import Toast from "react-native-root-toast";
-import usePlayAyah from "@/utils/usePlayAyah";
+import Fav, { FavType } from "@/utils/Favs";
+import { useQueryClient } from "react-query";
 
 export function AyahActionsWrapper({
   close,
   opened,
   ayah,
   playAyah,
+  Favs,
+  currentPage,
 }: {
   close: () => void;
   opened: boolean;
   ayah?: Ayah;
   playAyah: (id: number) => Promise<void>;
+  Favs: FavType[];
+  currentPage?: number;
 }) {
   const [openMeaning, setOpenMeaning] = useState(false);
+  const queryClient = useQueryClient();
 
   return (
     <View>
@@ -50,7 +56,24 @@ export function AyahActionsWrapper({
       <AyahActionModal
         close={close}
         opened={opened}
+        saved={Favs.some((item) => item.id === ayah?.id)}
         showMeaning={!!ayah?.maany_aya}
+        onSave={() => {
+          if (ayah && currentPage) {
+            if (!Favs.some((item) => item.id === ayah?.id))
+              Fav.addFav({
+                text: ayah.aya_text,
+                id: ayah.id,
+                page: currentPage,
+                sora_name: ayah.sora_name_ar,
+                number: ayah.aya_no,
+                sora: ayah.sora,
+              });
+            else Fav.deleteFav(ayah.id);
+            queryClient.invalidateQueries({ queryKey: ["favs"] });
+            close();
+          }
+        }}
         onPlay={async () => {
           const network = await Network.getNetworkStateAsync();
           if (network.isConnected) {

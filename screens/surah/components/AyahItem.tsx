@@ -32,6 +32,7 @@ export const AyahItem = memo(
           ayah={item}
           isFirst={index === 0}
           isLast={index + 1 !== data?.ayat.length}
+          index={index}
           onPress={onPress}
         />
         {data?.ayat?.length - 1 === index && <AyatBottomNav type="surah" />}
