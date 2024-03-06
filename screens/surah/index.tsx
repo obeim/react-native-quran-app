@@ -22,17 +22,17 @@ const Surah = () => {
   const [selectedAyah, setSelectedAyah] = useState<Ayah>();
   const [currentPage, setCurrentPage] = useState(1);
 
-  const { isLoading, data, isFetched } = useQuery(
-    "sura",
+  const { data: Favs } = useQuery("favs", () => {
+    return Fav.getFav();
+  });
+
+  const { isLoading, data, isFetched, isPreviousData } = useQuery(
+    `sura${parseInt((local.id as string).split("s")[0])}`,
     () => {
       return getSuraWithAyat(parseInt((local.id as string).split("s")[0]));
     },
     { cacheTime: Infinity }
   );
-
-  const { data: Favs } = useQuery("favs", () => {
-    return Fav.getFav();
-  });
 
   const { playAyah, stop, isPlaying, isLoading: soundLoading } = usePlayAyah();
 
@@ -43,7 +43,8 @@ const Surah = () => {
 
   return (
     !isLoading &&
-    isFetched && (
+    isFetched &&
+    !isPreviousData && (
       <View className="h-full">
         <AyahActionsWrapper
           Favs={Favs || []}
