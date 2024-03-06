@@ -28,7 +28,10 @@ export const AyahItem = memo(
       <AyaCard
         marked={marked}
         onPress={onPress}
-        ayah={item}
+        ayah={{
+          ...item,
+          sora_name_ar: item.sora_name_ar.replace("no", "").replace(",", ""),
+        }}
         isFirst={index === 0}
         isLast={index + 1 !== data?.length}
         index={index}

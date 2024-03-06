@@ -17,7 +17,7 @@ const Favs = () => {
 
   const filteredData = useMemo(
     () =>
-      search && data
+      data?.filter && search
         ? data?.filter((aya) => aya?.aya_text_emlaey?.includes(search))
         : data,
     [search, data]
@@ -53,7 +53,7 @@ const Favs = () => {
           جاري التحميل...
         </Text>
       )}
-      {data?.length === 0 ? (
+      {filteredData?.length === 0 ? (
         <Text className="text-center font-HelveticaRoman mt-20 h-[80%] text-primary dark:text-primaryDark">
           لا يوجد عناصر محفوظة
         </Text>

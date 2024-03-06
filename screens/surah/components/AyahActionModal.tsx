@@ -10,6 +10,7 @@ export function AyahActionModal({
   showMeaning,
   saved = false,
   onSave,
+  showSave = true,
 }: {
   opened: boolean;
   close: () => void;
@@ -18,6 +19,7 @@ export function AyahActionModal({
   onSave?: () => void;
   showMeaning?: boolean;
   saved: boolean;
+  showSave?: boolean;
 }) {
   const { colorScheme } = useColorScheme();
   return (
@@ -45,7 +47,7 @@ export function AyahActionModal({
           elevation: 4,
         }}
       >
-        {storage.getString("view_pref") === "page" && (
+        {storage.getString("view_pref") === "page" && showSave && (
           <Pressable
             onPress={onSave}
             className=" flex-row items-center py-5  border-b-[0.5px] border-primary/40 dark:border-white/40 w-full justify-center"

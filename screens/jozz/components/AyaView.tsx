@@ -9,6 +9,7 @@ export interface PageProps {
   data?: Ayah[];
   onPress?: (aya: Ayah) => void;
   Favs?: FavType[];
+  setCurrentPage?: (value: number) => void;
 }
 export function AyatView({ data, onPress, Favs }: PageProps) {
   const local = useLocalSearchParams();

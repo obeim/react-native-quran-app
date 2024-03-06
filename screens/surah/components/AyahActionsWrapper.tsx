@@ -1,10 +1,10 @@
 import { Modal, Pressable, Text, View } from "react-native";
 import { useState } from "react";
 import { AyahActionModal } from "./AyahActionModal";
-import { Ayah } from "@/types";
+import { Ayah, FavType } from "@/types";
 import * as Network from "expo-network";
 import Toast from "react-native-root-toast";
-import Fav, { FavType } from "@/utils/Favs";
+import Fav from "@/utils/Favs";
 import { useQueryClient } from "react-query";
 
 export function AyahActionsWrapper({
@@ -58,6 +58,7 @@ export function AyahActionsWrapper({
         opened={opened}
         saved={Favs.some((item) => item.id === ayah?.id)}
         showMeaning={!!ayah?.maany_aya}
+        showSave={!!currentPage}
         onSave={() => {
           if (ayah && currentPage) {
             if (!Favs.some((item) => item.id === ayah?.id))
