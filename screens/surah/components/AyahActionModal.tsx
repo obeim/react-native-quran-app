@@ -1,7 +1,6 @@
 import { Modal, Pressable, Text, View } from "react-native";
 import { FontAwesome5, MaterialIcons } from "@expo/vector-icons";
 import { useColorScheme } from "nativewind";
-import { FavType } from "@/utils/Favs";
 import { storage } from "@/utils";
 export function AyahActionModal({
   opened,
@@ -53,8 +52,7 @@ export function AyahActionModal({
           >
             <MaterialIcons
               name="bookmark"
-              fill="white"
-              color="white"
+              color={colorScheme === "dark" ? "#FAF0E6" : "#544981"}
               size={17}
             />
             <Text className="text-primary dark:text-white font-HelveticaRoman mx-3 text-sm">

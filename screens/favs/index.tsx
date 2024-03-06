@@ -1,12 +1,12 @@
 import Fav from "@/utils/Favs";
-import { AntDesign, MaterialIcons } from "@expo/vector-icons";
+import { AntDesign } from "@expo/vector-icons";
 import { router } from "expo-router";
 import { useColorScheme } from "nativewind";
-import { Pressable, ScrollView, Text, View } from "react-native";
+import { ScrollView, Text, View } from "react-native";
 import { useQuery, useQueryClient } from "react-query";
-import ArrowRight from "@/assets/icons/arrow_right.svg";
 import { useMemo, useState } from "react";
 import { SearchInput } from "../home/components/SearchInput";
+import { FavCard } from "./components/FavCard";
 
 const Favs = () => {
   const [search, setSearch] = useState<string>();
@@ -56,56 +56,16 @@ const Favs = () => {
           لا يوجد عناصر محفوظة
         </Text>
       ) : (
-        <ScrollView className="flex-col h-[80%] gap-y-4 pb-3 mt-2">
+        <ScrollView className="flex-col h-[80%] gap-y-3 pb-3 mt-2">
           {filteredData?.map((item) => (
-            <View
-              key={item.id}
-              className="bg-lotion dark:bg-blackCoral rounded px-4 pb-3 pt-5"
-            >
-              <MaterialIcons
-                name="bookmark"
-                onPress={() => {
+            <View key={item.id}>
+              <FavCard
+                item={item}
+                onFav={() => {
                   Fav.deleteFav(item.id);
                   queryClient.invalidateQueries({ queryKey: ["favs"] });
                 }}
-                fill="white"
-                color="white"
-                style={{ position: "absolute", top: 0, right: 0 }}
-                size={22}
               />
-              <Text className=" text-xl min-[600px]:text-2xl py-3 text-primary  dark:text-primaryDark !font-UthmanicHafs ">
-                {item.text}
-              </Text>
-              <View className="justify-between flex-row">
-                <View>
-                  <Text className="text-primary  dark:text-primaryDark !font-UthmanicHaf">
-                    سورة {item.sora_name}
-                  </Text>
-                  <Text className="text-primary  dark:text-primaryDark !font-UthmanicHaf text-xs mt-2">
-                    الاية {item.number}
-                  </Text>
-                </View>
-
-                <Pressable
-                  onPress={() => {
-                    if (item) Fav.goToFav({ ...item });
-                  }}
-                  className="flex-row py-3  pl-4"
-                >
-                  <Text className="text-primary  dark:text-primaryDark !font-HelveticaRoman">
-                    متابعة
-                  </Text>
-                  <ArrowRight
-                    style={{
-                      // @ts-ignore
-                      color: colorScheme === "dark" ? "#FAF0E6" : "#544981",
-                    }}
-                    width={20}
-                    height={12}
-                    className="mt-2"
-                  />
-                </Pressable>
-              </View>
             </View>
           ))}
         </ScrollView>
