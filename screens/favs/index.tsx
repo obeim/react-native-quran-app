@@ -40,19 +40,21 @@ const Favs = () => {
         />
       </View>
 
-      <View>
-        <SearchInput
-          value={search || ""}
-          onChange={(value) => setSearch(value)}
-        />
-      </View>
+      {data && data?.length > 0 && (
+        <View>
+          <SearchInput
+            value={search || ""}
+            onChange={(value) => setSearch(value)}
+          />
+        </View>
+      )}
       {isLoading && (
         <Text className="text-center font-HelveticaRoman mt-5 h-[80%] text-primary dark:text-primaryDark">
           جاري التحميل...
         </Text>
       )}
       {data?.length === 0 ? (
-        <Text className="text-center font-HelveticaRoman mt-5 h-[80%] text-primary dark:text-primaryDark">
+        <Text className="text-center font-HelveticaRoman mt-20 h-[80%] text-primary dark:text-primaryDark">
           لا يوجد عناصر محفوظة
         </Text>
       ) : (
