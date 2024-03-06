@@ -49,6 +49,12 @@
             "usesCleartextTraffic": true
           }
         }
+      ],
+      [
+        "./plugins/withAndroidMainActivityAttributes",
+        {
+          "android:extractNativeLibs": true
+        }
       ]
     ],
     "experiments": {
