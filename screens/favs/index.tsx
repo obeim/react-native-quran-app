@@ -5,11 +5,24 @@ import { useColorScheme } from "nativewind";
 import { Pressable, ScrollView, Text, View } from "react-native";
 import { useQuery, useQueryClient } from "react-query";
 import ArrowRight from "@/assets/icons/arrow_right.svg";
+import { useMemo, useState } from "react";
+import { SearchInput } from "../home/components/SearchInput";
 
 const Favs = () => {
-  const { data, isError, isLoading } = useQuery("favs", () => Fav.getFav());
+  const [search, setSearch] = useState<string>();
+  const { data, isLoading } = useQuery("favs", () => Fav.getFav());
+
   const { colorScheme } = useColorScheme();
   const queryClient = useQueryClient();
+
+  const filteredData = useMemo(
+    () =>
+      search && data
+        ? data?.filter((aya) => aya?.aya_text_emlaey?.includes(search))
+        : data,
+    [search, data]
+  );
+
   return (
     <View className="px-5 bg-white dark:bg-darkBg">
       <View className="flex-row justify-between h-[10%] items-center">
@@ -26,18 +39,25 @@ const Favs = () => {
           }}
         />
       </View>
+
+      <View>
+        <SearchInput
+          value={search || ""}
+          onChange={(value) => setSearch(value)}
+        />
+      </View>
       {isLoading && (
-        <Text className="text-center font-HelveticaRoman mt-5 h-[90%] text-primary dark:text-primaryDark">
+        <Text className="text-center font-HelveticaRoman mt-5 h-[80%] text-primary dark:text-primaryDark">
           جاري التحميل...
         </Text>
       )}
       {data?.length === 0 ? (
-        <Text className="text-center font-HelveticaRoman mt-5 h-[90%] text-primary dark:text-primaryDark">
+        <Text className="text-center font-HelveticaRoman mt-5 h-[80%] text-primary dark:text-primaryDark">
           لا يوجد عناصر محفوظة
         </Text>
       ) : (
-        <ScrollView className="flex-col h-[91%] gap-y-4 pb-3">
-          {data?.map((item) => (
+        <ScrollView className="flex-col h-[80%] gap-y-4 pb-3 mt-2">
+          {filteredData?.map((item) => (
             <View
               key={item.id}
               className="bg-lotion dark:bg-blackCoral rounded px-4 pb-3 pt-5"

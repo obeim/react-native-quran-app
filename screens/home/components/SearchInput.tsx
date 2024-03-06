@@ -21,7 +21,7 @@ export function SearchInput({
         height={17}
         width={20}
       />
-      {value.length > 0 && (
+      {value.trim() && value.length > 0 && (
         <Pressable
           onPress={() => onChange("")}
           className={`absolute top-0 inline-flex justify-center items-center right-0 z-20 w-10 h-12 ${

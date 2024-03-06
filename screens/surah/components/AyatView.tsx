@@ -3,8 +3,7 @@ import { FlatList } from "react-native";
 import useOnAyaScrolling from "@/utils/useOnAyaScrolling";
 import useScrollToAya from "@/utils/useScrollToAya";
 import { AyahItem } from "./AyahItem";
-import { Ayah, Surah as SurahType } from "@/types";
-import { FavType } from "@/utils/Favs";
+import { Ayah, FavType, Surah as SurahType } from "@/types";
 
 interface SurahwithAyat extends SurahType {
   ayat: Ayah[];

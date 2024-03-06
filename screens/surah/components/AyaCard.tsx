@@ -37,29 +37,29 @@ export function AyaCard({
         isFirst && "mt-5"
       } `}
     >
-      {ayah.sora !== 1 && (
-        <Bookmark
-          onPress={() => {
-            setBookmark(!bookmark);
-            if (!bookmark)
-              Fav.addFav({
-                text: ayah.aya_text,
-                id: ayah.id,
-                index: index,
-                sora_name: ayah.sora_name_ar,
-                number: ayah.aya_no,
-                sora: ayah.sora,
-              });
-            else Fav.deleteFav(ayah.id);
-            queryClient.invalidateQueries({ queryKey: ["favs"] });
-          }}
-          fill={bookmark ? currentColor : "none"}
-          color={currentColor}
-          width={20}
-          className="absolute -right-0 top-1 z-20"
-          height={18}
-        />
-      )}
+      <Bookmark
+        onPress={() => {
+          setBookmark(!bookmark);
+          if (!bookmark)
+            Fav.addFav({
+              text: ayah.aya_text,
+              id: ayah.id,
+              index: index,
+              sora_name: ayah.sora_name_ar,
+              number: ayah.aya_no,
+              sora: ayah.sora,
+              aya_text_emlaey: ayah.aya_text_emlaey,
+            });
+          else Fav.deleteFav(ayah.id);
+          queryClient.invalidateQueries({ queryKey: ["favs"] });
+        }}
+        fill={bookmark ? currentColor : "none"}
+        color={currentColor}
+        width={20}
+        className="absolute -right-0 top-1 z-20"
+        height={18}
+      />
+
       <View
         className={`bg-lotion dark:bg-blackCoral flex flex-row justify-between items-start ${
           isLast && "border-b"

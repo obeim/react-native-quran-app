@@ -1,5 +1,6 @@
 import { router } from "expo-router";
 import { storage } from ".";
+import { FavType } from "@/types";
 
 const Fav = {
   getFav: (): FavType[] => {
@@ -21,25 +22,14 @@ const Fav = {
     if (index) {
       if (storage.getString("view_pref") === "page")
         storage.set("view_pref", "ayat");
-      if (sora === 1) router.replace(`/surah/${sora}`);
-      else router.push(`/surah/${sora}s${index}`);
+
+      router.push(`/surah/${sora}s${index}`);
     } else if (page) {
       if (storage.getString("view_pref") === "ayat")
         storage.set("view_pref", "page");
-      if (sora === 1) router.replace(`/surah/${sora}`);
-      else router.push(`/surah/${sora}s${page}`);
+      router.push(`/surah/${sora}s${page}`);
     }
   },
-};
-
-export type FavType = {
-  id: number;
-  number: number;
-  index?: number;
-  sora: number;
-  sora_name: string;
-  text: string;
-  page?: number;
 };
 
 export default Fav;

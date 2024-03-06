@@ -14,6 +14,7 @@ export interface Ayah {
   aya_no: number;
   maany_aya: string;
   aya_text: string;
+  aya_text_emlaey: string;
 }
 
 export interface Recent {
@@ -129,3 +130,14 @@ export interface Offset {
   Isha: number;
   Midnight: number;
 }
+
+export type FavType = {
+  id: number;
+  number: number;
+  index?: number;
+  sora: number;
+  sora_name: string;
+  text: string;
+  page?: number;
+  aya_text_emlaey?: string;
+};
