@@ -46,14 +46,9 @@
           "android": {
             "enableProguardInReleaseBuilds": true,
             "enableShrinkResourcesInReleaseBuilds": true,
-            "usesCleartextTraffic": true
+            "usesCleartextTraffic": true,
+            "useLegacyPackaging": true
           }
-        }
-      ],
-      [
-        "./plugins/withAndroidMainActivityAttributes",
-        {
-          "android:extractNativeLibs": true
         }
       ]
     ],
