@@ -47,21 +47,6 @@ export function AyahActionModal({
           elevation: 4,
         }}
       >
-        {storage.getString("view_pref") === "page" && showSave && (
-          <Pressable
-            onPress={onSave}
-            className=" flex-row items-center py-5  border-b-[0.5px] border-primary/40 dark:border-white/40 w-full justify-center"
-          >
-            <MaterialIcons
-              name="bookmark"
-              color={colorScheme === "dark" ? "#FAF0E6" : "#544981"}
-              size={17}
-            />
-            <Text className="text-primary dark:text-white font-HelveticaRoman mx-3 text-sm">
-              {saved ? "الغاء الحفظ" : "حفظ"}
-            </Text>
-          </Pressable>
-        )}
         <Pressable
           onPress={onPlay}
           className=" flex-row items-center py-5  border-b-[0.5px] border-primary/40 dark:border-white/40 w-full justify-center"
@@ -91,6 +76,21 @@ export function AyahActionModal({
             </View>
             <Text className="text-primary dark:text-white font-HelveticaRoman mx-3 text-sm">
               معاني الأية
+            </Text>
+          </Pressable>
+        )}
+        {storage.getString("view_pref") === "page" && showSave && (
+          <Pressable
+            onPress={onSave}
+            className=" flex-row items-center py-5  border-b-[0.5px] border-primary/40 dark:border-white/40 w-full justify-center"
+          >
+            <MaterialIcons
+              name="bookmark"
+              color={colorScheme === "dark" ? "#FAF0E6" : "#544981"}
+              size={17}
+            />
+            <Text className="text-primary dark:text-white font-HelveticaRoman mx-3 text-sm">
+              {saved ? "الغاء العلامة" : "علامة مرجعية"}
             </Text>
           </Pressable>
         )}

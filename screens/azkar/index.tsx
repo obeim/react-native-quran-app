@@ -8,17 +8,19 @@ import { useEffect, useState } from "react";
 import CompletedModal from "./components/CompletedModal";
 import { Bar } from "react-native-progress";
 import { useColorScheme } from "nativewind";
+import { useKeepAwake } from "expo-keep-awake";
 
 export const Azkar = () => {
+  useKeepAwake();
   const local = useLocalSearchParams();
   const { colorScheme } = useColorScheme();
   const [completedCount, setCompletedCount] = useState<number>(0);
   const [completeModal, setCompleteModal] = useState(false);
 
   const { data, isLoading } = useQuery(
-    "azkar",
+    `azkar${local.category}`,
     async () => getAzkarByCate(local.category as string),
-    { cacheTime: Infinity }
+    { staleTime: Infinity }
   );
 
   useEffect(() => {

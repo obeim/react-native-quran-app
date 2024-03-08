@@ -3,7 +3,7 @@ import { Header } from "./Header";
 import { View } from "react-native";
 import { useQuery } from "react-query";
 import { getSuraWithAyat } from "@/services/SurahsService";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { PageView } from "./components/PageView";
 import { AyatView } from "./components/AyatView";
 import { storage } from "@/utils";
@@ -11,8 +11,10 @@ import { Ayah } from "@/types";
 import { AyahActionsWrapper } from "./components/AyahActionsWrapper";
 import Fav from "@/utils/Favs";
 import usePlayAyah from "@/utils/usePlayAyah";
+import { useKeepAwake } from "expo-keep-awake";
 
 const Surah = () => {
+  useKeepAwake();
   const local = useLocalSearchParams();
   const [layout, setLayout] = useState<"page" | "ayat">(
     (storage.getString("view_pref") as "page") || "ayat"
@@ -31,7 +33,7 @@ const Surah = () => {
     () => {
       return getSuraWithAyat(parseInt((local.id as string).split("s")[0]));
     },
-    { cacheTime: Infinity }
+    { staleTime: Infinity }
   );
 
   const { playAyah, stop, isPlaying, isLoading: soundLoading } = usePlayAyah();

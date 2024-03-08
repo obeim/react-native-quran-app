@@ -11,8 +11,10 @@ import { AyahActionsWrapper } from "../surah/components/AyahActionsWrapper";
 import { Ayah } from "@/types";
 import Fav from "@/utils/Favs";
 import usePlayAyah from "@/utils/usePlayAyah";
+import { useKeepAwake } from "expo-keep-awake";
 
 const Jozz = () => {
+  useKeepAwake();
   const local = useLocalSearchParams();
   const [openAyaAction, setOpenAyaAction] = useState(false);
   const [activeAya, setActiveAya] = useState<Ayah>();
@@ -22,13 +24,13 @@ const Jozz = () => {
   );
 
   const { isLoading, data, isFetched } = useQuery(
-    "jozz",
+    `jozz${parseInt((local.id as string).split("s")[0] as string)}`,
     () => {
       return getAyatAsJozz(
         parseInt((local.id as string).split("s")[0] as string)
       );
     },
-    { cacheTime: Infinity }
+    { staleTime: Infinity }
   );
 
   const { data: Favs } = useQuery("favs", () => {

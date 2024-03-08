@@ -17,7 +17,7 @@ const MainDrawer: FC<{
   const items = useMemo(() => {
     return [
       {
-        title: "المحفوظات",
+        title: "العلامات المرجعية",
         icon: (
           <MaterialIcons
             name="bookmark"

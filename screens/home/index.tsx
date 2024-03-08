@@ -18,7 +18,7 @@ const Home = () => {
   const [openMenu, setOpenMenu] = useState(false);
 
   const { data, isFetched } = useQuery("suar", async () => getSuar(), {
-    cacheTime: Infinity,
+    staleTime: Infinity,
   });
 
   useFocusEffect(

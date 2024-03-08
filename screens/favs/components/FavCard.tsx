@@ -1,23 +1,55 @@
 import Fav from "@/utils/Favs";
 import { MaterialIcons } from "@expo/vector-icons";
 import { useColorScheme } from "nativewind";
-import { Pressable, Text, View } from "react-native";
+import {
+  Animated,
+  Dimensions,
+  PanResponder,
+  Pressable,
+  Text,
+  View,
+} from "react-native";
 import ArrowRight from "@/assets/icons/arrow_right.svg";
 import { FavType } from "@/types";
+import { useState } from "react";
 
-export function FavCard({ item, onFav }: { item: FavType; onFav: () => void }) {
+export function FavCard({
+  item,
+  onDelete,
+}: {
+  item: FavType;
+  onDelete: () => void;
+}) {
   const { colorScheme } = useColorScheme();
+  const [position] = useState(new Animated.ValueXY());
+  const windowWidth = Dimensions.get("window").width;
 
+  const panResponder = (id: number) => {
+    let dx = 0;
+
+    return PanResponder.create({
+      onStartShouldSetPanResponder: () => true,
+      onPanResponderMove: (_, gestureState) => {
+        dx = gestureState.dx;
+        if (dx > 40) position.setValue({ x: gestureState.moveX / 3, y: 0 });
+      },
+      onPanResponderRelease: () => {
+        if (dx > (windowWidth * 50) / 100) {
+          // Swipe right threshold, you can adjust this value
+          onDelete();
+        } else {
+          position.setValue({ x: 0, y: 0 });
+        }
+      },
+    });
+  };
   return (
-    <View className="bg-lotion dark:bg-blackCoral rounded px-4 pb-3 pt-5">
-      <MaterialIcons
-        name="bookmark"
-        onPress={onFav}
-        color={colorScheme === "dark" ? "#FAF0E6" : "#544981"}
-        style={{ position: "absolute", top: 0, right: 0 }}
-        size={22}
-      />
-      <Text className=" text-xl min-[600px]:text-2xl py-3 text-primary  dark:text-primaryDark !font-UthmanicHafs ">
+    <Animated.View
+      {...panResponder(item.id).panHandlers}
+      className="bg-lotion dark:bg-blackCoral rounded px-4 pb-2 pt-3"
+      style={{ transform: [...position.getTranslateTransform()] }}
+    >
+      <Text className=" text-lg min-[600px]:text-xl py-3 text-primary  dark:text-primaryDark !font-UthmanicHafs ">
         {item.text}
       </Text>
       <View className="justify-between flex-row">
@@ -25,7 +57,7 @@ export function FavCard({ item, onFav }: { item: FavType; onFav: () => void }) {
           <Text className="text-primary  dark:text-primaryDark !font-UthmanicHaf">
             سورة {item.sora_name}
           </Text>
-          <Text className="text-primary  dark:text-primaryDark !font-UthmanicHaf text-xs mt-2">
+          <Text className="text-primary  dark:text-primaryDark !font-UthmanicHaf text-xs mt-1">
             الاية {item.number}
           </Text>
         </View>
@@ -50,6 +82,6 @@ export function FavCard({ item, onFav }: { item: FavType; onFav: () => void }) {
           />
         </Pressable>
       </View>
-    </View>
+    </Animated.View>
   );
 }

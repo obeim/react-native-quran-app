@@ -8,7 +8,7 @@ export const AzkarTab = ({ search }: { search: string }) => {
   const { data, isLoading } = useQuery(
     "category",
     async () => getCategories(),
-    { cacheTime: Infinity }
+    { staleTime: 2629800000 }
   );
 
   const filterdData = useMemo(

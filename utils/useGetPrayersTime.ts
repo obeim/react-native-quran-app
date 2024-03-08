@@ -20,7 +20,7 @@ const useGetPrayersTime = () => {
         long: coords?.longitude || 0,
       });
     },
-    { cacheTime: 2629800000, enabled: false }
+    { staleTime: 604800000, enabled: false }
   );
 
   useEffect(() => {
