@@ -54,10 +54,10 @@ export function FavCard({
       </Text>
       <View className="justify-between flex-row">
         <View>
-          <Text className="text-primary  dark:text-primaryDark !font-UthmanicHaf">
+          <Text className="text-primary dark:text-primaryDark !font-UthmanicHaf">
             سورة {item.sora_name}
           </Text>
-          <Text className="text-primary  dark:text-primaryDark !font-UthmanicHaf text-xs mt-1">
+          <Text className="text-primary dark:text-primaryDark !font-UthmanicHaf text-xs mt-1">
             الاية {item.number}
           </Text>
         </View>

@@ -4,8 +4,8 @@ import Bookmark from "@/assets/icons/bookmark.svg";
 import { useMemo, useState } from "react";
 import { useColorScheme } from "nativewind";
 import Fav from "@/utils/Favs";
-import { useQueryClient } from "react-query";
-import { copyToCliporad } from "@/utils";
+import { useQuery, useQueryClient } from "react-query";
+import { copyToCliporad, storage } from "@/utils";
 
 export function AyaCard({
   ayah,
@@ -25,6 +25,9 @@ export function AyaCard({
   const [bookmark, setBookmark] = useState(marked);
   const { colorScheme } = useColorScheme();
   const queryClient = useQueryClient();
+  const { data: fontSize } = useQuery("fontSize", () =>
+    storage.getString("fontSize")
+  );
 
   const currentColor = useMemo(
     () => (colorScheme === "dark" ? "#FAF0E6" : "#544981"),
@@ -70,10 +73,11 @@ export function AyaCard({
           onLongPress={() => {
             copyToCliporad(ayah.aya_text);
           }}
-          className=" text-xl min-[600px]:text-2xl py-3 text-primary  dark:text-primaryDark !font-UthmanicHafs "
+          style={{ fontSize: parseInt(fontSize || "20") }}
+          className={` py-3 text-primary  dark:text-primaryDark !font-UthmanicHafs `}
           key={ayah.aya_no}
         >
-          {ayah.sora !== 1
+          {ayah.sora !== 1 && ayah.aya_no === 1
             ? ayah.aya_text.replace(
                 "بِسۡمِ ٱللَّهِ ٱلرَّحۡمَٰنِ ٱلرَّحِيمِ",
                 ""

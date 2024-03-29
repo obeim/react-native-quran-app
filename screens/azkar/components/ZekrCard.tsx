@@ -2,7 +2,8 @@ import { Clipboard, Text, View } from "react-native";
 import { Azkar } from "@/types";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { ZekerCount } from "./ZekerCount";
-import { copyToCliporad } from "@/utils";
+import { copyToCliporad, storage } from "@/utils";
+import { useQuery } from "react-query";
 export function ZekrCard({
   zekr,
   setCompletedCount,
@@ -11,6 +12,11 @@ export function ZekrCard({
   setCompletedCount?: Dispatch<SetStateAction<number>>;
 }) {
   const [currentCount, setCount] = useState<number>(zekr?.count);
+
+  const { data: fontSize } = useQuery("fontSize", () =>
+    storage.getString("fontSize")
+  );
+
   useEffect(() => {
     if (zekr.count) setCount(zekr.count);
   }, [zekr?.count]);
@@ -27,7 +33,8 @@ export function ZekrCard({
               .replace("(", "")
           );
         }}
-        className="font-UthmanicHafs text-primary dark:text-primaryDark text-lg min-[600px]:text-3xl text-justify px-5 pb-3"
+        style={{ fontSize: parseInt(fontSize || "20") }}
+        className={`font-UthmanicHafs text-primary dark:text-primaryDark text-justify px-5 pb-3`}
       >
         {zekr.zekr
           .replace("(", "")

@@ -1,12 +1,15 @@
 import MyModal from "@/components/Modal";
 import { Motion } from "@legendapp/motion";
-import { FC, useMemo } from "react";
+import { FC, useMemo, useState } from "react";
 import { Text, View } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 import { useColorScheme } from "nativewind";
 import { MenuItem } from "./MenuItem";
 import { ReaderDropDown } from "./ReaderDropDown";
 import { router } from "expo-router";
+import { Select } from "@/components/Select";
+import { storage } from "@/utils";
+import { useQueryClient } from "react-query";
 
 const MainDrawer: FC<{
   isOpen: boolean;
@@ -75,6 +78,7 @@ const MainDrawer: FC<{
             })}
           </View>
           <ReaderDropDown />
+          <FontSizeOptions />
         </Motion.View>
       </View>
     </MyModal>
@@ -82,3 +86,30 @@ const MainDrawer: FC<{
 };
 
 export default MainDrawer;
+
+const FontSizeOptions = () => {
+  const queryClient = useQueryClient();
+
+  const [font, setFont] = useState(storage.getString("fontSize") || "20");
+
+  return (
+    <Select
+      label="حجم الخط"
+      data={[
+        { label: "صغير", value: "16" },
+        { label: "متوسط", value: "20" },
+        { label: "كبير", value: "24" },
+        { label: "كبير 1", value: "28" },
+        { label: "كبير 2", value: "32" },
+        { label: "كبير 3", value: "36" },
+      ]}
+      onChange={(value) => {
+        setFont(value.value);
+        storage.set("fontSize", value.value);
+        queryClient.invalidateQueries({ queryKey: ["fontSize"] });
+      }}
+      value={font}
+      itemFontSize={parseInt(font)}
+    />
+  );
+};

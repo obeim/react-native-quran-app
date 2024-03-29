@@ -5,6 +5,7 @@ import { PageProps } from "./AyatView";
 import { PageBottomBar } from "./PageBottomBar";
 import { LegacyRef, useEffect, useRef } from "react";
 import { copyToCliporad, storage } from "@/utils";
+import { useQuery } from "react-query";
 
 export const PageView = ({ data, onPressAyah, setCurrentPage }: PageProps) => {
   const listRef = useRef<ScrollView>();
@@ -12,6 +13,10 @@ export const PageView = ({ data, onPressAyah, setCurrentPage }: PageProps) => {
   const { ayat, nextPage, PrevPage, totalPages, currentPage } = usePagedAyat({
     data: data?.ayat,
   });
+
+  const { data: fontSize } = useQuery("fontSize", () =>
+    storage.getString("fontSize")
+  );
 
   useEffect(() => {
     if (data && currentPage)
@@ -60,7 +65,10 @@ export const PageView = ({ data, onPressAyah, setCurrentPage }: PageProps) => {
           )}
         {ayat && (
           <View className="bg-lotion dark:bg-blackCoral mb-9">
-            <Text className="text-justify text-[20px] min-[600px]:text-3xl py-1 px-2  leading-[49px] text-primary dark:text-primaryDark !font-UthmanicHafs w-full">
+            <Text
+              style={{ fontSize: parseInt(fontSize || "20") }}
+              className={`text-justify py-1 px-2  leading-[49px] text-primary dark:text-primaryDark !font-UthmanicHafs w-full`}
+            >
               {ayat.map((aya: Ayah) => (
                 <Text
                   onPress={() => {
@@ -71,7 +79,7 @@ export const PageView = ({ data, onPressAyah, setCurrentPage }: PageProps) => {
                   }}
                   key={aya.id}
                 >
-                  {(aya.sora !== 1
+                  {(aya.sora !== 1 && aya.aya_no === 1
                     ? aya.aya_text.replace(
                         "بِسۡمِ ٱللَّهِ ٱلرَّحۡمَٰنِ ٱلرَّحِيمِ",
                         ""
