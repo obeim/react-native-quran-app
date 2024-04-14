@@ -46,7 +46,7 @@ const Favs = () => {
           </Text>
         ) : (
           <ScrollView className="flex-col h-[80%] gap-y-3 pb-3 mt-2">
-            {filteredData?.reverse()?.map((item) => (
+            {filteredData?.map((item) => (
               <View key={item.id}>
                 <FavCard
                   onDelete={() => {

@@ -10,7 +10,7 @@ const Fav = {
   },
   addFav: (fav: FavType) => {
     const favs = Fav.getFav();
-    const newFavs = [...favs, fav];
+    const newFavs = [fav, ...favs];
     storage.set("fav", JSON.stringify(newFavs));
   },
   deleteFav: (id: number) => {
