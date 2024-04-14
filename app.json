@@ -24,9 +24,7 @@
         "ExpoLocalization_supportsRTL": true
       }
     },
-    "build": {
-      "android": { "buildType": "apk" }
-    },
+
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",

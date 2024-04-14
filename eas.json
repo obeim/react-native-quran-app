@@ -16,7 +16,8 @@
     "production": {
       "env": {
         "EXPO_ROUTER_APP_ROOT": "app"
-      }
+      },
+      "android": { "buildType": "apk" }
     }
   },
   "submit": {
