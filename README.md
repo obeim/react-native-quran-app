@@ -2,7 +2,7 @@
 
 Offline app for reading quran made with react native using expo
 
-#### App preview [apk](https://drive.google.com/file/d/1slXD8JZlvxN_QlzAq8-2rYe9oyWbnuRq/view)
+#### App preview [apk](https://drive.google.com/file/d/15CNykqhTNi47hKVfvg8qva_q5i0RpEc5/view?usp=drivesdk)
 
 #### figma design [link](https://www.figma.com/file/w0wbjGuzcfsZL3GRTX63lq/Quran-App?type=design&node-id=0%3A1&mode=design&t=jZF2fH9pWQUezzEU-1)
 
