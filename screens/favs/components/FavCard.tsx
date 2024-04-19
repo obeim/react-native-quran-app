@@ -46,22 +46,26 @@ export function FavCard({
   return (
     <Animated.View
       {...panResponder(item.id).panHandlers}
-      className="bg-lotion dark:bg-blackCoral rounded px-4 pb-2 pt-3"
+      className="bg-lotion dark:bg-blackCoral rounded px-4 pb-2 pt-3 relative"
       style={{ transform: [...position.getTranslateTransform()] }}
     >
       <Text className=" text-lg min-[600px]:text-xl py-3 text-primary  dark:text-primaryDark !font-UthmanicHafs ">
         {item.text}
       </Text>
-      <View className="justify-between flex-row">
+      <View className="justify-between flex-row ">
         <View>
           <Text className="text-primary dark:text-primaryDark !font-UthmanicHaf">
-            سورة {item.sora_name}
+            سورة {item.sora_name}{" "}
           </Text>
           <Text className="text-primary dark:text-primaryDark !font-UthmanicHaf text-xs mt-1">
             الاية {item.number}
           </Text>
         </View>
-
+        {item.jozz && (
+          <Text className="text-primary/20 dark:text-primaryDark/20 absolute right-0 -top-3 text-xs">
+            الجزء {item.jozz}{" "}
+          </Text>
+        )}
         <Pressable
           onPress={() => {
             if (item) Fav.goToFav({ ...item });

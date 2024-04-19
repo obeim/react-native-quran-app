@@ -135,7 +135,8 @@ export type FavType = {
   id: number;
   number: number;
   index?: number;
-  sora: number;
+  sora?: number;
+  jozz?: number;
   sora_name: string;
   text: string;
   page?: number;

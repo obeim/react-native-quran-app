@@ -18,6 +18,7 @@ const Jozz = () => {
   const local = useLocalSearchParams();
   const [openAyaAction, setOpenAyaAction] = useState(false);
   const [activeAya, setActiveAya] = useState<Ayah>();
+  const [currentPage, setCurrentPage] = useState(1);
 
   const [layout, setLayout] = useState<"page" | "ayat">(
     (storage.getString("view_pref") as "page") || "ayat" || "ayat"
@@ -38,7 +39,10 @@ const Jozz = () => {
   });
   const { playAyah, stop, isPlaying, isLoading: soundLoading } = usePlayAyah();
   const onPressAyah = (aya: Ayah) => {
-    setActiveAya(aya);
+    setActiveAya({
+      ...aya,
+      sora_name_ar: aya?.sora_name_ar.replace("no", "").replace(",", "") || "",
+    });
     setOpenAyaAction(true);
   };
   return (
@@ -53,6 +57,7 @@ const Jozz = () => {
             setOpenAyaAction(false);
           }}
           ayah={activeAya}
+          currentPage={currentPage}
         />
         <Header
           stop={stop}
@@ -66,7 +71,14 @@ const Jozz = () => {
           {
             {
               ayat: <AyatView Favs={Favs} onPress={onPressAyah} data={data} />,
-              page: <PageView Favs={Favs} onPress={onPressAyah} data={data} />,
+              page: (
+                <PageView
+                  setCurrentPage={setCurrentPage}
+                  Favs={Favs}
+                  onPress={onPressAyah}
+                  data={data}
+                />
+              ),
             }[layout]
           }
         </View>

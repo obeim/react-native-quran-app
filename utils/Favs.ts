@@ -18,16 +18,16 @@ const Fav = {
     const newFavs = favs.filter((value) => value.id !== id);
     storage.set("fav", JSON.stringify(newFavs));
   },
-  goToFav: ({ sora, index, page }: FavType) => {
+  goToFav: ({ sora, index, page, jozz }: FavType) => {
     if (index) {
       if (storage.getString("view_pref") === "page")
         storage.set("view_pref", "ayat");
 
-      router.push(`/surah/${sora}s${index}`);
+      router.replace(`/${jozz ? "jozz" : "surah"}/${sora || jozz}s${index}`);
     } else if (page) {
       if (storage.getString("view_pref") === "ayat")
         storage.set("view_pref", "page");
-      router.push(`/surah/${sora}s${page}`);
+      router.replace(`/${jozz ? "jozz" : "surah"}/${sora || jozz}s${page}`);
     }
   },
 };

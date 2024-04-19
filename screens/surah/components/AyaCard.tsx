@@ -6,6 +6,7 @@ import { useColorScheme } from "nativewind";
 import Fav from "@/utils/Favs";
 import { useQuery, useQueryClient } from "react-query";
 import { copyToCliporad, storage } from "@/utils";
+import { usePathname } from "expo-router";
 
 export function AyaCard({
   ayah,
@@ -28,6 +29,7 @@ export function AyaCard({
   const { data: fontSize } = useQuery("fontSize", () =>
     storage.getString("fontSize")
   );
+  const pathname = usePathname();
 
   const currentColor = useMemo(
     () => (colorScheme === "dark" ? "#FAF0E6" : "#544981"),
@@ -42,6 +44,11 @@ export function AyaCard({
     >
       <Bookmark
         onPress={() => {
+          let type: { jozz?: number; sora?: number } = {};
+
+          if (pathname.includes("jozz")) type.jozz = ayah?.jozz;
+          else type.sora = ayah?.sora;
+
           setBookmark(!bookmark);
           if (!bookmark)
             Fav.addFav({
@@ -50,7 +57,7 @@ export function AyaCard({
               index: index,
               sora_name: ayah.sora_name_ar,
               number: ayah.aya_no,
-              sora: ayah.sora,
+              ...type,
               aya_text_emlaey: ayah.aya_text_emlaey,
             });
           else Fav.deleteFav(ayah.id);

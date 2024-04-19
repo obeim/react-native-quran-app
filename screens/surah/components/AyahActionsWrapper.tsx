@@ -6,6 +6,7 @@ import * as Network from "expo-network";
 import Toast from "react-native-root-toast";
 import Fav from "@/utils/Favs";
 import { useQueryClient } from "react-query";
+import { usePathname } from "expo-router";
 
 export function AyahActionsWrapper({
   close,
@@ -24,6 +25,7 @@ export function AyahActionsWrapper({
 }) {
   const [openMeaning, setOpenMeaning] = useState(false);
   const queryClient = useQueryClient();
+  const pathname = usePathname();
 
   return (
     <View>
@@ -60,6 +62,11 @@ export function AyahActionsWrapper({
         showMeaning={!!ayah?.maany_aya}
         showSave={!!currentPage}
         onSave={() => {
+          let type: { jozz?: number; sora?: number } = {};
+
+          if (pathname.includes("jozz")) type.jozz = ayah?.jozz;
+          else type.sora = ayah?.sora;
+
           if (ayah && currentPage) {
             if (!Favs.some((item) => item.id === ayah?.id))
               Fav.addFav({
@@ -68,7 +75,7 @@ export function AyahActionsWrapper({
                 page: currentPage,
                 sora_name: ayah.sora_name_ar,
                 number: ayah.aya_no,
-                sora: ayah.sora,
+                ...type,
               });
             else Fav.deleteFav(ayah.id);
             queryClient.invalidateQueries({ queryKey: ["favs"] });

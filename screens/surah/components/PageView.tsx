@@ -7,7 +7,12 @@ import { LegacyRef, useEffect, useRef } from "react";
 import { copyToCliporad, storage } from "@/utils";
 import { useQuery } from "react-query";
 
-export const PageView = ({ data, onPressAyah, setCurrentPage }: PageProps) => {
+export const PageView = ({
+  data,
+  onPressAyah,
+  setCurrentPage,
+  Favs,
+}: PageProps) => {
   const listRef = useRef<ScrollView>();
 
   const { ayat, nextPage, PrevPage, totalPages, currentPage } = usePagedAyat({
@@ -71,6 +76,10 @@ export const PageView = ({ data, onPressAyah, setCurrentPage }: PageProps) => {
             >
               {ayat.map((aya: Ayah) => (
                 <Text
+                  className={`${
+                    Favs?.some((fav) => fav.id == aya.id) &&
+                    "bg-primary/10 dark:bg-gray-200/10"
+                  }`}
                   onPress={() => {
                     onPressAyah?.(aya);
                   }}
