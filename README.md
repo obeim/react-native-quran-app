@@ -47,7 +47,7 @@ Offline app for reading quran made with react native using expo
 - Prayer times api [link](https://aladhan.com/prayer-times-api)
 - Quran voice recitation api [link](https://alquran.cloud/cdn)
 
-## Screens preview :
+##  
 
 ![quran_screens_1](https://github.com/obeim/quran-app/assets/56155793/ebffc992-abd6-463f-acc3-3fc37369af3d)
 
