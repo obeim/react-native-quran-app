@@ -1,3 +1,25 @@
+
+# تطبيق القرآن الكريم
+
+تطبيق اوفلاين لقراءة القرآن الكريم تم تطويره باستخدام React Native و Expo
+
+#### تحميل التطبيق [apk](https://drive.google.com/file/d/1sg3KoNDyw5p1mH0PT3dLe9Ef5rcqKzFH/view?usp=drive_link)
+
+#### تصميم فيجما [الرابط](https://www.figma.com/file/w0wbjGuzcfsZL3GRTX63lq/Quran-App?type=design&node-id=0%3A1&mode=design&t=jZF2fH9pWQUezzEU-1)
+
+## المميزات :
+
+- الوضع الليلي والوضع النهاري
+- القراءة بالسورة أو الجزء
+- الحفظ التلقائي عند قراءة القرآن
+- قراءة الأذكار مع عداد
+- تفسير الآيات
+- الاستماع إلى الآيات المقرؤة من قبل أي قارئ متاح في التطبيق (يتطلب الإنترنت)
+- أوقات الصلاة (يتطلب الإنترنت)
+- اتجاه القبلة (يعمل فقط على الأجهزة التي تحتوي على مقياس المغناطيسية)
+- إمكانية تغيير حجم خط القراءة
+
+
 # Quran App
 
 Offline app for reading quran made with react native using expo
