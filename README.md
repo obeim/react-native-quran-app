@@ -20,7 +20,7 @@
 - إمكانية تغيير حجم خط القراءة
 
 
-# Quran App
+# 
 
 Offline app for reading quran made with react native using expo
 
