@@ -1,5 +1,5 @@
 import { Ayah } from "@/types";
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import { groupBy } from ".";
 import { useLocalSearchParams } from "expo-router";
 
@@ -15,19 +15,13 @@ const usePagedAyat = ({ data }: PageProps) => {
   );
   const [isLast, setIsLast] = useState(false);
 
-  const formatedData = useMemo(() => {
-    let newData = data ? { ...data } : {};
-    const pagedAyat = groupBy(data, (item: Ayah) => item.page);
+  const formatedData = data
+    ? groupBy(data, (item: Ayah) => item.page)
+    : undefined;
 
-    newData = pagedAyat;
-    return data ? (newData as any) : undefined;
-  }, [data]);
-
-  const currentPageAyat = useMemo(() => {
-    return formatedData
-      ? (formatedData as any)[Object.keys(formatedData as any)[activePage]]
-      : undefined;
-  }, [activePage, formatedData]);
+  const currentPageAyat = formatedData
+    ? (formatedData as any)[Object.keys(formatedData as any)[activePage]]
+    : undefined;
 
   const nextPage = () => {
     if (activePage < Object.keys(formatedData).length - 1) {

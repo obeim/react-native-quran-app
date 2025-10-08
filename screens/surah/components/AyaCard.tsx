@@ -1,7 +1,7 @@
 import { Ayah } from "@/types";
 import { Pressable, Text, View } from "react-native";
 import Bookmark from "@/assets/icons/bookmark.svg";
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import { useColorScheme } from "nativewind";
 import Fav from "@/utils/Favs";
 import { useQuery, useQueryClient } from "react-query";
@@ -31,10 +31,7 @@ export function AyaCard({
   );
   const pathname = usePathname();
 
-  const currentColor = useMemo(
-    () => (colorScheme === "dark" ? "#FAF0E6" : "#544981"),
-    [colorScheme]
-  );
+  const currentColor = colorScheme === "dark" ? "#FAF0E6" : "#544981";
 
   return (
     <Pressable

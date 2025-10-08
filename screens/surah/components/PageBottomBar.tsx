@@ -2,7 +2,6 @@ import { Pressable, Text, View } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 import { useColorScheme } from "nativewind";
 import { router, useLocalSearchParams } from "expo-router";
-import { useMemo } from "react";
 
 export function PageBottomBar({
   PrevPage,
@@ -19,10 +18,8 @@ export function PageBottomBar({
 }) {
   const local = useLocalSearchParams();
   const id = parseInt((local.id as string) || "");
-  const isLastSuraOrJozz = useMemo(
-    () => (type === "jozz" && id === 30) || (type === "surah" && id === 114),
-    [type, id]
-  );
+  const isLastSuraOrJozz =
+    (type === "jozz" && id === 30) || (type === "surah" && id === 114);
 
   const { colorScheme } = useColorScheme();
   return (

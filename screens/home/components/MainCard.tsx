@@ -1,7 +1,7 @@
 import { View } from "react-native";
 import { router, useFocusEffect } from "expo-router";
 import { storage } from "@/utils";
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useState } from "react";
 import { Recent } from "@/types";
 import CardContent from "./CardContent";
 import { NoRecentView } from "./NoRecentView";
@@ -10,6 +10,7 @@ export function MainCard() {
   const [recent, setRecent] = useState<Recent>();
   const [view, setView] = useState<"page" | "ayat">();
 
+  // Load recent from storage when screen is focused
   useFocusEffect(
     useCallback(() => {
       const recentJSON = storage.getString("recent");
@@ -19,21 +20,15 @@ export function MainCard() {
     }, [])
   );
 
-  const noPageAyaText = useMemo(
-    () =>
-      recent?.type === "surah"
-        ? `الأية : ${recent?.aya || 1}`
-        : `${recent?.name} الأية : ${recent?.aya}`,
-    [recent]
-  );
+  const noPageAyaText =
+    recent?.type === "surah"
+      ? `الأية : ${recent?.aya || 1}`
+      : `${recent?.name} الأية : ${recent?.aya}`;
 
-  const pageTextAya = useMemo(
-    () =>
-      recent?.type === "surah"
-        ? `الصفحة  ${recent.page} `
-        : ` سورة ${recent?.name} `,
-    [recent]
-  );
+  const pageTextAya =
+    recent?.type === "surah"
+      ? `الصفحة  ${recent.page} `
+      : ` سورة ${recent?.name} `;
 
   return (
     <View className="mt-3 bg-lotion dark:bg-blackCoral w-full  rounded-[17px] px-6 relative py-6">

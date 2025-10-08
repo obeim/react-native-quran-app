@@ -1,7 +1,7 @@
 import { Text, View } from "react-native";
 import { MainCard } from "./components/MainCard";
 import { TypeTabs } from "./components/TypeTabs";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 import { useQuery } from "react-query";
 import { getSuar } from "@/services/SurahsService";
 import { SearchInput } from "./components/SearchInput";

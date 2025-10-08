@@ -1,5 +1,4 @@
 import { FlatList, Pressable, Text, View } from "react-native";
-import { useMemo } from "react";
 import { useQuery } from "react-query";
 import { getCategories } from "@/services/CategoryService";
 import { router } from "expo-router";
@@ -11,13 +10,9 @@ export const AzkarTab = ({ search }: { search: string }) => {
     { staleTime: 2629800000 }
   );
 
-  const filterdData = useMemo(
-    () =>
-      data?.filter
-        ? data?.filter((item) => item?.cat_name?.includes(search))
-        : [],
-    [search, data]
-  );
+  const filterdData = data?.filter
+    ? data?.filter((item) => item?.cat_name?.includes(search))
+    : [];
 
   return (
     <View>

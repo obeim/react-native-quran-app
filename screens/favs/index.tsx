@@ -1,7 +1,7 @@
 import Fav from "@/utils/Favs";
-import { PanResponder, ScrollView, Text, View } from "react-native";
+import { ScrollView, Text, View } from "react-native";
 import { useQuery, useQueryClient } from "react-query";
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import { SearchInput } from "../home/components/SearchInput";
 import { FavCard } from "./components/FavCard";
 import { Header } from "../jozz/Header";
@@ -14,13 +14,10 @@ const Favs = () => {
 
   const queryClient = useQueryClient();
 
-  const filteredData = useMemo(
-    () =>
-      data?.filter && search
-        ? data?.filter((aya) => aya?.aya_text_emlaey?.includes(search))
-        : data,
-    [search, data]
-  );
+  const filteredData =
+    data?.filter && search
+      ? data?.filter((aya) => aya?.aya_text_emlaey?.includes(search))
+      : data;
 
   return (
     <View className=" bg-white dark:bg-darkBg">

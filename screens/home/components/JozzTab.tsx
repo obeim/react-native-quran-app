@@ -2,7 +2,6 @@ import { FlatList, Text } from "react-native";
 import { router } from "expo-router";
 import JozzCard from "./JozzCard";
 import { useQuery } from "react-query";
-import { useMemo } from "react";
 const JozzTab = ({ search }: { search: string }) => {
   const { data } = useQuery(
     "jozzs",
@@ -19,11 +18,9 @@ const JozzTab = ({ search }: { search: string }) => {
     { cacheTime: Infinity }
   );
 
-  const filterdData = useMemo(
-    () =>
-      data?.filter ? data?.filter((item) => item.name.includes(search)) : [],
-    [search, data]
-  );
+  const filterdData = data?.filter
+    ? data?.filter((item) => item.name.includes(search))
+    : [];
 
   return (
     <FlatList

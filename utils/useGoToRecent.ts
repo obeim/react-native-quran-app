@@ -1,5 +1,5 @@
 import { router, useFocusEffect } from "expo-router";
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useState } from "react";
 import { storage } from ".";
 import { Recent } from "@/types";
 
@@ -26,9 +26,8 @@ const useGoToRecent = () => {
         }`
       );
   };
-  const haveRecent = useMemo(() => recent, [recent]);
 
-  return { goToRecent, haveRecent };
+  return { goToRecent, haveRecent: recent };
 };
 
 export default useGoToRecent;

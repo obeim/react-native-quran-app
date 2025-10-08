@@ -33,7 +33,7 @@ export default function RootLayout(): ReactNode {
     if (fontsLoaded || fontError) {
       SplashScreen.hideAsync();
     }
-  }, [fontsLoaded, fontError]);
+  }, [fontsLoaded, !!fontError]);
 
   if (!fontsLoaded && !fontError) {
     return null;

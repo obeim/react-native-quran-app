@@ -2,18 +2,15 @@ import { Pressable, Text, View } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 import { useColorScheme } from "nativewind";
 import { router, useLocalSearchParams } from "expo-router";
-import { useMemo } from "react";
 
 export function AyatBottomNav({ type }: { type: "jozz" | "surah" }) {
   const local = useLocalSearchParams();
   const { colorScheme } = useColorScheme();
 
-  const isLastSuraOrJozz = useMemo(
-    () =>
-      (type === "jozz" && local.id === "30") ||
-      (type === "surah" && local.id === "114"),
-    [type, local.id]
-  );
+  const isLastSuraOrJozz =
+    (type === "jozz" && local.id === "30") ||
+    (type === "surah" && local.id === "114");
+
   return (
     <View className=" flex-2 flex-row justify-between pb-3 h-24">
       {local.id !== "1" ? (

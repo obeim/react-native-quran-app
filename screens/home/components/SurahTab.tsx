@@ -2,14 +2,11 @@ import { FlatList, Text } from "react-native";
 import SurahCard from "./SurahCard";
 import { router } from "expo-router";
 import { Surah } from "@/types";
-import { useMemo } from "react";
 
 const SurahTab = ({ data, search }: { data: Surah[]; search: string }) => {
-  const filterdData = useMemo(
-    () =>
-      data?.filter ? data?.filter((item) => item.name_ar.includes(search)) : [],
-    [search, data]
-  );
+  const filterdData = data?.filter
+    ? data?.filter((item) => item.name_ar.includes(search))
+    : [];
 
   return (
     <FlatList
