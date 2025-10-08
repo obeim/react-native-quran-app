@@ -31,7 +31,7 @@ const useScrollToAya = () => {
         index: parseInt((local.id as string).split("s")[1]),
         animated: true,
       });
-  }, [flatListRef]);
+  }, [local.id]);
   return { onScrollToIndexFailed, flatListRef };
 };
 
