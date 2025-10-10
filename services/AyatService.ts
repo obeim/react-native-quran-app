@@ -1,6 +1,6 @@
 import ayatData from "@/assets/data/ayat";
 
-export const getAyatAsJozz = async (id: number) => {
+export const getAyatAsJozz = (id: number) => {
   let ayat = ayatData.filter((aya) => aya.jozz === id);
   ayat = ayat.map((aya, index) => {
     if (index > 0 && aya.sora === ayat[index - 1].sora)

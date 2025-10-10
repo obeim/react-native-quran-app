@@ -1,14 +1,9 @@
 import { FlatList, Pressable, Text, View } from "react-native";
-import { useQuery } from "react-query";
 import { getCategories } from "@/services/CategoryService";
 import { router } from "expo-router";
 
 export const AzkarTab = ({ search }: { search: string }) => {
-  const { data, isLoading } = useQuery(
-    "category",
-    async () => getCategories(),
-    { staleTime: 2629800000 }
-  );
+  const data = getCategories();
 
   const filterdData = data?.filter
     ? data?.filter((item) => item?.cat_name?.includes(search))
@@ -16,11 +11,6 @@ export const AzkarTab = ({ search }: { search: string }) => {
 
   return (
     <View>
-      {isLoading && (
-        <Text className="text-center font-HelveticaRoman mt-5 text-primary dark:text-primaryDark">
-          جاري التحميل...
-        </Text>
-      )}
       {data && (
         <FlatList
           data={filterdData}

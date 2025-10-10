@@ -142,3 +142,6 @@ export type FavType = {
   page?: number;
   aya_text_emlaey?: string;
 };
+export interface SurahwithAyat extends Surah {
+  ayat: Ayah[];
+}

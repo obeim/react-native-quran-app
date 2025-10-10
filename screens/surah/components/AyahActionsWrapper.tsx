@@ -5,7 +5,6 @@ import { Ayah, FavType } from "@/types";
 import * as Network from "expo-network";
 import Toast from "react-native-root-toast";
 import Fav from "@/utils/Favs";
-import { useQueryClient } from "react-query";
 import { usePathname } from "expo-router";
 
 export function AyahActionsWrapper({
@@ -24,7 +23,6 @@ export function AyahActionsWrapper({
   currentPage?: number;
 }) {
   const [openMeaning, setOpenMeaning] = useState(false);
-  const queryClient = useQueryClient();
   const pathname = usePathname();
 
   return (
@@ -78,7 +76,6 @@ export function AyahActionsWrapper({
                 ...type,
               });
             else Fav.deleteFav(ayah.id);
-            queryClient.invalidateQueries({ queryKey: ["favs"] });
             close();
           }
         }}

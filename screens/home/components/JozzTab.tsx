@@ -1,22 +1,9 @@
 import { FlatList, Text } from "react-native";
 import { router } from "expo-router";
 import JozzCard from "./JozzCard";
-import { useQuery } from "react-query";
+import useJozzList from "@/utils/db/useJozzList";
 const JozzTab = ({ search }: { search: string }) => {
-  const { data } = useQuery(
-    "jozzs",
-    async () => {
-      let JozzArray: { id: number; name: string }[] = [];
-      Array.apply(0, Array(30)).forEach((item, index) => {
-        JozzArray.push({
-          id: index + 1,
-          name: `الجزء ${index + 1}`,
-        });
-      });
-      return JozzArray;
-    },
-    { cacheTime: Infinity }
-  );
+  const data = useJozzList();
 
   const filterdData = data?.filter
     ? data?.filter((item) => item.name.includes(search))

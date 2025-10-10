@@ -52,7 +52,7 @@ export function Header({
           className="  items-center justify-end !w-10 flex-3 "
         >
           <AntDesign
-            name="arrowright"
+            name="arrow-right"
             size={24}
             color={colorScheme === "dark" ? "#FAF0E6" : "#544981"}
           />

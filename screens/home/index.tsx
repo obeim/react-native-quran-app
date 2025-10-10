@@ -2,7 +2,6 @@ import { Text, View } from "react-native";
 import { MainCard } from "./components/MainCard";
 import { TypeTabs } from "./components/TypeTabs";
 import { useCallback, useState } from "react";
-import { useQuery } from "react-query";
 import { getSuar } from "@/services/SurahsService";
 import { SearchInput } from "./components/SearchInput";
 import InnerSplash from "@/components/InnerSplash";
@@ -17,9 +16,7 @@ const Home = () => {
   const [openCont, setOpenCont] = useState(false);
   const [openMenu, setOpenMenu] = useState(false);
 
-  const { data, isFetched } = useQuery("suar", async () => getSuar(), {
-    staleTime: Infinity,
-  });
+  const data = getSuar();
 
   useFocusEffect(
     useCallback(() => {
@@ -27,7 +24,7 @@ const Home = () => {
     }, [])
   );
 
-  return data && isFetched ? (
+  return data ? (
     <View
       className=" w-full h-screen bg-white dark:bg-darkBg "
       onTouchStart={() => {

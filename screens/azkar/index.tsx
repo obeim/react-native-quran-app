@@ -1,7 +1,6 @@
 import { Alert, Dimensions, ScrollView, Text, View } from "react-native";
 import { Header } from "../jozz/Header";
 import { useLocalSearchParams } from "expo-router";
-import { useQuery } from "react-query";
 import { getAzkarByCate } from "@/services/AzkarService";
 import { ZekrCard } from "./components/ZekrCard";
 import { useEffect, useState } from "react";
@@ -17,11 +16,7 @@ export const Azkar = () => {
   const [completedCount, setCompletedCount] = useState<number>(0);
   const [completeModal, setCompleteModal] = useState(false);
 
-  const { data, isLoading } = useQuery(
-    `azkar${local.category}`,
-    async () => getAzkarByCate(local.category as string),
-    { staleTime: Infinity }
-  );
+  const data = getAzkarByCate(local.category as string);
 
   useEffect(() => {
     if (completedCount === data?.length) {
@@ -46,12 +41,7 @@ export const Azkar = () => {
         />
       )}
       <ScrollView className=" w-full bg-white  dark:bg-blackCoral h-[93%] px-5 ">
-        {isLoading && (
-          <Text className="text-center font-HelveticaRoman mt-5 text-primary dark:text-primaryDark">
-            جاري التحميل...
-          </Text>
-        )}
-        {data && !isLoading && (
+        {data && (
           <View className="mt-4">
             {data?.map((zekr, i) => (
               <ZekrCard

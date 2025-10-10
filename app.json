@@ -24,7 +24,6 @@
         "ExpoLocalization_supportsRTL": true
       }
     },
-
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
@@ -51,17 +50,31 @@
             "useLegacyPackaging": true
           }
         }
+      ],
+      "expo-asset",
+      "expo-font",
+      [
+        "expo-sqlite",
+        {
+          "enableFTS": true,
+          "useSQLCipher": true,
+          "android": {
+            "enableFTS": false,
+            "useSQLCipher": false
+          },
+          "ios": {
+            "customBuildFlags": [
+              "-DSQLITE_ENABLE_DBSTAT_VTAB=1 -DSQLITE_ENABLE_SNAPSHOT=1"
+            ]
+          }
+        }
       ]
     ],
     "experiments": {
       "typedRoutes": true,
       "tsconfigPaths": true
     },
-    "jsEngine": "hermes",
     "extra": {
-      "router": {
-        "origin": false
-      },
       "eas": {
         "projectId": "6cf4cd2b-c02b-4f3d-bfe3-ff03fa5b2f4a"
       },

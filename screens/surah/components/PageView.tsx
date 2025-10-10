@@ -5,7 +5,6 @@ import { PageProps } from "./AyatView";
 import { PageBottomBar } from "./PageBottomBar";
 import { LegacyRef, useEffect, useRef } from "react";
 import { copyToCliporad, storage } from "@/utils";
-import { useQuery } from "react-query";
 
 export const PageView = ({
   data,
@@ -13,15 +12,13 @@ export const PageView = ({
   setCurrentPage,
   Favs,
 }: PageProps) => {
-  const listRef = useRef<ScrollView>();
+  const listRef = useRef<ScrollView>(null);
 
   const { ayat, nextPage, PrevPage, totalPages, currentPage } = usePagedAyat({
     data: data?.ayat,
   });
 
-  const { data: fontSize } = useQuery("fontSize", () =>
-    storage.getString("fontSize")
-  );
+  const fontSize = storage.getString("fontSize");
 
   useEffect(() => {
     if (data && currentPage)
@@ -78,7 +75,7 @@ export const PageView = ({
                 <Text
                   className={`${
                     Favs?.some((fav) => fav.id == aya.id) &&
-                    "bg-primary/10 dark:bg-gray-200/10"
+                    "bg-primary/10 dark:bg-gray-200/10 "
                   }`}
                   onPress={() => {
                     onPressAyah?.(aya);

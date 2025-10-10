@@ -1,5 +1,4 @@
 import { View } from "react-native";
-import { useQuery } from "react-query";
 import { useLocalSearchParams } from "expo-router";
 import { Header } from "./Header";
 import { getAyatAsJozz } from "@/services/AyatService";
@@ -24,19 +23,12 @@ const Jozz = () => {
     (storage.getString("view_pref") as "page") || "ayat" || "ayat"
   );
 
-  const { isLoading, data, isFetched } = useQuery(
-    `jozz${parseInt((local.id as string).split("s")[0] as string)}`,
-    () => {
-      return getAyatAsJozz(
-        parseInt((local.id as string).split("s")[0] as string)
-      );
-    },
-    { staleTime: Infinity }
+  const data = getAyatAsJozz(
+    parseInt((local.id as string).split("s")[0] as string)
   );
 
-  const { data: Favs } = useQuery("favs", () => {
-    return Fav.getFav();
-  });
+  const Favs = Fav.getFav();
+
   const { playAyah, stop, isPlaying, isLoading: soundLoading } = usePlayAyah();
   const onPressAyah = (aya: Ayah) => {
     setActiveAya({
@@ -46,44 +38,41 @@ const Jozz = () => {
     setOpenAyaAction(true);
   };
   return (
-    !isLoading &&
-    isFetched && (
-      <View className="h-full">
-        <AyahActionsWrapper
-          Favs={Favs || []}
-          playAyah={playAyah}
-          opened={openAyaAction}
-          close={() => {
-            setOpenAyaAction(false);
-          }}
-          ayah={activeAya}
-          currentPage={currentPage}
-        />
-        <Header
-          stop={stop}
-          isPlaying={isPlaying}
-          isLoading={soundLoading || false}
-          setLayout={setLayout}
-          layout={layout}
-          title={`الجزء ${(local.id as string).split("s")[0]}`}
-        />
-        <View className=" bg-white dark:bg-darkBg">
+    <View className="h-full">
+      <AyahActionsWrapper
+        Favs={Favs || []}
+        playAyah={playAyah}
+        opened={openAyaAction}
+        close={() => {
+          setOpenAyaAction(false);
+        }}
+        ayah={activeAya}
+        currentPage={currentPage}
+      />
+      <Header
+        stop={stop}
+        isPlaying={isPlaying}
+        isLoading={soundLoading || false}
+        setLayout={setLayout}
+        layout={layout}
+        title={`الجزء ${(local.id as string).split("s")[0]}`}
+      />
+      <View className=" bg-white dark:bg-darkBg">
+        {
           {
-            {
-              ayat: <AyatView Favs={Favs} onPress={onPressAyah} data={data} />,
-              page: (
-                <PageView
-                  setCurrentPage={setCurrentPage}
-                  Favs={Favs}
-                  onPress={onPressAyah}
-                  data={data}
-                />
-              ),
-            }[layout]
-          }
-        </View>
+            ayat: <AyatView Favs={Favs} onPress={onPressAyah} data={data} />,
+            page: (
+              <PageView
+                setCurrentPage={setCurrentPage}
+                Favs={Favs}
+                onPress={onPressAyah}
+                data={data}
+              />
+            ),
+          }[layout]
+        }
       </View>
-    )
+    </View>
   );
 };
 
