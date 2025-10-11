@@ -40,7 +40,7 @@ export function AyatView({ data, onPress, Favs }: PageProps) {
           {...{ item, id: local.id as string, index, data: data }}
         />
       )}
-      className="w-full bg-lotion dark:bg-blackCoral h-[93%] px-5 overflow-hidden"
+      className="w-full bg-lotion dark:bg-blackCoral h-[96%] px-5 overflow-hidden"
     />
   );
 }

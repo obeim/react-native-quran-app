@@ -31,7 +31,7 @@ const Home = () => {
         if (openCont) setOpenCont(false);
       }}
     >
-      <View className="h-[35%]">
+      <View className="h-[32%]">
         <Header onClickMenu={() => setOpenMenu(true)} />
         <View className="mt-3 w-full px-4">
           <Text className="text-lg font-HelveticaBold mb-2 text-primary/40 dark:text-primaryDark">
