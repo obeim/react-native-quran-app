@@ -11,11 +11,6 @@ import { PageView } from "./PageView";
 import { AyatView } from "./AyaView";
 import { AyahActionsWrapper } from "@/screens/surah/components/AyahActionsWrapper";
 
-const HeaderMemo = memo(Header);
-const PageViewMemo = memo(PageView);
-const AyatViewMemo = memo(AyatView);
-const AyahActionsWrapperMemo = memo(AyahActionsWrapper);
-
 const JozzBody = ({ jozzId, data }: { jozzId: number; data: Ayah[] }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedAyah, setSelectedAyah] = useState<Ayah>();
@@ -41,7 +36,7 @@ const JozzBody = ({ jozzId, data }: { jozzId: number; data: Ayah[] }) => {
 
   return (
     <>
-      <AyahActionsWrapperMemo
+      <AyahActionsWrapper
         Favs={Favs}
         player={player}
         close={() => setOpenModal(false)}
@@ -50,7 +45,7 @@ const JozzBody = ({ jozzId, data }: { jozzId: number; data: Ayah[] }) => {
         currentPage={currentPage}
       />
 
-      <HeaderMemo
+      <Header
         player={player}
         layout={layout}
         setLayout={setLayout}
@@ -61,16 +56,14 @@ const JozzBody = ({ jozzId, data }: { jozzId: number; data: Ayah[] }) => {
         {
           {
             page: (
-              <PageViewMemo
+              <PageView
                 setCurrentPage={setCurrentPage}
                 Favs={Favs}
                 onPress={onPressAyah}
                 data={data}
               />
             ),
-            ayat: (
-              <AyatViewMemo Favs={Favs} onPress={onPressAyah} data={data} />
-            ),
+            ayat: <AyatView Favs={Favs} onPress={onPressAyah} data={data} />,
           }[layout]
         }
       </View>

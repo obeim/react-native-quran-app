@@ -6,7 +6,7 @@ import * as Network from "expo-network";
 import Toast from "react-native-root-toast";
 import Fav from "@/services/Favs";
 import { usePathname } from "expo-router";
-import { AudioPlayer, useAudioPlayer } from "expo-audio";
+import { AudioPlayer } from "expo-audio";
 import { storage } from "@/utils";
 export function AyahActionsWrapper({
   close,
@@ -25,7 +25,6 @@ export function AyahActionsWrapper({
 }) {
   const [openMeaning, setOpenMeaning] = useState(false);
   const pathname = usePathname();
-
   return (
     <View>
       <Modal

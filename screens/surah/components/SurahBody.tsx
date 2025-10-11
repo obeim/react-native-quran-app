@@ -14,11 +14,6 @@ import { AyahActionsWrapper } from "../components/AyahActionsWrapper";
 
 import { Header } from "../Header";
 
-const HeaderMemo = memo(Header);
-const PageViewMemo = memo(PageView);
-const AyatViewMemo = memo(AyatView);
-const AyahActionsWrapperMemo = memo(AyahActionsWrapper);
-
 const SurahBody = ({ data }: { data: SurahwithAyat }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedAyah, setSelectedAyah] = useState<Ayah>();
@@ -41,7 +36,7 @@ const SurahBody = ({ data }: { data: SurahwithAyat }) => {
 
   return (
     <>
-      <AyahActionsWrapperMemo
+      <AyahActionsWrapper
         Favs={Favs}
         player={player}
         close={() => setOpenModal(false)}
@@ -49,7 +44,7 @@ const SurahBody = ({ data }: { data: SurahwithAyat }) => {
         ayah={selectedAyah}
         currentPage={currentPage}
       />
-      <HeaderMemo
+      <Header
         player={player}
         layout={layout}
         setLayout={setLayout}
@@ -66,7 +61,7 @@ const SurahBody = ({ data }: { data: SurahwithAyat }) => {
           {
             page: (
               <View style={{ display: "flex" }}>
-                <PageViewMemo
+                <PageView
                   setCurrentPage={setCurrentPage}
                   Favs={Favs}
                   onPressAyah={onPressAyah}
@@ -76,11 +71,7 @@ const SurahBody = ({ data }: { data: SurahwithAyat }) => {
             ),
             ayat: (
               <View style={{ display: "flex" }}>
-                <AyatViewMemo
-                  Favs={Favs}
-                  onPressAyah={onPressAyah}
-                  data={data}
-                />
+                <AyatView Favs={Favs} onPressAyah={onPressAyah} data={data} />
               </View>
             ),
           }[layout]

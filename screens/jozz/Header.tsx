@@ -15,20 +15,20 @@ export function Header({
   title?: string;
   setLayout?: React.Dispatch<React.SetStateAction<"ayat" | "page">>;
   layout?: "ayat" | "page";
-  player: AudioPlayer;
+  player?: AudioPlayer;
 }) {
   const { colorScheme } = useColorScheme();
-  const status = useAudioPlayerStatus(player);
+  const status = player ? useAudioPlayerStatus(player) : null;
 
   return (
     <View className="flex flex-row justify-between pl-4 py-4 h-[8%] bg-white dark:bg-darkBg items-center">
       <Pressable
         onPress={() => {
-          player.pause();
+          player?.pause();
         }}
         className="  z-40 right-12 flex-2 items-center w-20 absolute  "
       >
-        {status.playing && (
+        {status?.playing && (
           <AntDesign
             name="pause"
             size={27}
@@ -62,7 +62,7 @@ export function Header({
       </View>
       {layout && (
         <Pressable
-          className=" w-24 pr-4  h-32  inline-flex justify-center"
+          className=" w-[50px] pr-4  h-32  inline-flex justify-center"
           onPress={() => {
             if (layout === "ayat") {
               storage.set("view_pref", "page");
