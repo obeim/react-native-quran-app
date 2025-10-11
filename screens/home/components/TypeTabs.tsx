@@ -1,37 +1,60 @@
 import { View } from "react-native";
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import Tabs from "@/components/Tabs";
 import SurahTab from "./SurahTab";
 import JozzTab from "./JozzTab";
-import { Surah } from "@/types";
 import { AzkarTab } from "./AzkarTab";
+import { Surah } from "@/types";
 
-export const TypeTabs = (props: { data: Surah[]; search: string }) => {
-  const [tab, setTab] = useState<string>("surah");
+export const TypeTabs = ({
+  data,
+  search,
+}: {
+  data: Surah[];
+  search: string;
+}) => {
+  const [activeTab, setActiveTab] = useState<"surah" | "chapter" | "azkar">(
+    "surah"
+  );
+
+  // Use useMemo so we only create the tab definitions once
+  const allTabs = useMemo(
+    () => [
+      {
+        name: "surah",
+        title: "سورة",
+        component: <SurahTab data={data} search={search} />,
+      },
+      { name: "chapter", title: "جزء", component: <JozzTab search={search} /> },
+      {
+        name: "azkar",
+        title: "أذكار",
+        component: <AzkarTab search={search} />,
+      },
+    ],
+    [data, search]
+  );
 
   return (
     <View className="px-4 mt-5 h-[62.4%]">
       <Tabs
-        setTab={(name) => {
-          setTab(name);
-        }}
-        activeTab={tab}
-        tabs={tabs(props)}
+        setTab={setActiveTab as (name: string) => void}
+        activeTab={activeTab}
+        tabs={allTabs}
       />
-      {tabs(props).filter((ta) => ta.name === tab)[0]?.component}
+
+      {/* Keep all tabs mounted → prefetches all data */}
+      {allTabs.map((tab) => (
+        <View
+          key={tab.name}
+          style={{
+            display: tab.name === activeTab ? "flex" : "none",
+            flex: 1,
+          }}
+        >
+          {tab.component}
+        </View>
+      ))}
     </View>
   );
 };
-export const tabs = (props: { data: Surah[]; search: string }) => [
-  { name: "surah", title: "سورة", component: <SurahTab {...props} /> },
-  {
-    name: "chapter",
-    title: "جزء",
-    component: <JozzTab search={props.search} />,
-  },
-  {
-    name: "azkar",
-    title: "أذكار",
-    component: <AzkarTab search={props.search} />,
-  },
-];
