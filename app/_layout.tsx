@@ -41,8 +41,8 @@ export default function RootLayout(): ReactNode {
 
   return (
     <SQLiteProvider
-      databaseName="quran_data.db"
-      assetSource={{ assetId: require("../assets/data/quran_data.db") }}
+      databaseName="quran.db"
+      assetSource={{ assetId: require("../assets/quran.db") }}
     >
       <RootSiblingParent>
         <SafeAreaView

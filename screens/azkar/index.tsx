@@ -1,13 +1,13 @@
 import { Alert, Dimensions, ScrollView, Text, View } from "react-native";
 import { Header } from "../jozz/Header";
 import { useLocalSearchParams } from "expo-router";
-import { getAzkarByCate } from "@/services/AzkarService";
 import { ZekrCard } from "./components/ZekrCard";
 import { useEffect, useState } from "react";
 import CompletedModal from "./components/CompletedModal";
 import { Bar } from "react-native-progress";
 import { useColorScheme } from "nativewind";
 import { useKeepAwake } from "expo-keep-awake";
+import useGetAzkar from "@/utils/db/useGetAzkar";
 
 export const Azkar = () => {
   useKeepAwake();
@@ -16,7 +16,7 @@ export const Azkar = () => {
   const [completedCount, setCompletedCount] = useState<number>(0);
   const [completeModal, setCompleteModal] = useState(false);
 
-  const data = getAzkarByCate(local.category as string);
+  const data = useGetAzkar(local.category as string);
 
   useEffect(() => {
     if (completedCount === data?.length) {

@@ -3,7 +3,7 @@ import { Ayah } from "@/types";
 import usePagedAyat from "@/utils/usePagedAyat";
 import { PageProps } from "./AyaView";
 import { PageBottomBar } from "@/screens/surah/components/PageBottomBar";
-import { LegacyRef, useEffect, useRef } from "react";
+import { Ref, useEffect, useRef } from "react";
 import { copyToCliporad, storage } from "@/utils";
 
 export const PageView = ({
@@ -36,7 +36,7 @@ export const PageView = ({
   return (
     <View className="h-[95%] bg-lotion dark:bg-blackCoral">
       <ScrollView
-        ref={listRef as LegacyRef<ScrollView>}
+        ref={listRef as Ref<ScrollView>}
         bounces={false}
         decelerationRate={0}
         className=" px-2 h-[94%] mb-9 "

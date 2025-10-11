@@ -1,4 +1,4 @@
-import { getPrayerTimes } from "@/services";
+import { getPrayerTimes } from "@/services/prayers";
 import { useEffect, useState, useCallback } from "react";
 import { getUserLocation } from ".";
 

@@ -4,7 +4,7 @@ import { AyahActionModal } from "./AyahActionModal";
 import { Ayah, FavType } from "@/types";
 import * as Network from "expo-network";
 import Toast from "react-native-root-toast";
-import Fav from "@/utils/Favs";
+import Fav from "@/services/Favs";
 import { usePathname } from "expo-router";
 import { AudioPlayer, useAudioPlayer } from "expo-audio";
 import { storage } from "@/utils";

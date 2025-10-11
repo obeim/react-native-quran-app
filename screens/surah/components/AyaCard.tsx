@@ -3,7 +3,7 @@ import { Pressable, Text, View } from "react-native";
 import Bookmark from "@/assets/icons/bookmark.svg";
 import { useState } from "react";
 import { useColorScheme } from "nativewind";
-import Fav from "@/utils/Favs";
+import Fav from "@/services/Favs";
 import { copyToCliporad, storage } from "@/utils";
 import { usePathname } from "expo-router";
 

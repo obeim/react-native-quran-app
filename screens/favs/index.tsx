@@ -1,4 +1,4 @@
-import Fav from "@/utils/Favs";
+import Fav from "@/services/Favs";
 import { ScrollView, Text, View } from "react-native";
 import { useState } from "react";
 import { SearchInput } from "../home/components/SearchInput";

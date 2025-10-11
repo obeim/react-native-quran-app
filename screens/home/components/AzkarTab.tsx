@@ -1,9 +1,9 @@
 import { FlatList, Pressable, Text, View } from "react-native";
-import { getCategories } from "@/services/CategoryService";
 import { router } from "expo-router";
+import useGetAzkarCategories from "@/utils/db/useGetAzkarCategories";
 
 export const AzkarTab = ({ search }: { search: string }) => {
-  const data = getCategories();
+  const data = useGetAzkarCategories();
 
   const filterdData = data?.filter
     ? data?.filter((item) => item?.cat_name?.includes(search))

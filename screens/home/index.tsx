@@ -2,7 +2,6 @@ import { Text, View } from "react-native";
 import { MainCard } from "./components/MainCard";
 import { TypeTabs } from "./components/TypeTabs";
 import { useCallback, useState } from "react";
-import { getSuar } from "@/services/SurahsService";
 import { SearchInput } from "./components/SearchInput";
 import InnerSplash from "@/components/InnerSplash";
 import { Header } from "./components/Header";
@@ -10,13 +9,14 @@ import { useFocusEffect } from "expo-router";
 
 import { ContinePopup } from "./components/ContinePopup";
 import MainDrawer from "./components/MainDrawer";
+import useGetSuar from "@/utils/db/useGetSuar";
 
 const Home = () => {
   const [search, setSearch] = useState<string>("");
   const [openCont, setOpenCont] = useState(false);
   const [openMenu, setOpenMenu] = useState(false);
 
-  const data = getSuar();
+  const data = useGetSuar();
 
   useFocusEffect(
     useCallback(() => {
@@ -41,7 +41,7 @@ const Home = () => {
           <SearchInput value={search} onChange={(value) => setSearch(value)} />
         </View>
       </View>
-      {data && <TypeTabs search={search} data={data} />}
+      <TypeTabs search={search} data={data} />
       <ContinePopup isOpen={openCont} />
       <MainDrawer
         isOpen={openMenu}

@@ -1,16 +1,16 @@
 import { View } from "react-native";
 import { useLocalSearchParams } from "expo-router";
 import { Header } from "./Header";
-import { getAyatAsJozz } from "@/services/AyatService";
 import { useState } from "react";
 import { storage } from "@/utils";
 import { AyatView } from "./components/AyaView";
 import { PageView } from "./components/PageView";
 import { AyahActionsWrapper } from "../surah/components/AyahActionsWrapper";
 import { Ayah } from "@/types";
-import Fav from "@/utils/Favs";
+import Fav from "@/services/Favs";
 import { useKeepAwake } from "expo-keep-awake";
 import { useAudioPlayer } from "expo-audio";
+import { useGetAyatAsJozz } from "@/utils/db/useGetAyatAsJozz";
 const Jozz = () => {
   useKeepAwake();
   const local = useLocalSearchParams();
@@ -22,7 +22,7 @@ const Jozz = () => {
     (storage.getString("view_pref") as "page") || "ayat" || "ayat"
   );
 
-  const data = getAyatAsJozz(
+  const data = useGetAyatAsJozz(
     parseInt((local.id as string).split("s")[0] as string)
   );
 

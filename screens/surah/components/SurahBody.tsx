@@ -4,7 +4,7 @@ import { View } from "react-native";
 import { useState, useCallback, useEffect } from "react";
 
 import { storage } from "@/utils";
-import Fav from "@/utils/Favs";
+import Fav from "@/services/Favs";
 import { Ayah, FavType, SurahwithAyat } from "@/types";
 
 import { PageView } from "../components/PageView";

@@ -42,7 +42,7 @@ const CompletedModal = ({
         }}
       >
         <AntDesign
-          name="checkcircleo"
+          name="check-circle"
           size={44}
           color="green"
           style={{ marginBottom: 30 }}
