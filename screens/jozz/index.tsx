@@ -9,9 +9,8 @@ import { PageView } from "./components/PageView";
 import { AyahActionsWrapper } from "../surah/components/AyahActionsWrapper";
 import { Ayah } from "@/types";
 import Fav from "@/utils/Favs";
-import usePlayAyah from "@/utils/usePlayAyah";
 import { useKeepAwake } from "expo-keep-awake";
-
+import { useAudioPlayer } from "expo-audio";
 const Jozz = () => {
   useKeepAwake();
   const local = useLocalSearchParams();
@@ -29,7 +28,8 @@ const Jozz = () => {
 
   const Favs = Fav.getFav();
 
-  const { playAyah, stop, isPlaying, isLoading: soundLoading } = usePlayAyah();
+  const player = useAudioPlayer({});
+
   const onPressAyah = (aya: Ayah) => {
     setActiveAya({
       ...aya,
@@ -41,7 +41,7 @@ const Jozz = () => {
     <View className="h-full">
       <AyahActionsWrapper
         Favs={Favs || []}
-        playAyah={playAyah}
+        player={player}
         opened={openAyaAction}
         close={() => {
           setOpenAyaAction(false);
@@ -50,9 +50,8 @@ const Jozz = () => {
         currentPage={currentPage}
       />
       <Header
-        stop={stop}
-        isPlaying={isPlaying}
-        isLoading={soundLoading || false}
+        stop={() => player.pause()}
+        isPlaying={player.playing}
         setLayout={setLayout}
         layout={layout}
         title={`الجزء ${(local.id as string).split("s")[0]}`}

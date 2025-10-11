@@ -6,19 +6,20 @@ import * as Network from "expo-network";
 import Toast from "react-native-root-toast";
 import Fav from "@/utils/Favs";
 import { usePathname } from "expo-router";
-
+import { AudioPlayer, useAudioPlayer } from "expo-audio";
+import { storage } from "@/utils";
 export function AyahActionsWrapper({
   close,
   opened,
   ayah,
-  playAyah,
+  player,
   Favs,
   currentPage,
 }: {
   close: () => void;
   opened: boolean;
   ayah?: Ayah;
-  playAyah: (id: number) => Promise<void>;
+  player: AudioPlayer;
   Favs: FavType[];
   currentPage?: number;
 }) {
@@ -82,7 +83,13 @@ export function AyahActionsWrapper({
         onPlay={async () => {
           const network = await Network.getNetworkStateAsync();
           if (network.isConnected) {
-            if (ayah) playAyah(ayah?.id);
+            if (ayah)
+              player.replace(
+                `https://cdn.islamic.network/quran/audio/64/${
+                  storage.getString("reader") || "ar.alafasy"
+                }/${ayah?.id}.mp3`
+              );
+            player.play();
           } else {
             Toast.show("تأكد من أتصال الانترنت", {
               textStyle: { fontFamily: "HelveticaNeueLTArabic-Roman" },

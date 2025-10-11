@@ -8,9 +8,9 @@ import { storage } from "@/utils";
 import { Ayah, FavType, SurahwithAyat } from "@/types";
 import { AyahActionsWrapper } from "./components/AyahActionsWrapper";
 import Fav from "@/utils/Favs";
-import usePlayAyah from "@/utils/usePlayAyah";
 import { useKeepAwake } from "expo-keep-awake";
 import { useGetSurahWithAyat } from "@/utils/db/useGetSurahWithAyat";
+import { useAudioPlayer } from "expo-audio";
 
 const HeaderMemo = React.memo(Header);
 const PageViewMemo = React.memo(PageView);
@@ -47,7 +47,7 @@ const SurahBody = ({ data }: { data: SurahwithAyat }) => {
     (storage.getString("view_pref") as "page") || "ayat"
   );
 
-  const { playAyah, stop, isPlaying, isLoading: soundLoading } = usePlayAyah();
+  const player = useAudioPlayer();
 
   useEffect(() => {
     setFavs(Fav.getFav() || []);
@@ -62,16 +62,14 @@ const SurahBody = ({ data }: { data: SurahwithAyat }) => {
     <>
       <AyahActionsWrapperMemo
         Favs={Favs}
-        playAyah={playAyah}
+        player={player}
         close={() => setOpenModal(false)}
         opened={openedModal}
         ayah={selectedAyah}
         currentPage={currentPage}
       />
       <HeaderMemo
-        stop={stop}
-        isPlaying={isPlaying}
-        isLoading={soundLoading}
+        player={player}
         layout={layout}
         setLayout={setLayout}
         title={data.name_ar?.slice(5)}
@@ -83,18 +81,29 @@ const SurahBody = ({ data }: { data: SurahwithAyat }) => {
       />
 
       <View className="bg-white dark:bg-darkBg">
-        <View style={{ display: layout === "page" ? "flex" : "none" }}>
-          <PageViewMemo
-            setCurrentPage={setCurrentPage}
-            Favs={Favs}
-            onPressAyah={onPressAyah}
-            data={data}
-          />
-        </View>
-
-        <View style={{ display: layout === "ayat" ? "flex" : "none" }}>
-          <AyatViewMemo Favs={Favs} onPressAyah={onPressAyah} data={data} />
-        </View>
+        {
+          {
+            page: (
+              <View style={{ display: "flex" }}>
+                <PageViewMemo
+                  setCurrentPage={setCurrentPage}
+                  Favs={Favs}
+                  onPressAyah={onPressAyah}
+                  data={data}
+                />
+              </View>
+            ),
+            ayat: (
+              <View style={{ display: "flex" }}>
+                <AyatViewMemo
+                  Favs={Favs}
+                  onPressAyah={onPressAyah}
+                  data={data}
+                />
+              </View>
+            ),
+          }[layout]
+        }
       </View>
     </>
   );

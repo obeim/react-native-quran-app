@@ -1,12 +1,13 @@
 import { useCallback, type ReactNode } from "react";
 import { SplashScreen, Stack } from "expo-router";
-import { SafeAreaView, StyleSheet, I18nManager } from "react-native";
+import { StyleSheet, I18nManager } from "react-native";
 import { useFonts } from "expo-font";
 import { useColorScheme } from "nativewind";
 import RNAppRestart from "@brandingbrand/react-native-app-restart";
 import { storage } from "@/utils";
 import { RootSiblingParent } from "react-native-root-siblings";
 import { SQLiteProvider } from "expo-sqlite";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 SplashScreen.preventAutoHideAsync();
 
