@@ -2,7 +2,7 @@
   "expo": {
     "name": "القرآن والأذكار",
     "slug": "quran-app",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "myapp",
@@ -17,9 +17,7 @@
         "backgroundColor": "#34303D"
       }
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true,
       "infoPlist": {
@@ -32,7 +30,11 @@
         "backgroundColor": "#F5F4F4"
       },
       "jsEngine": "hermes",
-      "package": "com.obei.quranapp"
+      "package": "com.obei.quranapp",
+      "permissions": [
+        "android.permission.RECORD_AUDIO",
+        "android.permission.MODIFY_AUDIO_SETTINGS"
+      ]
     },
     "web": {
       "bundler": "metro",
@@ -49,7 +51,8 @@
             "enableProguardInReleaseBuilds": true,
             "enableShrinkResourcesInReleaseBuilds": true,
             "usesCleartextTraffic": true,
-            "useLegacyPackaging": true
+            "useLegacyPackaging": true,
+            "enableMinifyInReleaseBuilds": true
           }
         }
       ],
@@ -85,6 +88,7 @@
     },
     "runtimeVersion": {
       "policy": "appVersion"
-    }
+    },
+    "owner": "obei"
   }
 }

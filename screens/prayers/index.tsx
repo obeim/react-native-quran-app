@@ -1,14 +1,10 @@
-import useGetPrayersTime from "@/utils/useGetPrayersTime";
-import { AntDesign } from "@expo/vector-icons";
-import { router } from "expo-router";
-import { useColorScheme } from "nativewind";
 import { ScrollView, Text, View } from "react-native";
 import { Prayer } from "./components/Prayer";
 import { Header } from "../jozz/Header";
+import { useGetPrayersTime } from "@/utils/useGetPrayersTime";
 
 const PrayerTimes = () => {
   const { timings, isLoading, error } = useGetPrayersTime();
-  const { colorScheme } = useColorScheme();
 
   return (
     <View className=" bg-white dark:bg-darkBg">

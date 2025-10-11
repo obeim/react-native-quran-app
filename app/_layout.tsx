@@ -1,6 +1,6 @@
 import { useCallback, type ReactNode } from "react";
 import { SplashScreen, Stack } from "expo-router";
-import { StyleSheet, I18nManager } from "react-native";
+import { StyleSheet, I18nManager, StatusBar } from "react-native";
 import { useFonts } from "expo-font";
 import { useColorScheme } from "nativewind";
 import RNAppRestart from "@brandingbrand/react-native-app-restart";
@@ -44,6 +44,9 @@ export default function RootLayout(): ReactNode {
       databaseName="quran.db"
       assetSource={{ assetId: require("../assets/quran.db") }}
     >
+      <StatusBar
+        backgroundColor={colorScheme === "dark" ? "#352F44" : "white"}
+      />
       <RootSiblingParent>
         <SafeAreaView
           onLayout={() => {

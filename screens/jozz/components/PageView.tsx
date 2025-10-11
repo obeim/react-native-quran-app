@@ -34,7 +34,7 @@ export const PageView = ({
   }, [currentPage, ayat]);
 
   return (
-    <View className="h-[96%] bg-lotion dark:bg-blackCoral">
+    <View className="h-[98%] bg-lotion dark:bg-blackCoral">
       <ScrollView
         ref={listRef as Ref<ScrollView>}
         bounces={false}
