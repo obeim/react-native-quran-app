@@ -1,44 +1,37 @@
-import { ActivityIndicator, Pressable, View } from "react-native";
+import { Pressable, View } from "react-native";
 import { Text } from "react-native";
 import { router } from "expo-router";
 import { useColorScheme } from "nativewind";
 import { AntDesign, Entypo, Feather } from "@expo/vector-icons";
 import { storage } from "@/utils";
+import { AudioPlayer, useAudioPlayerStatus } from "expo-audio";
 
 export function Header({
   title,
   layout,
   setLayout,
-  isLoading,
-  isPlaying,
-  stop,
+  player,
 }: {
   title?: string;
   setLayout?: React.Dispatch<React.SetStateAction<"ayat" | "page">>;
   layout?: "ayat" | "page";
-  stop?: () => void;
-  isPlaying?: boolean;
-  isLoading?: boolean;
+  player?: AudioPlayer;
 }) {
   const { colorScheme } = useColorScheme();
+  const status = player ? useAudioPlayerStatus(player) : null;
 
   return (
     <View className="flex flex-row justify-between pl-4 py-4 h-[8%] bg-white dark:bg-darkBg items-center">
       <Pressable
         onPress={() => {
-          stop?.();
+          player?.pause();
         }}
         className="  z-40 right-12 flex-2 items-center w-20 absolute  "
       >
-        {isPlaying && !isLoading && (
+        {status?.playing && (
           <AntDesign
             name="pause"
             size={27}
-            color={colorScheme === "dark" ? "#FAF0E6" : "#544981"}
-          />
-        )}
-        {isLoading && (
-          <ActivityIndicator
             color={colorScheme === "dark" ? "#FAF0E6" : "#544981"}
           />
         )}
@@ -51,7 +44,7 @@ export function Header({
           className="  items-center justify-end !w-10 flex-3 "
         >
           <AntDesign
-            name="arrowright"
+            name="arrow-right"
             size={24}
             color={colorScheme === "dark" ? "#FAF0E6" : "#544981"}
           />
@@ -69,7 +62,7 @@ export function Header({
       </View>
       {layout && (
         <Pressable
-          className=" w-24 pr-4  h-32  inline-flex justify-center"
+          className=" w-[50px] pr-4  h-32  inline-flex justify-center"
           onPress={() => {
             if (layout === "ayat") {
               storage.set("view_pref", "page");

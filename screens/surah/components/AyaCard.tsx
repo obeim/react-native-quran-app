@@ -3,8 +3,7 @@ import { Pressable, Text, View } from "react-native";
 import Bookmark from "@/assets/icons/bookmark.svg";
 import { useState } from "react";
 import { useColorScheme } from "nativewind";
-import Fav from "@/utils/Favs";
-import { useQuery, useQueryClient } from "react-query";
+import Fav from "@/services/Favs";
 import { copyToCliporad, storage } from "@/utils";
 import { usePathname } from "expo-router";
 
@@ -25,10 +24,8 @@ export function AyaCard({
 }) {
   const [bookmark, setBookmark] = useState(marked);
   const { colorScheme } = useColorScheme();
-  const queryClient = useQueryClient();
-  const { data: fontSize } = useQuery("fontSize", () =>
-    storage.getString("fontSize")
-  );
+  const fontSize = storage.getString("fontSize");
+
   const pathname = usePathname();
 
   const currentColor = colorScheme === "dark" ? "#FAF0E6" : "#544981";
@@ -58,7 +55,6 @@ export function AyaCard({
               aya_text_emlaey: ayah.aya_text_emlaey,
             });
           else Fav.deleteFav(ayah.id);
-          queryClient.invalidateQueries({ queryKey: ["favs"] });
         }}
         fill={bookmark ? currentColor : "none"}
         color={currentColor}

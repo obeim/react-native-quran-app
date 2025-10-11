@@ -1,4 +1,4 @@
-import Fav from "@/utils/Favs";
+import Fav from "@/services/Favs";
 import { MaterialIcons } from "@expo/vector-icons";
 import { useColorScheme } from "nativewind";
 import {
