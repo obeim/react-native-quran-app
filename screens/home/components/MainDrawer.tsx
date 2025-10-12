@@ -9,7 +9,6 @@ import { ReaderDropDown } from "./ReaderDropDown";
 import { router } from "expo-router";
 import { Select } from "@/components/Select";
 import { storage } from "@/utils";
-import { useQueryClient } from "react-query";
 
 const MainDrawer: FC<{
   isOpen: boolean;
@@ -30,7 +29,7 @@ const MainDrawer: FC<{
         ),
         onPress: () => {
           props.close();
-          router.push("/favs/");
+          router.push("/favs");
         },
       },
       {
@@ -44,14 +43,14 @@ const MainDrawer: FC<{
         ),
         onPress: () => {
           props.close();
-          router.push("/prayers/");
+          router.push("/prayers");
         },
       },
       {
         title: "أتجاه القبلة",
         onPress: () => {
           props.close();
-          router.push("/qibla/");
+          router.push("/qibla");
         },
         icon: (
           <MaterialIcons
@@ -88,8 +87,6 @@ const MainDrawer: FC<{
 export default MainDrawer;
 
 const FontSizeOptions = () => {
-  const queryClient = useQueryClient();
-
   const [font, setFont] = useState(storage.getString("fontSize") || "20");
 
   return (
@@ -106,7 +103,6 @@ const FontSizeOptions = () => {
       onChange={(value) => {
         setFont(value.value);
         storage.set("fontSize", value.value);
-        queryClient.invalidateQueries({ queryKey: ["fontSize"] });
       }}
       value={font}
       itemFontSize={parseInt(font)}

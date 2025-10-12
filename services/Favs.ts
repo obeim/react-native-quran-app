@@ -1,5 +1,5 @@
 import { router } from "expo-router";
-import { storage } from ".";
+import { storage } from "../utils";
 import { FavType } from "@/types";
 
 const Fav = {

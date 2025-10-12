@@ -13,6 +13,7 @@ const usePagedAyat = ({ data }: PageProps) => {
       ? parseInt((local.id as string).split("s")[1]) - 1
       : 0 || 0
   );
+
   const [isLast, setIsLast] = useState(false);
 
   const formatedData = data

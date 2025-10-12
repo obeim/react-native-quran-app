@@ -3,7 +3,6 @@ import { Azkar } from "@/types";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { ZekerCount } from "./ZekerCount";
 import { copyToCliporad, storage } from "@/utils";
-import { useQuery } from "react-query";
 export function ZekrCard({
   zekr,
   setCompletedCount,
@@ -13,9 +12,7 @@ export function ZekrCard({
 }) {
   const [currentCount, setCount] = useState<number>(zekr?.count);
 
-  const { data: fontSize } = useQuery("fontSize", () =>
-    storage.getString("fontSize")
-  );
+  const fontSize = storage.getString("fontSize");
 
   useEffect(() => {
     if (zekr.count) setCount(zekr.count);

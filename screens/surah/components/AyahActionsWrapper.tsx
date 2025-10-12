@@ -4,29 +4,27 @@ import { AyahActionModal } from "./AyahActionModal";
 import { Ayah, FavType } from "@/types";
 import * as Network from "expo-network";
 import Toast from "react-native-root-toast";
-import Fav from "@/utils/Favs";
-import { useQueryClient } from "react-query";
+import Fav from "@/services/Favs";
 import { usePathname } from "expo-router";
-
+import { AudioPlayer } from "expo-audio";
+import { storage } from "@/utils";
 export function AyahActionsWrapper({
   close,
   opened,
   ayah,
-  playAyah,
+  player,
   Favs,
   currentPage,
 }: {
   close: () => void;
   opened: boolean;
   ayah?: Ayah;
-  playAyah: (id: number) => Promise<void>;
+  player: AudioPlayer;
   Favs: FavType[];
   currentPage?: number;
 }) {
   const [openMeaning, setOpenMeaning] = useState(false);
-  const queryClient = useQueryClient();
   const pathname = usePathname();
-
   return (
     <View>
       <Modal
@@ -78,14 +76,19 @@ export function AyahActionsWrapper({
                 ...type,
               });
             else Fav.deleteFav(ayah.id);
-            queryClient.invalidateQueries({ queryKey: ["favs"] });
             close();
           }
         }}
         onPlay={async () => {
           const network = await Network.getNetworkStateAsync();
           if (network.isConnected) {
-            if (ayah) playAyah(ayah?.id);
+            if (ayah)
+              player.replace(
+                `https://cdn.islamic.network/quran/audio/64/${
+                  storage.getString("reader") || "ar.alafasy"
+                }/${ayah?.id}.mp3`
+              );
+            player.play();
           } else {
             Toast.show("تأكد من أتصال الانترنت", {
               textStyle: { fontFamily: "HelveticaNeueLTArabic-Roman" },
