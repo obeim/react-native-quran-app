@@ -3,7 +3,7 @@ import { useEffect, useRef } from "react";
 import { FlatList } from "react-native";
 
 const useScrollToAya = () => {
-  const flatListRef = useRef<FlatList>();
+  const flatListRef = useRef<FlatList>(null);
   const local = useLocalSearchParams();
 
   const onScrollToIndexFailed = (error: {

@@ -18,7 +18,9 @@ export function AyatView({ data, onPressAyah, Favs }: PageProps) {
   const local = useLocalSearchParams();
 
   const { flatListRef, onScrollToIndexFailed } = useScrollToAya();
-  const { viewabilityConfigCallbackPairs } = useOnAyaScrolling({});
+  const { viewabilityConfigCallbackPairs } = useOnAyaScrolling({
+    type: "surah",
+  });
 
   return (
     <FlatList
@@ -40,7 +42,7 @@ export function AyatView({ data, onPressAyah, Favs }: PageProps) {
           {...{ item, id: local.id as string, index, data: data }}
         />
       )}
-      className="w-full bg-lotion dark:bg-blackCoral h-[93%] px-5 overflow-hidden"
+      className="w-full bg-lotion dark:bg-blackCoral h-[96%] px-5 overflow-hidden"
     />
   );
 }

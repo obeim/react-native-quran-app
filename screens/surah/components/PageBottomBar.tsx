@@ -46,9 +46,10 @@ export function PageBottomBar({
       <View className="my-auto flex-3 flex-row pt-4">
         <Text className="text-primary dark:text-primaryDark text-center">
           {currentPage}
+          {" / "}
         </Text>
         <Text className="text-primary dark:text-primaryDark text-center">
-          {totalPages} {" / "}
+          {totalPages}
         </Text>
       </View>
       <Pressable

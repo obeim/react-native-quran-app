@@ -1,17 +1,17 @@
 import { useCallback, type ReactNode } from "react";
 import { SplashScreen, Stack } from "expo-router";
-import { SafeAreaView, StyleSheet, I18nManager } from "react-native";
+import { StyleSheet, I18nManager, StatusBar } from "react-native";
 import { useFonts } from "expo-font";
-import { QueryClient, QueryClientProvider } from "react-query";
 import { useColorScheme } from "nativewind";
 import RNAppRestart from "@brandingbrand/react-native-app-restart";
 import { storage } from "@/utils";
 import { RootSiblingParent } from "react-native-root-siblings";
+import { SQLiteProvider } from "expo-sqlite";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout(): ReactNode {
-  const queryClient = new QueryClient();
   const { colorScheme, setColorScheme } = useColorScheme();
 
   const [fontsLoaded, fontError] = useFonts({
@@ -40,7 +40,13 @@ export default function RootLayout(): ReactNode {
   }
 
   return (
-    <QueryClientProvider client={queryClient}>
+    <SQLiteProvider
+      databaseName="quran.db"
+      assetSource={{ assetId: require("../assets/quran.db") }}
+    >
+      <StatusBar
+        backgroundColor={colorScheme === "dark" ? "#352F44" : "white"}
+      />
       <RootSiblingParent>
         <SafeAreaView
           onLayout={() => {
@@ -55,7 +61,7 @@ export default function RootLayout(): ReactNode {
           <Stack
             screenOptions={{
               headerShown: false,
-              statusBarColor: "#352F44",
+              statusBarStyle: colorScheme === "dark" ? "light" : "dark",
               contentStyle: {
                 padding: 0,
                 margin: 0,
@@ -66,7 +72,7 @@ export default function RootLayout(): ReactNode {
           />
         </SafeAreaView>
       </RootSiblingParent>
-    </QueryClientProvider>
+    </SQLiteProvider>
   );
 }
 

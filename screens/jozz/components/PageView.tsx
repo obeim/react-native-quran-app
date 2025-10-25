@@ -1,11 +1,10 @@
-import { Alert, Pressable, ScrollView, Text, View } from "react-native";
+import { ScrollView, Text, View } from "react-native";
 import { Ayah } from "@/types";
 import usePagedAyat from "@/utils/usePagedAyat";
 import { PageProps } from "./AyaView";
 import { PageBottomBar } from "@/screens/surah/components/PageBottomBar";
-import { LegacyRef, useEffect, useRef } from "react";
+import { Ref, useEffect, useRef } from "react";
 import { copyToCliporad, storage } from "@/utils";
-import { useQuery } from "react-query";
 
 export const PageView = ({
   data,
@@ -13,14 +12,12 @@ export const PageView = ({
   Favs,
   setCurrentPage,
 }: PageProps) => {
-  const listRef = useRef<ScrollView>();
+  const listRef = useRef<ScrollView>(null);
   const { ayat, nextPage, PrevPage, totalPages, currentPage } = usePagedAyat({
     data: data,
   });
 
-  const { data: fontSize } = useQuery("fontSize", () =>
-    storage.getString("fontSize")
-  );
+  const fontSize = storage.getString("fontSize");
 
   useEffect(() => {
     if (ayat)
@@ -37,9 +34,9 @@ export const PageView = ({
   }, [currentPage, ayat]);
 
   return (
-    <View className="h-[95%] bg-lotion dark:bg-blackCoral">
+    <View className="h-[98%] bg-lotion dark:bg-blackCoral">
       <ScrollView
-        ref={listRef as LegacyRef<ScrollView>}
+        ref={listRef as Ref<ScrollView>}
         bounces={false}
         decelerationRate={0}
         className=" px-2 h-[94%] mb-9 "

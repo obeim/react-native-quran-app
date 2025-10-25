@@ -2,6 +2,8 @@
   "extends": "expo/tsconfig.base",
   "compilerOptions": {
     "strict": true,
+    "types": ["react", "react-native"],
+    "jsx": "react-jsx",
     "paths": {
       "@/*": ["./*"]
     }
@@ -11,6 +13,7 @@
     "**/*.tsx",
     ".expo/types/**/*.ts",
     "expo-env.d.ts",
+    "motion-custom.d.ts",
     "App.js"
   ]
 }

@@ -2,7 +2,7 @@
   "expo": {
     "name": "القرآن والأذكار",
     "slug": "quran-app",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "myapp",
@@ -24,14 +24,17 @@
         "ExpoLocalization_supportsRTL": true
       }
     },
-
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#F5F4F4"
       },
       "jsEngine": "hermes",
-      "package": "com.obei.quranapp"
+      "package": "com.obei.quranapp",
+      "permissions": [
+        "android.permission.RECORD_AUDIO",
+        "android.permission.MODIFY_AUDIO_SETTINGS"
+      ]
     },
     "web": {
       "bundler": "metro",
@@ -48,20 +51,36 @@
             "enableProguardInReleaseBuilds": true,
             "enableShrinkResourcesInReleaseBuilds": true,
             "usesCleartextTraffic": true,
-            "useLegacyPackaging": true
+            "useLegacyPackaging": true,
+            "enableMinifyInReleaseBuilds": true
           }
         }
-      ]
+      ],
+      "expo-asset",
+      "expo-font",
+      [
+        "expo-sqlite",
+        {
+          "enableFTS": true,
+          "useSQLCipher": true,
+          "android": {
+            "enableFTS": false,
+            "useSQLCipher": false
+          },
+          "ios": {
+            "customBuildFlags": [
+              "-DSQLITE_ENABLE_DBSTAT_VTAB=1 -DSQLITE_ENABLE_SNAPSHOT=1"
+            ]
+          }
+        }
+      ],
+      "expo-audio"
     ],
     "experiments": {
       "typedRoutes": true,
       "tsconfigPaths": true
     },
-    "jsEngine": "hermes",
     "extra": {
-      "router": {
-        "origin": false
-      },
       "eas": {
         "projectId": "6cf4cd2b-c02b-4f3d-bfe3-ff03fa5b2f4a"
       },
@@ -69,6 +88,7 @@
     },
     "runtimeVersion": {
       "policy": "appVersion"
-    }
+    },
+    "owner": "obei"
   }
 }
