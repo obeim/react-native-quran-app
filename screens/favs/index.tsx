@@ -21,14 +21,12 @@ const Favs = () => {
       <Header title="العلامات المرجعية" />
 
       <View className="px-5">
-        {data && data?.length > 0 && (
-          <View>
-            <SearchInput
-              value={search || ""}
-              onChange={(value) => setSearch(value)}
-            />
-          </View>
-        )}
+        <View>
+          <SearchInput
+            value={search || ""}
+            onChange={(value) => setSearch(value)}
+          />
+        </View>
 
         {filteredData?.length === 0 ? (
           <Text className="text-center font-HelveticaRoman mt-20 h-[80%] text-primary dark:text-primaryDark">

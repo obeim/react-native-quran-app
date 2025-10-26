@@ -39,12 +39,12 @@ export function SearchInput({
       <TextInput
         selectionColor={colorScheme === "dark" ? "#FAF0E6" : "#544981"}
         placeholder="بحث"
-        blurOnSubmit
+        submitBehavior="blurAndSubmit"
         placeholderTextColor={
           colorScheme === "dark" ? "#faf0e666" : "#54498166"
         }
         value={value}
-        className="w-full h-full text-right pl-10 font-HelveticaRoman  text-primary dark:text-primaryDark border  border-lotion dark:border-blackCoral rounded-lg"
+        className="w-full h-full text-right px-10 font-HelveticaRoman  text-primary dark:text-primaryDark border  border-lotion dark:border-blackCoral rounded-lg"
         onChangeText={(text) => {
           onChange(text);
         }}

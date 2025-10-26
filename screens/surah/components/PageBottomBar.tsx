@@ -23,7 +23,7 @@ export function PageBottomBar({
 
   const { colorScheme } = useColorScheme();
   return (
-    <View className="h-[7%] absolute bottom-0 flex-1 flex-row  w-full justify-between bg-white dark:bg-darkBg  items-center">
+    <View className="h-[8%] absolute bottom-0 flex-1 flex-row  w-full justify-between bg-white dark:bg-darkBg  items-center">
       <Pressable
         onPress={() => {
           if (currentPage === 1 && id > 1) router.replace(`/${type}/${id - 1}`);
