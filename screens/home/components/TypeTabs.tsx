@@ -32,7 +32,7 @@ export const TypeTabs = ({
         component: <AzkarTab search={search} />,
       },
     ],
-    [data, search]
+    []
   );
 
   return (
